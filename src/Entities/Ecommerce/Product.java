@@ -23,6 +23,19 @@ public class Product {
     private String Photo ;
     private String Description;
 
+    public Product(Integer id, String name, String Type, Double price, String Photo, String Description) {
+        this.id = id;
+        this.name = name;
+        this.Type = Type;
+        this.price = price;
+        this.Photo = Photo;
+        this.Description = Description;
+        this.nb_seller=0;
+        this.nb_view=0;
+    }
+    
+    
+
     public Integer getId() {
         return id;
     }

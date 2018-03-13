@@ -93,9 +93,10 @@ public class ProductService {
     
     public void delete(int id)
     {
-        String req="Delete from product where id=124";
+        String req="Delete from product where id= ?";
         try {
             PreparedStatement statment = connection.prepareStatement(req);
+            statment.setInt(1,id);
             statment.executeUpdate();
             
         } catch (SQLException ex) {

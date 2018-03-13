@@ -12,16 +12,18 @@ import java.util.Objects;
  * @author Arshavin
  */
 public class Product {
-    
-   
+
     private Integer id;
     private String name;
     private String Type;
     private Double price;
     private Integer nb_view;
     private Integer nb_seller;
-    private String Photo ;
+    private String Photo;
     private String Description;
+
+    public Product() {
+    }
 
     public Product(Integer id, String name, String Type, Double price, Integer nb_view, Integer nb_seller, String Photo, String Description) {
         this.id = id;
@@ -34,19 +36,16 @@ public class Product {
         this.Description = Description;
     }
 
-    
     public Product(String name, String Type, Double price, String Photo, String Description) {
-        
+
         this.name = name;
         this.Type = Type;
         this.price = price;
         this.Photo = Photo;
         this.Description = Description;
-        this.nb_seller=0;
-        this.nb_view=0;
+        this.nb_seller = 0;
+        this.nb_view = 0;
     }
-    
-    
 
     public Integer getId() {
         return id;
@@ -135,6 +134,5 @@ public class Product {
         final Product other = (Product) obj;
         return Objects.equals(this.name, other.name);
     }
-    
-    
+
 }

@@ -6,6 +6,7 @@
 package cupcakesjavafx;
 
 import Entities.Ecommerce.Product;
+import Services.CartService;
 import Services.ProductService;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -28,6 +29,7 @@ public class CupCakesJavaFx extends Application {
         Product p1 = new Product("TESTJAVA","TESTJAVA",12.5,"TESSSST","TESSSST");
         ProductService s = new ProductService();
         s.insert(p1);
+        CartService cart =new CartService();
         btn.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
@@ -38,6 +40,7 @@ public class CupCakesJavaFx extends Application {
                 System.out.println(s.selectProductById(123));
                 s.update(p1);
                 s.delete(127);
+                System.out.println(cart.selectAllProductsFromCart());
             }
         });
         

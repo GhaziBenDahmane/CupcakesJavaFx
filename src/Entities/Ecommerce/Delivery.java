@@ -15,12 +15,12 @@ public class Delivery {
    private int id,phone;
    private String name,notes,email,adress,serviceType;
    private Date dateDelivery,contactTime;
+   private boolean status;
 
     public Delivery() {
     }
 
-    public Delivery(int id, int phone, String name, String notes, String email, String adress, String serviceType, Date dateDelivery, Date contactTime) {
-        this.id = id;
+    public Delivery(int phone, String name, String notes, String email, String adress, String serviceType, Date dateDelivery, Date contactTime, boolean status) {
         this.phone = phone;
         this.name = name;
         this.notes = notes;
@@ -29,7 +29,19 @@ public class Delivery {
         this.serviceType = serviceType;
         this.dateDelivery = dateDelivery;
         this.contactTime = contactTime;
+        this.status = status;
     }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    
+
    
 
     public int getId() {

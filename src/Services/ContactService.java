@@ -8,6 +8,10 @@ package Services;
 import Connection.DataSource;
 import Entities.Contact.Contact;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import servicesInterfaces.IContactService;
 
 /**
@@ -20,12 +24,28 @@ public class ContactService implements IContactService{
 
     public ContactService() {
          connection = DataSource.getInstance().getConnection();
+         
     }
     
     
 
     @Override
     public void create(Contact contact) {
+                String req="INSERT INTO contact (firstName,email,status,adress,lastName,phone,message) VALUES (?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement statment = connection.prepareStatement(req);
+            statment.setString(1,contact.getFirstName() );
+            statment.setString(2, contact.getEmail());
+            statment.setBoolean(3, contact.isStatus());
+            statment.setString(4,contact.getAdress());
+            statment.setString(5, contact.getLastName());
+            statment.setInt(6,contact.getPhone());
+            statment.setString(5, contact.getMessage());
+            statment.execute();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductService.class.getName()).log(Level.SEVERE, null, ex);
+        }
        
     }
 

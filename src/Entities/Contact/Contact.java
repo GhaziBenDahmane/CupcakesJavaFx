@@ -12,6 +12,30 @@ package Entities.Contact;
 public class Contact {
     private int id,phone;
     private String firstName,lastName,message,adress,email;
+    private boolean status;
+
+    public Contact() {
+    }
+
+    public Contact(int phone, String firstName, String lastName, String message, String adress, String email, boolean status) {
+        this.phone = phone;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.message = message;
+        this.adress = adress;
+        this.email = email;
+        this.status = false;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+    
+    
 
     public int getId() {
         return id;

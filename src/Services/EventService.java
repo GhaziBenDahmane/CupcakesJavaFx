@@ -6,8 +6,8 @@
 package Services;
 
 import Connection.DataSource;
-import Model.Event;
-import ServicesInterfaces.IService;
+import entities.event.Event;
+import servicesInterfaces.IEventService;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author Haroun
  */
-public class EventService implements IService<Event> {
+public class EventService implements IEventService{
     
     private Connection connection;
 
@@ -33,11 +33,7 @@ public class EventService implements IService<Event> {
             String req = "INSERT INTO `event` (`id`, `title`, `description`, `startDate`, `endDate`, `location` , `ratingEvent` ) VALUES (NULL, ?, ?, ?, ?, ?, ?);";
             PreparedStatement ps = connection.prepareStatement(req);
             ps.setString(1, event.getTitle());
-            ps.setString(2, event.getDescription());
-            ps.setDate(3, event.getStartDate());
-            ps.setDate(4, event.getEndDate());
-            ps.setString(5, event.getLocation());
-            ps.setString(6, event.getRatingEvent());
+
            
             
             
@@ -54,9 +50,7 @@ public class EventService implements IService<Event> {
             String req = "update event set (title, description) values (?,?) where id = ?";
             PreparedStatement ps = connection.prepareStatement(req);
             ps.setString(1, event.getTitle());
-            ps.setString(2, event.getDescription());
-            ps.setInt(3, event.getId());
-            ps.executeUpdate();
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

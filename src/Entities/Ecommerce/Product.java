@@ -23,8 +23,20 @@ public class Product {
     private String Photo ;
     private String Description;
 
-    public Product(Integer id, String name, String Type, Double price, String Photo, String Description) {
+    public Product(Integer id, String name, String Type, Double price, Integer nb_view, Integer nb_seller, String Photo, String Description) {
         this.id = id;
+        this.name = name;
+        this.Type = Type;
+        this.price = price;
+        this.nb_view = nb_view;
+        this.nb_seller = nb_seller;
+        this.Photo = Photo;
+        this.Description = Description;
+    }
+
+    
+    public Product(String name, String Type, Double price, String Photo, String Description) {
+        
         this.name = name;
         this.Type = Type;
         this.price = price;

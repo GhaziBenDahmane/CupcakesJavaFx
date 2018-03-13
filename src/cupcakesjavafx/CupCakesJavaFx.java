@@ -25,7 +25,7 @@ public class CupCakesJavaFx extends Application {
     public void start(Stage primaryStage) {
         Button btn = new Button();
         btn.setText("Say 'Hello World'");
-        Product p1 = new Product(123,"TESTJAVA","TESTJAVA",12.5,"TESSSST","TESSSST");
+        Product p1 = new Product("TESTJAVA","TESTJAVA",12.5,"TESSSST","TESSSST");
         ProductService s = new ProductService();
         s.insert(p1);
         btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -33,8 +33,11 @@ public class CupCakesJavaFx extends Application {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Hello World!");
-                System.out.println(p1);
-                
+                System.out.println(s.selectAll());
+                p1.setName("TEST UPDATE");
+                System.out.println(s.selectProductById(123));
+                s.update(p1);
+                s.delete(127);
             }
         });
         

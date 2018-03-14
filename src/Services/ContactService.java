@@ -51,12 +51,33 @@ public class ContactService implements IContactService{
 
     @Override
     public void update(Contact contact) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         String req="Update contact set firstName=? , email=? , status=? ,adress=?, lastName=? where id=1";
+        try {
+            PreparedStatement statment = connection.prepareStatement(req);
+            statment.setString(1,contact.getFirstName());
+            statment.setString(2, contact.getEmail());
+            statment.setBoolean(3, contact.isStatus());
+            statment.setString(4,contact.getAdress());
+            statment.setString(5,contact.getLastName());
+            
+            statment.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ContactService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String req="Delete from contact where id= ?";
+        try {
+            PreparedStatement statment = connection.prepareStatement(req);
+            statment.setInt(1,id);
+            statment.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ContactService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

@@ -5,6 +5,11 @@
  */
 package cupcakesjavafx;
 
+import Entities.Contact.Contact;
+import Entities.Ecommerce.Product;
+import Services.CartService;
+import Services.ContactService;
+import Services.ProductService;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,11 +28,24 @@ public class CupCakesJavaFx extends Application {
     public void start(Stage primaryStage) {
         Button btn = new Button();
         btn.setText("Say 'Hello World'");
+        Contact c1 = new Contact(71444521, "STYLESHEET","MODENA"," STYLESHEET_MODENA"," STYLESHEET_CASPIAN"," STYLESHEET@CASPIAN.com",false);
+        Product p1 = new Product("TESTJAVA","TESTJAVA",12.5,"TESSSST","TESSSST");
+        ProductService s = new ProductService();
+        ContactService cs1 = new ContactService();
+        s.insert(p1);
+        cs1.create(c1);
+        CartService cart =new CartService();
         btn.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Hello World!");
+                System.out.println(s.selectAll());
+                p1.setName("TEST UPDATE");
+                System.out.println(s.selectProductById(123));
+                s.update(p1);
+                s.delete(127);
+                System.out.println(cart.selectAllProductsFromCart());
             }
         });
         

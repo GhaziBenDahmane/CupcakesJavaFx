@@ -7,7 +7,9 @@ package test;
 
 import Services.EventService;
 import entities.event.Event;
-
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author haffez
@@ -16,8 +18,10 @@ public class test {
     
       
     public static void main(String[] args) {
-      Event  event = new Event("12", "12");
-           EventService Es = new EventService();
+Date mnt = new Date(System.currentTimeMillis()); 
+
+            Event  event = new Event( "Anni", "", mnt , mnt, "", "", "", "");
+            EventService Es = new EventService();
             Es.add(event);
         
         

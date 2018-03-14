@@ -15,10 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- *
- * @author Haroun
- */
+
 public class EventService implements IEventService{
     
     private Connection connection;
@@ -30,13 +27,23 @@ public class EventService implements IEventService{
     @Override
     public void add(Event event) {
         try {
-            String req = "INSERT INTO `event` (`id`, `title`, `description`, `startDate`, `endDate`, `location` , `ratingEvent` ) VALUES (NULL, ?, ?, ?, ?, ?, ?);";
-            PreparedStatement ps = connection.prepareStatement(req);
-            ps.setString(1, event.getTitle());
+            String req = "INSERT INTO `event` (`id`, `title`, `url`, `bgColor`,"
+                    + "`cssClass`, `startDatetime`, `endDatetime`, `allDay`, "
+                    + "`nb_person`, `nb_table`, `band`, `cost`, `participants`,"
+                    + "`status` ,`user` ) "
+                    + "VALUES (NULL, '?', NULL, NULL, NULL, "
+                    + "?', '?', '0', '10',"
+                    + " '10', '0', '200', NULL, 'Pending', '0' )";
 
-           
-            
-            
+            PreparedStatement ps = connection.prepareStatement(req);
+                         ps.setString(2, event.getTitle());
+                         ps.setDate(6, event.getStartDate());
+                         ps.setDate(7, event.getEndDate());
+                         ps.setString(9, event.getNbPerson());
+                         ps.setString(10, event.getNbTable());
+                         ps.setString(11, event.getBand());
+                         ps.setString(12, event.getCost());
+                         ps.setString(14, event.getStatus());
             
             ps.executeUpdate();
         } catch (SQLException ex) {
@@ -69,9 +76,7 @@ public class EventService implements IEventService{
     }
 
   
-    
-    
-    
+  
     
     
 

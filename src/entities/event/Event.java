@@ -26,8 +26,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(int id, String title, String nbPerson, Date startDate, Date endDate, String nbTable, String band, String status, String cost) {
-        this.id = id;
+    public Event( String title, String nbPerson, Date startDate, Date endDate, String nbTable, String band, String status, String cost) {
         this.title = title;
         this.nbPerson = nbPerson;
         this.startDate = startDate;

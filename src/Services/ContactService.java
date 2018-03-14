@@ -20,7 +20,7 @@ import servicesInterfaces.IContactService;
  */
 public class ContactService implements IContactService{
 
-    private Connection connection;
+    private Connection connection=null;
 
     public ContactService() {
          connection = DataSource.getInstance().getConnection();
@@ -40,11 +40,11 @@ public class ContactService implements IContactService{
             statment.setString(4,contact.getAdress());
             statment.setString(5, contact.getLastName());
             statment.setInt(6,contact.getPhone());
-            statment.setString(5, contact.getMessage());
+            statment.setString(7, contact.getMessage());
             statment.execute();
             
         } catch (SQLException ex) {
-            Logger.getLogger(ProductService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ContactService.class.getName()).log(Level.SEVERE, null, ex);
         }
        
     }

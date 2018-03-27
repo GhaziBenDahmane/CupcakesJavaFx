@@ -5,7 +5,7 @@
  */
 package service;
 
-import connection.DataSource;
+import util.DataSource;
 import entity.Product;
 
 import java.sql.Connection;

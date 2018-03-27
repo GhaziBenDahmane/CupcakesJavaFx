@@ -5,7 +5,7 @@
  */
 package service;
 
-import connection.DataSource;
+import util.DataSource;
 import entity.Event;
 import servicesInterfaces.IEventService;
 import java.sql.Connection;

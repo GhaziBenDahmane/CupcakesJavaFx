@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entities.Ecommerce;
+package entity;
 
 import java.util.Objects;
 
@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author Arshavin
  */
 public class Tag {
-    
+
     private Integer id_tag;
     private String name;
 
@@ -55,6 +55,5 @@ public class Tag {
         final Tag other = (Tag) obj;
         return Objects.equals(this.name, other.name);
     }
-    
-    
+
 }

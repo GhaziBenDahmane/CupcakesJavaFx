@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entities.Ecommerce;
+package entity;
 
 /**
  *
  * @author Arshavin
  */
 public class Rating {
-    
+
     private Integer id_rating;
     private Integer rate;
 
@@ -34,6 +34,5 @@ public class Rating {
     public String toString() {
         return "Rating{" + "id_rating=" + id_rating + ", rate=" + rate + '}';
     }
-    
-    
+
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities.event;
+package entity;
 
 import java.sql.Date;
 import java.util.Objects;
@@ -13,21 +13,21 @@ import java.util.Objects;
  * @author Haroun
  */
 public class Event {
-    
-    private int id ; 
+
+    private int id;
     private String title;
     private String nbPerson;
     private Date startDate;
     private Date endDate;
-    private String nbTable ;
-    private String band ; 
-    private String status ; 
+    private String nbTable;
+    private String band;
+    private String status;
     private String cost;
+
     public Event() {
     }
 
-    public Event(int id, String title, String nbPerson, Date startDate, Date endDate, String nbTable, String band, String status, String cost) {
-        this.id = id;
+    public Event(String title, String nbPerson, Date startDate, Date endDate, String nbTable, String band, String status, String cost) {
         this.title = title;
         this.nbPerson = nbPerson;
         this.startDate = startDate;
@@ -37,9 +37,6 @@ public class Event {
         this.status = status;
         this.cost = cost;
     }
-
- 
-
 
     public Event(int id, String title, String nbPerson, Date startDate, Date endDate, String nbTable) {
         this.id = id;
@@ -77,7 +74,6 @@ public class Event {
         this.title = title;
     }
 
-
     public Date getStartDate() {
         return startDate;
     }
@@ -94,14 +90,12 @@ public class Event {
         this.endDate = endDate;
     }
 
-   
     @Override
     public String toString() {
         return "Event{" + "id=" + id + ", title=" + title + ", nbPerson=" + nbPerson + ", startDate=" + startDate + ", endDate=" + endDate + ", nbTable=" + nbTable + ", band=" + band + '}';
     }
 
-    
-   public String getNbPerson() {
+    public String getNbPerson() {
         return nbPerson;
     }
 
@@ -141,7 +135,6 @@ public class Event {
         this.cost = cost;
     }
 
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -166,7 +159,5 @@ public class Event {
         }
         return true;
     }
-    
-    
-    
+
 }

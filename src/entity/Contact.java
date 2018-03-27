@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entities.Contact;
+package entity;
 
 /**
  *
  * @author Anis-PC
  */
 public class Contact {
-    private int id,phone;
-    private String firstName,lastName,message,adress,email;
+
+    private int id, phone;
+    private String firstName, lastName, message, adress, email;
     private boolean status;
 
     public Contact() {
@@ -34,8 +35,6 @@ public class Contact {
     public void setStatus(boolean status) {
         this.status = status;
     }
-    
-    
 
     public int getId() {
         return id;
@@ -122,7 +121,5 @@ public class Contact {
     public String toString() {
         return "Contact{" + "id=" + id + ", phone=" + phone + ", firstName=" + firstName + ", lastName=" + lastName + ", message=" + message + ", adress=" + adress + ", email=" + email + '}';
     }
-    
-    
-    
+
 }

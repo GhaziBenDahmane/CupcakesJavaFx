@@ -5,7 +5,7 @@
  */
 package servicesInterfaces;
 
-import Entities.Contact.Contact;
+import entity.Contact;
 
 /**
  *

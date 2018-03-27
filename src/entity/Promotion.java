@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entities.Ecommerce;
+package entity;
 
 import java.sql.Date;
 
@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author Arshavin
  */
 public class Promotion {
-    
+
     private Integer id_promotion;
     private Double Discount;
     private Date starting_date;
@@ -61,8 +61,5 @@ public class Promotion {
     public String toString() {
         return "Promotion{" + "id_promotion=" + id_promotion + ", Discount=" + Discount + ", starting_date=" + starting_date + ", ending_date=" + ending_date + '}';
     }
-    
-    
-    
-    
+
 }

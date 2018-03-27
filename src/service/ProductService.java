@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Services;
+package service;
 
-import Connection.DataSource;
-import Entities.Ecommerce.Product;
+import connection.DataSource;
+import entity.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

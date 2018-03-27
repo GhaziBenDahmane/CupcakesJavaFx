@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entities.Ecommerce;
+package entity;
 
 import java.sql.Date;
 
@@ -12,10 +12,11 @@ import java.sql.Date;
  * @author Anis-PC
  */
 public class Delivery {
-   private int id,phone;
-   private String name,notes,email,adress,serviceType;
-   private Date dateDelivery,contactTime;
-   private boolean status;
+
+    private int id, phone;
+    private String name, notes, email, adress, serviceType;
+    private Date dateDelivery, contactTime;
+    private boolean status;
 
     public Delivery() {
     }
@@ -39,10 +40,6 @@ public class Delivery {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
-    
-
-   
 
     public int getId() {
         return id;
@@ -145,8 +142,5 @@ public class Delivery {
     public String toString() {
         return "Delivery{" + "id=" + id + ", phone=" + phone + ", name=" + name + ", notes=" + notes + ", email=" + email + ", adress=" + adress + ", serviceType=" + serviceType + ", dateDelivery=" + dateDelivery + ", contactTime=" + contactTime + '}';
     }
-   
-   
-           
-    
+
 }

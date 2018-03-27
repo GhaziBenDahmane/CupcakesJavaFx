@@ -5,11 +5,11 @@
  */
 package cupcakesjavafx;
 
-import Entities.Contact.Contact;
-import Entities.Ecommerce.Product;
-import Services.CartService;
-import Services.ContactService;
-import Services.ProductService;
+import entity.Contact;
+import entity.Product;
+import service.CartService;
+import service.ContactService;
+import service.ProductService;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

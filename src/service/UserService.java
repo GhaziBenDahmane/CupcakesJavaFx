@@ -3,21 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servicesInterfaces;
-
-import entity.Event;
+package service;
 
 /**
  *
- * @author Haroun
+ * @author ding
  */
-public interface IEventService {
-    
-    void add(Event event);
+public class UserService {
 
-    void update(Event event);
-
-    void delete(int id);
-    
-    
 }

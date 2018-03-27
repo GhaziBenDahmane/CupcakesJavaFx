@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entities.Contact;
+package entity;
 
 import java.sql.Date;
 
@@ -12,7 +12,8 @@ import java.sql.Date;
  * @author Anis-PC
  */
 public class Reservation {
-    private int id,nbTables,nbPersonnes;
+
+    private int id, nbTables, nbPersonnes;
     private Date dateReservation;
 
     public int getId() {
@@ -76,6 +77,5 @@ public class Reservation {
     public String toString() {
         return "Reservation{" + "id=" + id + ", nbTables=" + nbTables + ", nbPersonnes=" + nbPersonnes + ", dateReservation=" + dateReservation + '}';
     }
-    
-    
+
 }

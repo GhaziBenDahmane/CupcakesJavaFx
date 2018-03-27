@@ -3,26 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Services;
+package service;
 
-import Connection.DataSource;
-import entities.event.Event;
+import connection.DataSource;
+import entity.Event;
 import servicesInterfaces.IEventService;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
+public class EventService implements IEventService {
 
-public class EventService implements IEventService{
-    
     private Connection connection;
 
     public EventService() {
         connection = DataSource.getInstance().getConnection();
-        }
+    }
 
     @Override
     public void add(Event event) {
@@ -36,15 +32,15 @@ public class EventService implements IEventService{
                     + " '10', '0', '200', NULL, 'Pending', '0' )";
 
             PreparedStatement ps = connection.prepareStatement(req);
-                         ps.setString(2, event.getTitle());
-                         ps.setDate(6, event.getStartDate());
-                         ps.setDate(7, event.getEndDate());
-                         ps.setString(9, event.getNbPerson());
-                         ps.setString(10, event.getNbTable());
-                         ps.setString(11, event.getBand());
-                         ps.setString(12, event.getCost());
-                         ps.setString(14, event.getStatus());
-            
+            ps.setString(2, event.getTitle());
+            ps.setDate(6, event.getStartDate());
+            ps.setDate(7, event.getEndDate());
+            ps.setString(9, event.getNbPerson());
+            ps.setString(10, event.getNbTable());
+            ps.setString(11, event.getBand());
+            ps.setString(12, event.getCost());
+            ps.setString(14, event.getStatus());
+
             ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -75,14 +71,4 @@ public class EventService implements IEventService{
         }
     }
 
-  
-  
-    
-    
-
-
-   
-    
-    
-    
 }

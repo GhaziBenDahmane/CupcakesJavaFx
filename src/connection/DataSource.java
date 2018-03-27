@@ -9,11 +9,11 @@ public final class DataSource {
     private static DataSource db;
 
     private DataSource() {
-        String url = "jdbc:mysql://sql11.freemysqlhosting.net:3306/";
-        String dbName = "sql11222383";
+        String url = "jdbc:mysql://localhost/";
+        String dbName = "symfony";
         String driver = "com.mysql.jdbc.Driver";
-        String userName = "sql11222383";
-        String password = "6TuZt5JUMi";
+        String userName = "root";
+        String password = "";
         try {
             Class.forName(driver).newInstance();
             this.conn = (Connection) DriverManager.getConnection(url + dbName, userName, password);

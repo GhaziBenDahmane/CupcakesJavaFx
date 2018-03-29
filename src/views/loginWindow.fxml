@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -10,7 +11,6 @@
    <children>
       <Label layoutX="132.0" layoutY="159.0" text="username" />
       <Label layoutX="132.0" layoutY="200.0" text="password" />
-      <TextField fx:id="password" layoutX="244.0" layoutY="195.0" />
       <TextField fx:id="username" layoutX="244.0" layoutY="154.0" />
       <Button fx:id="loginButton" layoutX="353.0" layoutY="251.0" mnemonicParsing="false" onAction="#loginAction" text="login" />
       <Button layoutX="252.0" layoutY="251.0" mnemonicParsing="false" text="clear" />
@@ -20,5 +20,6 @@
          </font>
       </Label>
       <Label fx:id="errors" layoutX="213.0" layoutY="325.0" />
+      <PasswordField fx:id="password" layoutX="244.0" layoutY="195.0" />
    </children>
 </AnchorPane>

@@ -5,19 +5,13 @@
  */
 package cupcakesjavafx;
 
-import entity.Contact;
-import entity.Product;
 import entity.User;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import service.CartService;
-import service.ContactService;
-import service.ProductService;
+import util.Views;
 
 /**
  *
@@ -28,44 +22,29 @@ public class CupCakesJavaFx extends Application {
     public static User loggedUser;
 
     @Override
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        Contact c1 = new Contact(71444521, "STYLESHEET", "MODENA", " STYLESHEET_MODENA", " STYLESHEET_CASPIAN", " STYLESHEET@CASPIAN.com", false);
-        Product p1 = new Product("TESTJAVA", "TESTJAVA", 12.5, "TESSSST", "TESSSST");
-        ProductService s = new ProductService();
-        ContactService cs1 = new ContactService();
-        s.insert(p1);
-        cs1.create(c1);
-        CartService cart = new CartService();
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+    public void start(Stage stage) {
+        Views views = new Views();
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/views/loginWindow.fxml"));
+            stage.setTitle("login");
+            Scene scene = new Scene(root);
+            scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
+            stage.centerOnScreen();
+            stage.setScene(scene);
 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-                System.out.println(s.selectAll());
-                p1.setName("TEST UPDATE");
-                System.out.println(s.selectProductById(123));
-                s.update(p1);
-                s.delete(127);
-                System.out.println(cart.selectAllProductsFromCart());
-            }
-        });
+            System.out.println("lmao");
+            stage.show();
 
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-
-        Scene scene = new Scene(root, 300, 250);
-
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.out.println("lol");
         launch(args);
     }
 

@@ -1,5 +1,6 @@
 package servicesInterfaces;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -20,4 +21,6 @@ public interface CrudService<T> {
     void update(T a);
 
     void delete(T a);
+
+    T fromRs(ResultSet rs);
 }

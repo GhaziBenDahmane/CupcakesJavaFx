@@ -28,13 +28,16 @@ public class User {
     private int points;
     private String cin;
     private String phone;
-    private String num;
     private String photoprofil;
+
+    public User(int id) {
+        this.id = id;
+    }
 
     public User() {
     }
 
-    public User(int id, String username, String email, boolean enabled, String salt, String password, Date lastLogin, String confirmationToken, Date passwordRequestedAt, ArrayList<String> roles, int points, String cin, String phone, String num, String photoprofil) {
+    public User(int id, String username, String email, boolean enabled, String salt, String password, Date lastLogin, String confirmationToken, Date passwordRequestedAt, ArrayList<String> roles, int points, String phone, String photoprofil) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -46,9 +49,7 @@ public class User {
         this.passwordRequestedAt = passwordRequestedAt;
         this.roles = roles;
         this.points = points;
-        this.cin = cin;
         this.phone = phone;
-        this.num = num;
         this.photoprofil = photoprofil;
     }
 
@@ -156,14 +157,6 @@ public class User {
         this.phone = phone;
     }
 
-    public String getNum() {
-        return num;
-    }
-
-    public void setNum(String num) {
-        this.num = num;
-    }
-
     public String getPhotoprofil() {
         return photoprofil;
     }
@@ -188,7 +181,6 @@ public class User {
         hash = 61 * hash + this.points;
         hash = 61 * hash + Objects.hashCode(this.cin);
         hash = 61 * hash + Objects.hashCode(this.phone);
-        hash = 61 * hash + Objects.hashCode(this.num);
         hash = 61 * hash + Objects.hashCode(this.photoprofil);
         return hash;
     }
@@ -235,9 +227,6 @@ public class User {
         if (!Objects.equals(this.phone, other.phone)) {
             return false;
         }
-        if (!Objects.equals(this.num, other.num)) {
-            return false;
-        }
         if (!Objects.equals(this.photoprofil, other.photoprofil)) {
             return false;
         }
@@ -255,7 +244,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", username=" + username + ", email=" + email + ", enabled=" + enabled + ", salt=" + salt + ", password=" + password + ", lastLogin=" + lastLogin + ", confirmationToken=" + confirmationToken + ", passwordRequestedAt=" + passwordRequestedAt + ", roles=" + roles + ", points=" + points + ", cin=" + cin + ", phone=" + phone + ", num=" + num + ", photoprofil=" + photoprofil + '}';
+        return "User{" + "id=" + id + ", username=" + username + ", email=" + email + ", enabled=" + enabled + ", salt=" + salt + ", password=" + password + ", lastLogin=" + lastLogin + ", confirmationToken=" + confirmationToken + ", passwordRequestedAt=" + passwordRequestedAt + ", roles=" + roles + ", points=" + points + ", cin=" + cin + ", phone=" + phone + ", photoprofil=" + photoprofil + '}';
     }
 
 }

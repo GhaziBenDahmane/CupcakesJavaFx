@@ -7,9 +7,7 @@ package cupcakesjavafx;
 
 import entity.Contact;
 import entity.Product;
-import service.CartService;
-import service.ContactService;
-import service.ProductService;
+import entity.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,26 +15,31 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import service.CartService;
+import service.ContactService;
+import service.ProductService;
 
 /**
  *
  * @author Arshavin
  */
 public class CupCakesJavaFx extends Application {
-    
+
+    public static User loggedUser;
+
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();
         btn.setText("Say 'Hello World'");
-        Contact c1 = new Contact(71444521, "STYLESHEET","MODENA"," STYLESHEET_MODENA"," STYLESHEET_CASPIAN"," STYLESHEET@CASPIAN.com",false);
-        Product p1 = new Product("TESTJAVA","TESTJAVA",12.5,"TESSSST","TESSSST");
+        Contact c1 = new Contact(71444521, "STYLESHEET", "MODENA", " STYLESHEET_MODENA", " STYLESHEET_CASPIAN", " STYLESHEET@CASPIAN.com", false);
+        Product p1 = new Product("TESTJAVA", "TESTJAVA", 12.5, "TESSSST", "TESSSST");
         ProductService s = new ProductService();
         ContactService cs1 = new ContactService();
         s.insert(p1);
         cs1.create(c1);
-        CartService cart =new CartService();
+        CartService cart = new CartService();
         btn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Hello World!");
@@ -48,12 +51,12 @@ public class CupCakesJavaFx extends Application {
                 System.out.println(cart.selectAllProductsFromCart());
             }
         });
-        
+
         StackPane root = new StackPane();
         root.getChildren().add(btn);
-        
+
         Scene scene = new Scene(root, 300, 250);
-        
+
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -65,5 +68,5 @@ public class CupCakesJavaFx extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

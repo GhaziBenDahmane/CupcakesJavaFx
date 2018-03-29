@@ -8,6 +8,7 @@ package service;
 import cupcakesjavafx.CupCakesJavaFx;
 import entity.User;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,31 +27,6 @@ public class UserService implements CrudService<User> {
 
     public UserService() {
         connection = DataSource.getInstance().getConnection();
-    }
-
-    public boolean insert(User u) {
-
-        String request = "INSERT INTO `fos_user` "
-                + "(`username`, `username_canonical`, `email`, `email_canonical`, "
-                + "`enabled`, `password`,`roles`, `phone`, `picture`) "
-                + "VALUES (?, ?, ?, ?, '1', ?,?, ?, ?);";
-        try {
-            ste = connection.prepareStatement(request);
-            ste.setString(1, u.getUsername());
-            ste.setString(2, u.getUsername().toLowerCase());
-            ste.setString(3, u.getEmail());
-            ste.setString(4, u.getEmail().toLowerCase());
-            ste.setString(5, u.getPassword());
-            ste.setString(6, Util.arrayToString(u.getRoles()));
-            ste.setString(7, u.getPhone());
-            ste.setString(8, u.getPhotoprofil());
-            ste.executeUpdate();
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     public User login(String username, String pw) {
@@ -82,7 +58,24 @@ public class UserService implements CrudService<User> {
 
     }
 
-    public User getById(int id) {
+    @Override
+    public List<User> getAll() {
+        List<User> users = new ArrayList();
+        String request = "SELECT * FROM fos_user";
+        try {
+            ste = connection.prepareStatement(request);
+            ResultSet rs = ste.executeQuery();
+            while (rs.next()) {
+                users.add(fromRs(rs));
+            }
+        } catch (SQLException ex) {
+        }
+
+        return users;
+    }
+
+    @Override
+    public User get(int id) {
         String request = "SELECT * FROM fos_user WHERE id = ?";
         try {
             ste = connection.prepareStatement(request);
@@ -98,23 +91,44 @@ public class UserService implements CrudService<User> {
     }
 
     @Override
-    public List<User> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public User get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<User> getBy(String param, String val) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<User> users = new ArrayList();
+
+        String request = "SELECT * FROM fos_user WHERE " + param + " = ?";
+        try {
+            ste = connection.prepareStatement(request);
+            ste.setString(0, val);
+            ResultSet rs = ste.executeQuery();
+            if (rs.next()) {
+                users.add(fromRs(rs));
+            }
+        } catch (SQLException ex) {
+        }
+
+        return users;
     }
 
     @Override
-    public void add(User a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void add(User u) {
+
+        String request = "INSERT INTO `fos_user` "
+                + "(`username`, `username_canonical`, `email`, `email_canonical`, "
+                + "`enabled`, `password`,`roles`, `phone`, `picture`) "
+                + "VALUES (?, ?, ?, ?, '1', ?,?, ?, ?);";
+        try {
+            ste = connection.prepareStatement(request);
+            ste.setString(1, u.getUsername());
+            ste.setString(2, u.getUsername().toLowerCase());
+            ste.setString(3, u.getEmail());
+            ste.setString(4, u.getEmail().toLowerCase());
+            ste.setString(5, u.getPassword());
+            ste.setString(6, Util.arrayToString(u.getRoles()));
+            ste.setString(7, u.getPhone());
+            ste.setString(8, u.getPhotoprofil());
+            ste.executeUpdate();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 
     @Override

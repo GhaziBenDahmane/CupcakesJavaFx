@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import entity.User;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -42,7 +43,11 @@ public class LoginWindowController implements Initializable {
     @FXML
     private void loginAction(ActionEvent event) {
         UserService us = new UserService();
-        us.login(username.getText(), password.getText());
+        User user = us.login(username.getText(), password.getText());
+        System.out.println(user == null);
+        System.out.println(user);
+        errors.setText("wrong userName/password combination");
+
     }
 
 }

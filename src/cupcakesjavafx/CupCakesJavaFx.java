@@ -25,14 +25,14 @@ public class CupCakesJavaFx extends Application {
     public void start(Stage stage) {
         Views views = new Views();
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/views/loginWindow.fxml"));
+            Parent root = FXMLLoader.load(getClass()
+                    .getResource("/views/loginWindow.fxml"));
             stage.setTitle("login");
             Scene scene = new Scene(root);
             scene.setFill(javafx.scene.paint.Color.TRANSPARENT);
             stage.centerOnScreen();
             stage.setScene(scene);
 
-            System.out.println("lmao");
             stage.show();
 
         } catch (Exception e) {
@@ -44,7 +44,6 @@ public class CupCakesJavaFx extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("lol");
         launch(args);
     }
 

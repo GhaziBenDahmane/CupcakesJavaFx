@@ -42,14 +42,15 @@ public class UserService implements CrudService<User> {
                 if (Util.checkpw(pw, hashedpw)) {
                     System.out.println("Logged in!");
                     CupCakesJavaFx.loggedUser = fromRs(rs);
+                    return CupCakesJavaFx.loggedUser;
 
-                } else {
-                    System.out.println("Wrong password");
                 }
             }
         } catch (SQLException e) {
             System.err.println(e);
         }
+        System.out.println("Wrong username/password");
+
         return u;
     }
 

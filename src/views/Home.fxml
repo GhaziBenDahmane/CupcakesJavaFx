@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="831.0" prefWidth="1228.0" stylesheets="@../../src/styles/style.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" maxWidth="-Infinity" prefWidth="150.0" style="-fx-background-color: #FFB6C1;">
+               <children>
+                  <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="cursor_hand">
+                     <image>
+                        <Image url="@../../../../../Downloads/icons8-confectionery-50%20(1).png" />
+                     </image>
+                  </ImageView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold;" text="CupCakes Dashbord">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <TextField alignment="TOP_LEFT" promptText="Search" style="-fx-background-color: transparent; -fx-prompt-text-fill: #485460;">
+                           <HBox.margin>
+                              <Insets left="5.0" right="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <FontAwesomeIcon fill="#686565" glyphName="SEARCH" size="1.5em" styleClass="cursor_hand" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <FontAwesomeIcon glyphName="BELL_O" size="1.5em" styleClass="cursor_hand" />
+                        <ImageView fitWidth="32.0" pickOnBounds="true" preserveRatio="true" styleClass="cursor_hand">
+                           <image>
+                              <Image url="@../../../../../Downloads/icons8-administrator-male-50.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bolder;" text="Admin">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Text>
+                        <FontAwesomeIcon glyphName="ANGLE_DOWN" size="1.5em" styleClass="cursor_hand">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </FontAwesomeIcon>
+                     </children></HBox>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox maxWidth="-Infinity" prefWidth="233.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" styleClass="hover_border">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+               <children>
+                  <FontAwesomeIcon fill="#485460" glyphName="CIRCLE_ALT_NOTCH" size="1.5em">
+                     <HBox.margin>
+                        <Insets left="12.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold; -fx-fill: #485460;" text="Dashbord">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" styleClass="hover_border">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <FontAwesomeIcon fill="#485460" glyphName="LIST_UL" size="1.5em">
+                     <HBox.margin>
+                        <Insets left="12.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold; -fx-fill: #485460;" text="Products">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" styleClass="hover_border">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <FontAwesomeIcon fill="#485460" size="1.5em">
+                     <HBox.margin>
+                        <Insets left="12.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold; -fx-fill: #485460;" text="Deliveries">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" styleClass="hover_border">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <FontAwesomeIcon fill="#485460" glyphName="CALENDAR_ALT" size="1.5em">
+                     <HBox.margin>
+                        <Insets left="12.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold; -fx-fill: #485460;" text="Reservations">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" styleClass="hover_border">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <FontAwesomeIcon fill="#485460" glyphName="FILE_TEXT_ALT" size="1.5em">
+                     <HBox.margin>
+                        <Insets left="12.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold; -fx-fill: #485460;" text="Reports">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" styleClass="hover_border">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <FontAwesomeIcon fill="#485460" glyphName="ENVELOPE_ALT" size="1.5em">
+                     <HBox.margin>
+                        <Insets left="12.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold; -fx-fill: #485460;" text="Contacts">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+</BorderPane>

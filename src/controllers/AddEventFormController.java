@@ -43,7 +43,7 @@ public class AddEventFormController implements Initializable {
     
     
     @FXML
-    private TextField title, nbTable, nbPerson , sdate, edate ,band ;
+    private TextField title, nbTable, nbPerson , sdate_text, edate ,band ;
             
     @FXML
     private AnchorPane pane;
@@ -65,17 +65,23 @@ public class AddEventFormController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         clear();
         
-    }    
+    }  
+    
+     @FXML
+    private void dateClicked(ActionEvent event){
+        String dateText = sdf.format(Date.valueOf(startDate.getValue()));
+        sdate_text.setText(dateText);
+    }
     
     @FXML
     private void startDateClicked(ActionEvent event){
         String dateText = sdf.format(Date.valueOf(startDate.getValue()));
-        sdate.setText(dateText);
+        sdate_text.setText(dateText);
     }
     
     private void endDateClicked(ActionEvent event){
         String dateText = sdf.format(Date.valueOf(startDate.getValue()));
-        sdate.setText(dateText);
+        sdate_text.setText(dateText);
     }
     
     @FXML
@@ -89,7 +95,7 @@ public class AddEventFormController implements Initializable {
     
     private void inputMethod() throws ParseException{
         if(title.getText().equals("")||nbPerson.getText().equals("")
-                ||sdate.getText().equals("")||edate.getText().equals("")){
+                ||sdate_text.getText().equals("")||edate.getText().equals("")){
             nav.showAlert(Alert.AlertType.WARNING, "Error", null, "Please enter the following information");
         }
         else{

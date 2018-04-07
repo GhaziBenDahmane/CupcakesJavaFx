@@ -10,7 +10,7 @@ public final class DataSource {
 
     private DataSource() {
         String url = "jdbc:mysql://localhost/";
-        String dbName = "symfony";
+        String dbName = "cupcake";
         String driver = "com.mysql.jdbc.Driver";
         String userName = "root";
         String password = "";

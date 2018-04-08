@@ -19,6 +19,7 @@ public class navigation {
     private final String dashboard="/view/Dashboard.fxml";
     private final String database="/view/Database.fxml";
     private final String AddEventForm="/views/AddEventForm.fxml";
+    private final String AddPromotionForm="/views/AddEventForm.fxml";
 
     private final String uangMasuk="/view/UangMasuk.fxml";
     private final String ubahUangMasuk="/view/UbahUangMasuk.fxml";
@@ -55,6 +56,9 @@ public class navigation {
     
     public String getAddEventForm(){
         return AddEventForm;
+    }
+    public String getAddPromotionForm(){
+        return AddPromotionForm;
     }
     
     public String getUangMasuk(){

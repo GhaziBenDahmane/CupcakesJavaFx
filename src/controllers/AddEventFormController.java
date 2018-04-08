@@ -56,11 +56,7 @@ public class AddEventFormController implements Initializable {
         title.requestFocus();
     }
     
-        
-    
    
-   
-            
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         clear();

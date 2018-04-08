@@ -14,6 +14,8 @@ import function.navigation;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +31,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import service.EventService;
 
 /**
  * FXML Controller class
@@ -86,12 +89,12 @@ public class EventListController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-title.setCellValueFactory(new PropertyValueFactory<>("title"));
+           title.setCellValueFactory(new PropertyValueFactory<>("title"));
            nbPerson.setCellValueFactory(new PropertyValueFactory<>("nbPerson"));
            nbTable.setCellValueFactory(new PropertyValueFactory<>("nbTable"));
            band.setCellValueFactory(new PropertyValueFactory<>("band"));
            status.setCellValueFactory(new PropertyValueFactory<>("status"));
-
+           startDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
            tableEvent.setItems(getEvent());    
 
     }    
@@ -100,12 +103,11 @@ title.setCellValueFactory(new PropertyValueFactory<>("title"));
  
      public ObservableList<Event> getEvent()
          {
-            ObservableList<Event> events = FXCollections.observableArrayList();
-            Date mnt = new Date(System.currentTimeMillis());
-
-            events.add(new Event("title", "nbPerson", mnt, mnt, "nbTable", "band", "status", "cost"));
-            events.add(new Event("bbb", "bb", mnt, mnt, "22", "qqq", "qq", "qq"));
-            return events;
+            EventService service = new EventService();
+            ObservableList<Event> list;
+            list = FXCollections.observableArrayList();
+            list =  service.selectAllEventFrom();
+            return list;
          }
      
      @FXML

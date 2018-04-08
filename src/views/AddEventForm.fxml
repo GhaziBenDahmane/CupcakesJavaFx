@@ -56,7 +56,12 @@
                         <Font name="Segoe UI" size="12.0" />
                      </font>
                   </JFXTextField>
-                  
+                  <JFXTextField fx:id="sdate_text" editable="false" labelFloat="true" prefHeight="26.0" prefWidth="241.0" promptText="Tanggal" style="-jfx-disable-animation: false;" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Segoe UI" size="12.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXDatePicker fx:id="startDate" defaultColor="#4183d7" editable="false" focusTraversable="false" onAction="#dateClicked" prefHeight="25.0" prefWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
                <padding>
                   <Insets left="10.0" />

@@ -7,10 +7,19 @@ package service;
 
 import util.DataSource;
 import entity.Event;
+import entity.Promotion;
 import servicesInterfaces.IEventService;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class EventService implements IEventService {
 
@@ -35,10 +44,10 @@ public class EventService implements IEventService {
             ps.setString(2, event.getTitle());
             ps.setDate(6, event.getStartDate());
             ps.setDate(7, event.getEndDate());
-            ps.setString(9, event.getNbPerson());
-            ps.setString(10, event.getNbTable());
-            ps.setString(11, event.getBand());
-            ps.setString(12, event.getCost());
+            ps.setInt(9, event.getNbPerson());
+            ps.setInt(10, event.getNbTable());
+            ps.setInt(11, event.getBand());
+            ps.setDouble(12, event.getCost());
             ps.setString(14, event.getStatus());
 
             ps.executeUpdate();
@@ -69,6 +78,29 @@ public class EventService implements IEventService {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    public ObservableList<Event>  selectAllEventFrom() {
+        ObservableList<Event> events = FXCollections.observableArrayList();
+        String req ="select * from event";
+        try {
+            Statement statement = (Statement) connection.createStatement();
+            ResultSet result = statement.executeQuery(req);
+            while (result.next())
+            {
+                Event event = new Event(
+                        result.getString("title"), result.getInt("nb_person"),result.getDate("startDatetime"),
+                        result.getDate("endDatetime"), result.getInt("nb_table"), result.getInt("band"),
+                        result.getString("status"), result.getDouble("cost"));
+                events.add(event);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return events;
     }
 
 }

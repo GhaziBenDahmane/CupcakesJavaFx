@@ -18,6 +18,13 @@ public class Promotion {
     private Date starting_date;
     private Date ending_date;
 
+    public Promotion(Double Discount, Date starting_date, Date ending_date) {
+        this.Discount = Discount;
+        this.starting_date = starting_date;
+        this.ending_date = ending_date;
+    }
+
+    
     public Promotion(Integer id_promotion, Double Discount, Date starting_date, Date ending_date) {
         this.id_promotion = id_promotion;
         this.Discount = Discount;

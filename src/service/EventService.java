@@ -36,19 +36,19 @@ public class EventService implements IEventService {
                     + "`cssClass`, `startDatetime`, `endDatetime`, `allDay`, "
                     + "`nb_person`, `nb_table`, `band`, `cost`, `participants`,"
                     + "`status` ,`user` ) "
-                    + "VALUES (NULL, '?', NULL, NULL, NULL, "
-                    + "?', '?', '0', '10',"
-                    + " '10', '0', '200', NULL, 'Pending', '0' )";
+                    + "VALUES (NULL, ?, NULL, NULL, NULL, "
+                    + "?, ?, '0', ?,"
+                    + " ?, ?, ?, NULL, ? , '0' )";
 
             PreparedStatement ps = connection.prepareStatement(req);
-            ps.setString(2, event.getTitle());
-            ps.setDate(6, event.getStartDate());
-            ps.setDate(7, event.getEndDate());
-            ps.setInt(9, event.getNbPerson());
-            ps.setInt(10, event.getNbTable());
-            ps.setInt(11, event.getBand());
-            ps.setDouble(12, event.getCost());
-            ps.setString(14, event.getStatus());
+            ps.setString(1, event.getTitle());
+            ps.setDate(2, event.getStartDate());
+            ps.setDate(3, event.getEndDate());
+            ps.setInt(4, event.getNbPerson());
+            ps.setInt(5, event.getNbTable());
+            ps.setInt(6, event.getBand());
+            ps.setDouble(7, event.getCost());
+            ps.setString(8, event.getStatus());
 
             ps.executeUpdate();
         } catch (SQLException ex) {

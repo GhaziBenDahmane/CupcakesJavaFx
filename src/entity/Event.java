@@ -58,6 +58,10 @@ public class Event {
         this.nbPerson = nbPerson;
     }
 
+    public Event(String setTitle, int parseInt, java.util.Date parse) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId() {
         return id;
     }

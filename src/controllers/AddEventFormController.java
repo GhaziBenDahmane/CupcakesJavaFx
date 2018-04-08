@@ -23,6 +23,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import entity.Event;
 import java.text.ParseException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import service.EventService;
@@ -71,10 +76,11 @@ public class AddEventFormController implements Initializable {
     
     @FXML
     private void startDateClicked(ActionEvent event){
-        String dateText = sdf.format(Date.valueOf(startDate.getValue()));
-        sdate_text.setText(dateText);
+
+            String dateText = sdf.format(Date.valueOf(startDate.getValue()));
+            sdate_text.setText(dateText);
+           
     }
-    
     private void endDateClicked(ActionEvent event){
         String dateText = sdf.format(Date.valueOf(startDate.getValue()));
         sdate_text.setText(dateText);
@@ -90,25 +96,38 @@ public class AddEventFormController implements Initializable {
     }
     
     private void inputMethod() throws ParseException{
-        if(title.getText().equals("")||nbPerson.getText().equals("")
+	LocalDate now = LocalDate.now();
+       /* if(title.getText().equals("")||nbPerson.getText().equals("")
                 ||sdate_text.getText().equals("")||edate.getText().equals("")){
             nav.showAlert(Alert.AlertType.WARNING, "Error", null, "Please enter the following information");
         }
-        else{
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+        if(startDate.getValue().isBefore(now))
+        {
+            nav.showAlert(Alert.AlertType.WARNING, "Error",null, "The date is wrong");
+
+        }
+*/
+       
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy ");
+ 
+       
             Calendar cal = Calendar.getInstance();
             String setTitle=title.getText();
             String setNbPerson=nbPerson.getText();
             String setNbTable=nbTable.getText();
-            Date setStartDate= (Date) dateFormat.parse(startDate.getValue().toString()) ;
             
-            Date setEndDate=(Date) dateFormat.parse(endDate.getValue().toString());
-            String setBand=band.getSelection().toString();
+            java.sql.Date dd = java.sql.Date.valueOf(startDate.getValue());
             
-               
-
-            service.add(new Event(setTitle, setNbPerson, setStartDate, setEndDate , setNbTable, setBand , "Pending" , "0"));
-        }
+//            Date setEndDate= (Date) sdf.parse(sdate_text.getText());
+             
+            Event event = new Event(
+                    setTitle, Integer.parseInt(setNbPerson),dd, 
+                    dd, Integer.parseInt(setNbTable),0, "Pending", 0.0
+            );
+            EventService service = new EventService();
+            service.add(event);
+        
     }
     
 }

@@ -19,7 +19,7 @@ public class UserMaster {
     }
 
     public UserMaster(User user) {
-        System.out.println(user.getRoles());
+        System.out.println(user);
         this.user = user;
         this.username = new SimpleStringProperty(user.getUsername());
         this.email = new SimpleStringProperty(user.getEmail());

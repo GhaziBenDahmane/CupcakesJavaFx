@@ -42,6 +42,8 @@ public class ContactAddController implements Initializable {
     @FXML
     private AnchorPane pane;
     
+    private int i=1;
+    
     private void clear(){
         firstName.setText("");
         lastName.setText("");
@@ -61,6 +63,11 @@ public class ContactAddController implements Initializable {
             public void handle(javafx.scene.input.KeyEvent event) {
                 if (!phone.getText().matches("[0-9]*")){
                     nav.showAlert(Alert.AlertType.WARNING, "WARNING", null, "Only numbers!!");
+                    phone.setText("");
+                    phone.requestFocus();
+                }
+                if (phone.getText().length()!=8){
+                    nav.showAlert(Alert.AlertType.WARNING, "WARNING", null, "Phone Number must contain 8 numbers!!");
                     phone.setText("");
                     phone.requestFocus();
                 }
@@ -102,9 +109,10 @@ public class ContactAddController implements Initializable {
             String phoneText=phone.getText().toString();
             String adressText=adress.getText();
             String messageText=message.getText();
-            String waktuInputText=dateFormat.format(cal.getTime());
-            int i=1;
-            Contact c = new Contact(String.valueOf(i),Integer.parseInt(phoneText), firstNameText, lastNameText, messageText, adressText, emailText, false);
+            String inputTime=dateFormat.format(cal.getTime());
+           
+            
+            Contact c = new Contact(i,Integer.parseInt(phoneText),inputTime, firstNameText, lastNameText, messageText, adressText, emailText, false);
             i++;
             model.create(c);
             if(model.getStatusInert()==true){

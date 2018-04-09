@@ -13,6 +13,7 @@ import java.sql.Date;
  */
 public class Reservation {
 
+    
     private int id, nbTables, nbPersonnes;
     private Date dateReservation;
 
@@ -63,12 +64,7 @@ public class Reservation {
         this.dateReservation = dateReservation;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + this.id;
-        return hash;
-    }
+
 
     @Override
     public boolean equals(Object obj) {

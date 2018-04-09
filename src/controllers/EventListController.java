@@ -114,7 +114,7 @@ public class EventListController implements Initializable {
 
     private void openUbah() throws IOException {
         FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource(nav.getUbahUangMasuk()));
+      //  Loader.setLocation(getClass().getResource(nav.getUbahUangMasuk()));
         blur.setEffect(new GaussianBlur(10));
         new FadeInRightTransition(trans).play();
         AnchorPane pane = Loader.load();

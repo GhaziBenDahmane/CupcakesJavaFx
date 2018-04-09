@@ -22,10 +22,11 @@ public class navigation {
     private final String AddPromotionForm="/views/AddEventForm.fxml";
 
     private final String uangMasuk="/view/UangMasuk.fxml";
-    private final String ubahUangMasuk="/view/UbahUangMasuk.fxml";
+    private final String ReservationUpdate="/views/ReservationUpdate.fxml";
     private final String user="/view/User.fxml";
     private final String uangKeluar="/view/UangKeluar.fxml";
     private final String ContactAdd="/views/ContactAdd.fxml";
+    private final String ReservationAdd="/views/ReservationAdd.fxml";
     private final String ContactUpdate="/views/ContactUpdate.fxml";
     private final String userManagement="/view/UserManagement.fxml";
     private final String tambahUserManagement="/view/TambahUserManagement.fxml";
@@ -67,8 +68,12 @@ public class navigation {
     
     
     
-    public String getUbahUangMasuk(){
-        return ubahUangMasuk;
+    public String getReservationUpdate(){
+        return ReservationUpdate;
+    }
+    
+    public String getReservationAdd(){
+        return ReservationAdd;
     }
     
     public String getContactAdd(){
@@ -152,7 +157,7 @@ public class navigation {
             @Override
             public void handle(javafx.scene.input.KeyEvent event) {
                 if (!text.getText().matches("[0-9]*")){
-                    showAlert(AlertType.WARNING, "Peringatan", null, "Hanya boleh angka !!");
+                    showAlert(AlertType.WARNING, "WARNING", null, "It can only be a number!!");
                     text.setText("");
                     text.requestFocus();
                 }

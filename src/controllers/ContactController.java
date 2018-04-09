@@ -47,7 +47,7 @@ import util.DataSource;
 
 public class ContactController implements Initializable {
     
-    ObservableList<String> comboFilter = FXCollections.observableArrayList("Hari","Bulan","Semua");
+    ObservableList<String> comboFilter = FXCollections.observableArrayList("Day","Month","Year");
     ObservableList<String> comboBulan = FXCollections.observableArrayList("January","February"
             ,"March","April","May","June","July","August","September","October","November","December");
     SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
@@ -108,13 +108,13 @@ public class ContactController implements Initializable {
     private CheckBox check;
     
     @FXML
-    private ComboBox filter, bulan;
+    private ComboBox filter, month;
     
     @FXML
-    private TextField hari, tahun, cari;
+    private TextField day, year, cari;
     
     @FXML
-    private DatePicker hari_pilih;
+    private DatePicker select_day;
     
     private String id="";
     private String  firstName="", lastName="", email="", adress="",message="",phone="";
@@ -126,22 +126,22 @@ public class ContactController implements Initializable {
     time time = new time();
     
     private void setFilter(){
-        filter.setValue("Hari");
+        filter.setValue("day");
         filter.setItems(comboFilter);
     }
     
-    private void setHari(){
-        hari.setText(time.tanggal());
-        hari_pilih.setValue(LocalDate.parse(time.tanggalQuery()));
+    private void  setDay(){
+        day.setText(time.tanggal());
+        select_day.setValue(LocalDate.parse(time.tanggalQuery()));
     }
     
-    private void setBulan(){
-        bulan.setValue(time.tanggalBulan());
-        bulan.setItems(comboBulan);
+    private void setMonth(){
+        month.setValue(time.tanggalBulan());
+        month.setItems(comboBulan);
     }
     
-    private void setTahun(){
-        tahun.setText(time.tanggalTahun());
+    private void setYear(){
+        year.setText(time.tanggalTahun());
     }
     
     /*private void setStyleTable(){
@@ -155,7 +155,7 @@ public class ContactController implements Initializable {
     
     private void loadTable(){
         try {
-            nav.animationFade(tableUangKeluar);
+           
       
             columnID.setCellValueFactory(new PropertyValueFactory<>("id"));
             columnFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -164,7 +164,7 @@ public class ContactController implements Initializable {
             columnAdress.setCellValueFactory(new PropertyValueFactory<>("adress"));
             columnPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
             columnMessage.setCellValueFactory(new PropertyValueFactory<>("message"));
-           // columnInputTime.setCellValueFactory(new PropertyValueFactory<>("inputTime"));
+            columnInputTime.setCellValueFactory(new PropertyValueFactory<>("inputTime"));
             tableUangKeluar.setItems(getContacts());
         } catch (Exception e) {
             System.out.println("error controller");;
@@ -182,33 +182,33 @@ public class ContactController implements Initializable {
     
     @FXML
     private void filterClicked(ActionEvent event){
-        if(filter.getSelectionModel().getSelectedItem().toString().equals("Hari")){
-            bulan.setVisible(false);
-            hari.setVisible(true);
-            hari_pilih.setVisible(true);
-            tahun.setVisible(false);
-            setHari();
+        if(filter.getSelectionModel().getSelectedItem().toString().equals("day")){
+            month.setVisible(false);
+            day.setVisible(true);
+            select_day.setVisible(true);
+            year.setVisible(false);
+             setDay();
         }
-        else if (filter.getSelectionModel().getSelectedItem().toString().equals("Bulan")){
-            bulan.setVisible(true);
-            hari.setVisible(false);
-            hari_pilih.setVisible(false);
-            tahun.setVisible(true);
-            setBulan();
-            setTahun();
+        else if (filter.getSelectionModel().getSelectedItem().toString().equals("month")){
+            month.setVisible(true);
+            day.setVisible(false);
+            select_day.setVisible(false);
+            year.setVisible(true);
+            setMonth();
+            setYear();
         }
         else{
-            bulan.setVisible(false);
-            hari.setVisible(false);
-            hari_pilih.setVisible(false);
-            tahun.setVisible(false);
+            month.setVisible(false);
+            day.setVisible(false);
+            select_day.setVisible(false);
+            year.setVisible(false);
         }
     }
     
     @FXML
     private void dateClicked(ActionEvent event){
-        String dateText = sdf.format(Date.valueOf(hari_pilih.getValue()));
-        hari.setText(dateText);
+        String dateText = sdf.format(Date.valueOf(select_day.getValue()));
+        day.setText(dateText);
     }
     
     @FXML
@@ -223,7 +223,7 @@ public class ContactController implements Initializable {
      @FXML
     private void ambilID(MouseEvent event) throws IOException{
         if(event.getClickCount()==1){
-            id = tableUangKeluar.getSelectionModel().getSelectedItem().getId();
+           // id = tableUangKeluar.getSelectionModel().getSelectedItem().getId();
             firstName = tableUangKeluar.getSelectionModel().getSelectedItem().getFirstName();
             lastName = tableUangKeluar.getSelectionModel().getSelectedItem().getLastName();
             email = tableUangKeluar.getSelectionModel().getSelectedItem().getEmail();
@@ -232,12 +232,12 @@ public class ContactController implements Initializable {
             message = tableUangKeluar.getSelectionModel().getSelectedItem().getMessage();
         }
         else if(event.getClickCount()==2){
-           id = tableUangKeluar.getSelectionModel().getSelectedItem().getId();
+          //   id = tableUangKeluar.getSelectionModel().getSelectedItem().getId();
             firstName = tableUangKeluar.getSelectionModel().getSelectedItem().getFirstName();
             lastName = tableUangKeluar.getSelectionModel().getSelectedItem().getLastName();
             email = tableUangKeluar.getSelectionModel().getSelectedItem().getEmail();
             adress = tableUangKeluar.getSelectionModel().getSelectedItem().getAdress();
-            //phone = tableUangKeluar.getSelectionModel().getSelectedItem().getPhone();
+          //  phone = tableUangKeluar.getSelectionModel().getSelectedItem().getPhone();
             message = tableUangKeluar.getSelectionModel().getSelectedItem().getMessage();
             openUbah();
         }
@@ -253,7 +253,7 @@ public class ContactController implements Initializable {
             List<Contact> allContacts;
              allContacts=contact.selectAll();
              allContacts.stream().forEach((allContact) -> {
-                p.add(new Contact(allContact.getId(),allContact.getPhone(),allContact.getFirstName(),allContact.getLastName(),
+                p.add(new Contact(allContact.getId(),allContact.getPhone(),allContact.getInputTime(),allContact.getFirstName(),allContact.getLastName(),
                         allContact.getMessage(),allContact.getAdress(),allContact.getEmail()));
         });
             return p;
@@ -263,9 +263,9 @@ public class ContactController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setFilter();
-        setHari();
-        setBulan();
-        setTahun();
+        setDay();
+        setMonth();
+        setYear();
        // setStyleTable();
         loadTable();
     }    

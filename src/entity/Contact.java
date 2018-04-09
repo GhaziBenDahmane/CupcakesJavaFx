@@ -5,7 +5,7 @@
  */
 package entity;
 
-import javafx.beans.property.StringProperty;
+import java.sql.Date;
 
 /**
  *
@@ -14,13 +14,14 @@ import javafx.beans.property.StringProperty;
 public class Contact {
 
    
-    private int phone;
-    private String id, firstName, lastName, message, adress, email;
+    private int id, phone;
+   
+    private String firstName, lastName, message, adress,inputTime, email;
     private boolean status;
 
 
 
-    public Contact(String id, int phone, String firstName, String lastName, String adress, String email, boolean status) {
+    public Contact(int id, int phone, String firstName, String lastName, String adress, String email, boolean status) {
         this.id = id;
         this.phone = phone;
         this.firstName = firstName;
@@ -30,7 +31,7 @@ public class Contact {
         this.status = status;
     }
 
-    public Contact(String id, int phone, String firstName, String lastName, String message, String adress, String email) {
+    public Contact(int id, int phone, String firstName, String lastName, String message, String adress, String email) {
         this.id = id;
         this.phone = phone;
         this.firstName = firstName;
@@ -41,7 +42,7 @@ public class Contact {
     }
     
 
-    public Contact(String id, int phone, String firstName, String lastName, String message, String adress, String email, boolean status) {
+    public Contact(int id, int phone, String firstName, String lastName, String message, String adress, String email, boolean status) {
         this.id = id;
         this.phone = phone;
         this.firstName = firstName;
@@ -61,7 +62,7 @@ public class Contact {
         this.status = status;
     }
 
-    public Contact(String id, int phone, String firstName, String lastName, String message, String adress) {
+    public Contact(int id, int phone, String firstName, String lastName, String message, String adress) {
         this.id = id;
         this.phone = phone;
         this.firstName = firstName;
@@ -69,17 +70,42 @@ public class Contact {
         this.message = message;
         this.adress = adress;
     }
-    
 
-    public Contact(int phone, String firstName, String lastName, String message, String adress, String email, boolean status) {
+    public Contact(int id, int phone, String inputTime, String firstName, String lastName, String message, String adress, String email, boolean status) {
+        this.id = id;
         this.phone = phone;
+        this.inputTime = inputTime;
         this.firstName = firstName;
         this.lastName = lastName;
         this.message = message;
         this.adress = adress;
         this.email = email;
-        this.status = false;
+        this.status = status;
     }
+
+    public Contact(int id, int phone, String inputTime, String firstName, String lastName, String message, String adress, String email) {
+        this.id = id;
+        this.phone = phone;
+        this.inputTime = inputTime;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.message = message;
+        this.adress = adress;
+        this.email = email;
+    }
+    
+    
+
+    public String getInputTime() {
+        return inputTime;
+    }
+
+    public void setInputTime(String inputTime) {
+        this.inputTime = inputTime;
+    }
+    
+    
+
 
     public boolean isStatus() {
         return status;
@@ -89,11 +115,11 @@ public class Contact {
         this.status = status;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

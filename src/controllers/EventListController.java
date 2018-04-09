@@ -13,9 +13,6 @@ import entity.Event;
 import function.navigation;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -67,56 +64,55 @@ public class EventListController implements Initializable {
     @FXML
     private ContextMenu contextMenu;
     @FXML
-    private TableColumn<Event,String> title;
+    private TableColumn<Event, String> title;
     @FXML
-    private TableColumn<Event,String> nbPerson;
-    private TableColumn<Event,String> endDate;
+    private TableColumn<Event, String> nbPerson;
+    private TableColumn<Event, String> endDate;
     @FXML
-    private TableColumn<Event,String> nbTable;
+    private TableColumn<Event, String> nbTable;
     @FXML
-    private TableColumn<Event,String> band;
+    private TableColumn<Event, String> band;
     @FXML
-    private TableColumn<Event,String> status;
-    private TableColumn<Event,String> cost;
+    private TableColumn<Event, String> status;
+    private TableColumn<Event, String> cost;
     @FXML
-    private TableColumn<Event,String> startDate;
+    private TableColumn<Event, String> startDate;
 
-    
-        navigation nav = new navigation();
+    navigation nav = new navigation();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-           title.setCellValueFactory(new PropertyValueFactory<>("title"));
-           nbPerson.setCellValueFactory(new PropertyValueFactory<>("nbPerson"));
-           nbTable.setCellValueFactory(new PropertyValueFactory<>("nbTable"));
-           band.setCellValueFactory(new PropertyValueFactory<>("band"));
-           status.setCellValueFactory(new PropertyValueFactory<>("status"));
-           startDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-           tableEvent.setItems(getEvent());    
+        title.setCellValueFactory(new PropertyValueFactory<>("title"));
+        nbPerson.setCellValueFactory(new PropertyValueFactory<>("nbPerson"));
+        nbTable.setCellValueFactory(new PropertyValueFactory<>("nbTable"));
+        band.setCellValueFactory(new PropertyValueFactory<>("band"));
+        status.setCellValueFactory(new PropertyValueFactory<>("status"));
+        startDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        tableEvent.setItems(getEvent());
 
-    }    
-    
-    @FXML
- 
-     public ObservableList<Event> getEvent()
-         {
-            EventService service = new EventService();
-            ObservableList<Event> list;
-            list = FXCollections.observableArrayList();
-            list =  service.selectAllEventFrom();
-            return list;
-         }
-     
-     @FXML
-    private void deleteClicked(ActionEvent event) throws IOException {
-      
-            openUbah();
-      
     }
-  private void openUbah() throws IOException{
+
+    @FXML
+
+    public ObservableList<Event> getEvent() {
+        EventService service = new EventService();
+        ObservableList<Event> list;
+        list = FXCollections.observableArrayList();
+        list = service.selectAllEventFrom();
+        return list;
+    }
+
+    @FXML
+    private void deleteClicked(ActionEvent event) throws IOException {
+
+        openUbah();
+
+    }
+
+    private void openUbah() throws IOException {
         FXMLLoader Loader = new FXMLLoader();
         Loader.setLocation(getClass().getResource(nav.getUbahUangMasuk()));
         blur.setEffect(new GaussianBlur(10));
@@ -126,8 +122,9 @@ public class EventListController implements Initializable {
         eventList.setData(title, nbPerson, endDate, nbTable, band, cost, startDate);
         loadPane.getChildren().setAll(pane);
     }
-        public void setData(String title, String nbPerson, String endDate, String nbTable, String band, String cost, String startDate){
-        
+
+    public void setData(String title, String nbPerson, String endDate, String nbTable, String band, String cost, String startDate) {
+
         this.title.setText(title);
         this.nbPerson.setText(nbPerson);
         this.endDate.setText(endDate);
@@ -135,10 +132,11 @@ public class EventListController implements Initializable {
         this.band.setText(band);
         this.cost.setText(cost);
         this.startDate.setText(startDate);
-          
+
     }
-     @FXML
-    private void tambahClicked() throws IOException{
+
+    @FXML
+    private void tambahClicked() throws IOException {
         blur.setEffect(new GaussianBlur(10));
         new FadeInRightTransition(trans).play();
         AnchorPane pane = FXMLLoader.load(getClass().getResource(nav.getAddEventForm()));

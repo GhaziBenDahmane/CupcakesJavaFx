@@ -22,5 +22,7 @@ public interface CrudService<T> {
 
     void delete(T a);
 
+    void deleteId(int a);
+
     T fromRs(ResultSet rs);
 }

@@ -5,8 +5,8 @@
  */
 package service;
 
-import util.DataSource;
 import entity.Contact;
+import entity.Reservation;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,24 +14,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import servicesInterfaces.IContactService;
+import util.DataSource;
 
 /**
  *
- * @author Anis-PC
+ * @author USER
  */
-public class ContactService {
+public class ReservationService {
+   
 
     private Connection connection=null;
 
-    public ContactService() {
+    public ReservationService() {
          connection = DataSource.getInstance().getConnection();
          
     }
     
-     private String query="select id,firstName,lastName,email,adress,phone,message "
+     private String query="select id,nbTable,nbPerson,dateReservation "
             +"DATE_FORMAT(input_time,'%d %M %Y %T') from contact ";
     private String filter;
     private String detailCari;
@@ -63,17 +62,14 @@ public class ContactService {
     
 
   
-    public void create(Contact contact) {
-                String req="INSERT INTO contact (firstName,lastName,email,adress,phone,message) VALUES (?,?,?,?,?,?)";
+    public void create(Reservation reser) {
+                String req="INSERT INTO reservation (nbTable,nbPerson,dateReservation) VALUES (?,?,?)";
         try {
             PreparedStatement statment = connection.prepareStatement(req);
-            statment.setString(1,contact.getFirstName() );
-            statment.setString(2, contact.getLastName());
-            statment.setString(3, contact.getEmail());
-             statment.setString(4,contact.getAdress());     
-            statment.setInt(5,contact.getPhone());
-            statment.setString(6, contact.getMessage());
-            
+            statment.setInt(1,reser.getNbPersonnes());
+            statment.setInt(2, reser.getNbTables());
+            statment.setDate(3, reser.getDateReservation());
+    
             statment.execute();
  
             statusInsert=true;
@@ -86,19 +82,18 @@ public class ContactService {
         public boolean getStatusInert(){
         return statusInsert;
     }
-     public List<Contact> selectAll() {
-         List<Contact> contacs = new ArrayList<>();
-        String req ="select * from contact";
+     public List<Reservation> selectAll() {
+         List<Reservation> reservation = new ArrayList<>();
+        String req ="select * from reservation";
         try {
             Statement statement = (Statement) connection.createStatement();
             ResultSet result = statement.executeQuery(req);
             while (result.next())
             {
                
-                Contact p = new Contact(result.getString(1), result.getInt(6),result.getString(2),result.getString(3),result.getString(7),
-                        result.getString(5),result.getString(4));
+                Reservation r = new Reservation(result.getInt(1),result.getInt(2),result.getInt(3),result.getDate(4));
                
-                contacs.add(p);
+                reservation.add(r);
             }
             
         } catch (SQLException ex) {
@@ -106,19 +101,15 @@ public class ContactService {
         }
         
         
-        return contacs;
+        return reservation;
     }
-     public void update(Contact contact){
-       String req="Update contact set firstName=?,lastName=? , email=? , adress=?,phone=? ,message=? ,  where id=?";
+     public void update(String id, String email, String firstName, String lastName){
+       String req="Update reservation set nbTable=? , nbPerson=? ,dateReservation=? where id=1";
          try {
-            PreparedStatement statment = connection.prepareStatement(req);
-            statment.setString(1, contact.getFirstName());
-            statment.setString(2, contact.getLastName());
-            statment.setString(3, contact.getEmail());
-            statment.setString(4, contact.getAdress());
-            statment.setInt(5, contact.getPhone());
-            statment.setString(6, contact.getMessage()); 
-            statment.executeUpdate();
+             PreparedStatement statment = connection.prepareStatement(req);
+            statment.executeUpdate("update contact set firstName='"+firstName+
+                    "',lastName='"+lastName+
+                    "',email='"+email+"' where id='"+id+"'");
             statusUpdate=true;
         } catch (Exception e) {
             statusUpdate=false;
@@ -154,7 +145,7 @@ public class ContactService {
 
 
     public void delete(int id) {
-        String req="Delete from contact where id="+id;
+        String req="Delete from reservation where id= ?";
         try {
             PreparedStatement statment = connection.prepareStatement(req);
             statment.setInt(1,id);

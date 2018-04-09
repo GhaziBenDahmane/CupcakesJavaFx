@@ -113,8 +113,8 @@ public class UserService implements CrudService<User> {
 
         String request = "INSERT INTO `fos_user` "
                 + "(`username`, `username_canonical`, `email`, `email_canonical`, "
-                + "`enabled`, `password`,`roles`, `phone`, `picture`, `points`) "
-                + "VALUES (?, ?, ?, ?, '1', ?,?, ?, ?,0);";
+                + "`enabled`, `password`,`roles`, `phone`, `picture`, `points`,`last_login`) "
+                + "VALUES (?, ?, ?, ?, '1', ?,?, ?, ?,0,?);";
         try {
             ste = connection.prepareStatement(request);
             ste.setString(1, u.getUsername());
@@ -125,6 +125,8 @@ public class UserService implements CrudService<User> {
             ste.setString(6, Util.arrayToString(u.getRoles()));
             ste.setString(7, u.getPhone());
             ste.setString(8, u.getPhotoprofil());
+            ste.setDate(9, new java.sql.Date(u.getLastLogin().getTime()));
+
             ste.executeUpdate();
         } catch (Exception e) {
             System.err.println(e);
@@ -134,7 +136,7 @@ public class UserService implements CrudService<User> {
     @Override
     public void update(User u) {
         String req = "UPDATE `fos_user` SET `username`=?, `username_canonical`=?, `email`=?, `email_canonical`=?, "
-                + "`enabled`=?, `password`=?,`roles`=?, `phone`=?, `picture`=?, `points`=0"
+                + "`enabled`=?, `password`=?,`roles`=?, `phone`=?, `picture`=?, `points`=0,`last_login`=?"
                 + "WHERE id=?";
         try {
             PreparedStatement statment = connection.prepareStatement(req);
@@ -146,6 +148,7 @@ public class UserService implements CrudService<User> {
             ste.setString(6, Util.arrayToString(u.getRoles()));
             ste.setString(7, u.getPhone());
             ste.setString(8, u.getPhotoprofil());
+            ste.setDate(8, new java.sql.Date(u.getLastLogin().getTime()));
             ste.executeUpdate();
 
         } catch (Exception e) {

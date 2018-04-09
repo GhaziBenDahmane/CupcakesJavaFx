@@ -25,8 +25,8 @@ public class navigation {
     private final String ubahUangMasuk="/view/UbahUangMasuk.fxml";
     private final String user="/view/User.fxml";
     private final String uangKeluar="/view/UangKeluar.fxml";
-    private final String tambahUangKeluar="/view/TambahUangKeluar.fxml";
-    private final String ubahUangKeluar="/view/UbahUangKeluar.fxml";
+    private final String ContactAdd="/views/ContactAdd.fxml";
+    private final String ContactUpdate="/views/ContactUpdate.fxml";
     private final String userManagement="/view/UserManagement.fxml";
     private final String tambahUserManagement="/view/TambahUserManagement.fxml";
     private final String ubahUserManagement="/view/UbahUserManagement.fxml";
@@ -71,12 +71,12 @@ public class navigation {
         return ubahUangMasuk;
     }
     
-    public String getTambahUangKeluar(){
-        return tambahUangKeluar;
+    public String getContactAdd(){
+        return ContactAdd;
     }
     
-    public String getUbahUangKeluar(){
-        return ubahUangKeluar;
+    public String getContactUpdate(){
+        return ContactUpdate;
     }
     
     public String getUserManagement(){

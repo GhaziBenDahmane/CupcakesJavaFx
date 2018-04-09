@@ -34,7 +34,7 @@ public class ContactService {
      private String query="select id,firstName,lastName,email,adress,phone,message "
             +"DATE_FORMAT(input_time,'%d %M %Y %T') from contact ";
     private String filter;
-    private String detailCari;
+    private String rechercheEtat;
     public String queryLoad="";
     
 
@@ -43,28 +43,30 @@ public class ContactService {
     private boolean statusUpdate = false;
     private boolean statusDelete = false;
     
-    public void filterHari(String hari, String cari){
-        filter=" where tanggal='"+hari+"'";
-        detailCari=" and detail like '%"+cari+"%'";
-        queryLoad=query+filter+detailCari;
+     public void filterHari(String day, String recherche, String etat){
+        if(etat.equals("All")){
+            rechercheEtat="";
+        }
+        else{
+            rechercheEtat=" and status='"+etat+"'";
+        }
+        filter=" where inputTime='"+day+"'";
+       
+        queryLoad=query+filter+rechercheEtat;
     }
     
     public void filterBulan(String bulan, String tahun, String cari){
-        filter=" where DATE_FORMAT(tanggal,'%M/%Y')='"+bulan+"/"+tahun+"'";
-        detailCari=" and detail like '%"+cari+"%'";
-        queryLoad=query+filter+detailCari;
+        filter=" where DATE_FORMAT(inputTime,'%M/%Y')='"+bulan+"/"+tahun+"'";
+        
+        queryLoad=query+filter;
     }
     
-    public void filterSemua(String cari){
-        detailCari=" where detail like '%"+cari+"%'";
-        queryLoad=query+detailCari;
-    }
 
     
 
   
     public void create(Contact contact) {
-                String req="INSERT INTO contact (firstName,lastName,email,adress,phone,message) VALUES (?,?,?,?,?,?)";
+                String req="INSERT INTO contact (firstName,lastName,email,adress,phone,message,inputTime) VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement statment = connection.prepareStatement(req);
             statment.setString(1,contact.getFirstName() );
@@ -73,6 +75,7 @@ public class ContactService {
              statment.setString(4,contact.getAdress());     
             statment.setInt(5,contact.getPhone());
             statment.setString(6, contact.getMessage());
+            statment.setString(7, contact.getInputTime());
             
             statment.execute();
  
@@ -95,8 +98,8 @@ public class ContactService {
             while (result.next())
             {
                
-                Contact p = new Contact(result.getString(1), result.getInt(6),result.getString(2),result.getString(3),result.getString(7),
-                        result.getString(5),result.getString(4));
+                Contact p = new Contact(result.getInt(1), result.getInt(6),result.getString(9),result.getString(2),result.getString(3),result.getString(7),
+                        result.getString(5),result.getString(4),false);
                
                 contacs.add(p);
             }

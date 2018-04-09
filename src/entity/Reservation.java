@@ -16,6 +16,21 @@ public class Reservation {
     private int id, nbTables, nbPersonnes;
     private Date dateReservation;
 
+    public Reservation(int id, int nbTables, int nbPersonnes, Date dateReservation) {
+        this.id = id;
+        this.nbTables = nbTables;
+        this.nbPersonnes = nbPersonnes;
+        this.dateReservation = dateReservation;
+    }
+
+    public Reservation(int nbTables, int nbPersonnes, Date dateReservation) {
+        this.nbTables = nbTables;
+        this.nbPersonnes = nbPersonnes;
+        this.dateReservation = dateReservation;
+    }
+    
+    
+
     public int getId() {
         return id;
     }

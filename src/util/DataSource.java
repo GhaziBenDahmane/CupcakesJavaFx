@@ -8,7 +8,7 @@ public final class DataSource {
     private Connection conn;
     private static DataSource db;
 
-    private DataSource() {
+    public DataSource() {
         String url = "jdbc:mysql://localhost/";
         String dbName = "symfony";
         String driver = "com.mysql.jdbc.Driver";

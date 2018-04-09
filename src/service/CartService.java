@@ -7,7 +7,6 @@ package service;
 
 import util.DataSource;
 import entity.Cart;
-import entity.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,61 +22,55 @@ import java.util.logging.Logger;
  * @author Arshavin
  */
 public class CartService {
-    
+
     Connection connection = null;
-    public CartService()
-    {
-        connection =DataSource.getInstance().getConnection();
+
+    public CartService() {
+        connection = DataSource.getInstance().getConnection();
     }
-    
+
     public void insert(Cart c) {
-        String req="INSERT INTO product (id_product) VALUES (?)";
+        String req = "INSERT INTO product (id_product) VALUES (?)";
         try {
             PreparedStatement statment = connection.prepareStatement(req);
             statment.setInt(1, c.getProducts().getId());
             statment.execute();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ProductService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
     }
-    
+
     public List<Cart> selectAllProductsFromCart() {
         List<Cart> carts = new ArrayList<>();
-        String req ="select * from cart";
+        String req = "select * from cart";
         try {
             Statement statement = (Statement) connection.createStatement();
             ResultSet result = statement.executeQuery(req);
-            while (result.next())
-            {
-                ProductService productservice =new ProductService();
-                Cart c = new Cart(result.getInt(1),productservice.selectProductById(result.getInt(2)));
+            while (result.next()) {
+                ProductService productservice = new ProductService();
+                Cart c = new Cart(result.getInt(1), productservice.selectProductById(result.getInt(2)));
                 carts.add(c);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ProductService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         return carts;
     }
-    
-    
-    
-    public void delete(int id)
-    {
-        String req="Delete from cart where id= ?";
+
+    public void delete(int id) {
+        String req = "Delete from cart where id= ?";
         try {
             PreparedStatement statment = connection.prepareStatement(req);
-            statment.setInt(1,id);
+            statment.setInt(1, id);
             statment.executeUpdate();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ProductService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

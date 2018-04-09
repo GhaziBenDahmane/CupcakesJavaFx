@@ -16,18 +16,18 @@ public class Event {
 
     private int id;
     private String title;
-    private String nbPerson;
+    private int nbPerson;
     private Date startDate;
     private Date endDate;
-    private String nbTable;
-    private String band;
+    private int nbTable;
+    private int band;
     private String status;
-    private String cost;
+    private double cost;
 
     public Event() {
     }
 
-    public Event(String title, String nbPerson, Date startDate, Date endDate, String nbTable, String band, String status, String cost) {
+    public Event(String title, int nbPerson, Date startDate, Date endDate, int nbTable, int band, String status, Double cost) {
         this.title = title;
         this.nbPerson = nbPerson;
         this.startDate = startDate;
@@ -38,7 +38,7 @@ public class Event {
         this.cost = cost;
     }
 
-    public Event(int id, String title, String nbPerson, Date startDate, Date endDate, String nbTable) {
+    public Event(int id, String title, int nbPerson, Date startDate, Date endDate, int nbTable) {
         this.id = id;
         this.title = title;
         this.nbPerson = nbPerson;
@@ -47,15 +47,19 @@ public class Event {
         this.nbTable = nbTable;
     }
 
-    public Event(int id, String title, String nbPerson) {
+    public Event(int id, String title, int nbPerson) {
         this.id = id;
         this.title = title;
         this.nbPerson = nbPerson;
     }
 
-    public Event(String title, String nbPerson) {
+    public Event(String title, int nbPerson) {
         this.title = title;
         this.nbPerson = nbPerson;
+    }
+
+    public Event(String setTitle, int parseInt, java.util.Date parse) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getId() {
@@ -95,27 +99,27 @@ public class Event {
         return "Event{" + "id=" + id + ", title=" + title + ", nbPerson=" + nbPerson + ", startDate=" + startDate + ", endDate=" + endDate + ", nbTable=" + nbTable + ", band=" + band + '}';
     }
 
-    public String getNbPerson() {
+    public int getNbPerson() {
         return nbPerson;
     }
 
-    public void setNbPerson(String nbPerson) {
+    public void setNbPerson(int nbPerson) {
         this.nbPerson = nbPerson;
     }
 
-    public String getNbTable() {
+    public int getNbTable() {
         return nbTable;
     }
 
-    public void setNbTable(String nbTable) {
+    public void setNbTable(int nbTable) {
         this.nbTable = nbTable;
     }
 
-    public String getBand() {
+    public int getBand() {
         return band;
     }
 
-    public void setBand(String band) {
+    public void setBand(int band) {
         this.band = band;
     }
 
@@ -127,11 +131,11 @@ public class Event {
         this.status = status;
     }
 
-    public String getCost() {
+    public Double getCost() {
         return cost;
     }
 
-    public void setCost(String cost) {
+    public void setCost(Double cost) {
         this.cost = cost;
     }
 

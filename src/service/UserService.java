@@ -30,8 +30,9 @@ public class UserService implements CrudService<User> {
     }
 
     public User login(String username, String pw) {
-
-        User u = null;
+        if (username.trim().isEmpty() || pw.trim().isEmpty()) {
+            return null;
+        }
         String request = "SELECT * FROM `fos_user` WHERE `username` = ?";
         try {
             ste = connection.prepareStatement(request);
@@ -46,12 +47,10 @@ public class UserService implements CrudService<User> {
 
                 }
             }
-        } catch (SQLException e) {
-            System.err.println(e);
+        } catch (Exception e) {
         }
-        System.out.println("Wrong username/password");
 
-        return u;
+        return null;
     }
 
     public void logout() {
@@ -98,7 +97,7 @@ public class UserService implements CrudService<User> {
         String request = "SELECT * FROM fos_user WHERE " + param + " = ?";
         try {
             ste = connection.prepareStatement(request);
-            ste.setString(0, val);
+            ste.setString(1, val);
             ResultSet rs = ste.executeQuery();
             if (rs.next()) {
                 users.add(fromRs(rs));
@@ -133,13 +132,43 @@ public class UserService implements CrudService<User> {
     }
 
     @Override
-    public void update(User a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(User u) {
+        String req = "UPDATE `fos_user` SET `username`=?, `username_canonical`=?, `email`=?, `email_canonical`=?, "
+                + "`enabled`=?, `password`=?,`roles`=?, `phone`=?, `picture`=?"
+                + "WHERE id=?";
+        try {
+            PreparedStatement statment = connection.prepareStatement(req);
+            ste.setString(1, u.getUsername());
+            ste.setString(2, u.getUsername().toLowerCase());
+            ste.setString(3, u.getEmail());
+            ste.setString(4, u.getEmail().toLowerCase());
+            ste.setString(5, u.getPassword());
+            ste.setString(6, Util.arrayToString(u.getRoles()));
+            ste.setString(7, u.getPhone());
+            ste.setString(8, u.getPhotoprofil());
+            ste.executeUpdate();
+
+        } catch (Exception e) {
+            System.err.println(e);
+
+        }
     }
 
     @Override
     public void delete(User a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        deleteId(a.getId());
+    }
+
+    @Override
+    public void deleteId(int a) {
+        String req = "DELETE from `fos_user` WHERE id= ?";
+        try {
+            PreparedStatement statment = connection.prepareStatement(req);
+            statment.setInt(1, a);
+            statment.executeUpdate();
+
+        } catch (SQLException ex) {
+        }
     }
 
     public static void main(String[] args) {

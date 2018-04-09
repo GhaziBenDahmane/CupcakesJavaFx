@@ -5,18 +5,71 @@
  */
 package entity;
 
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author Anis-PC
  */
 public class Contact {
 
-    private int id, phone;
-    private String firstName, lastName, message, adress, email;
+   
+    private int phone;
+    private String id, firstName, lastName, message, adress, email;
     private boolean status;
 
-    public Contact() {
+
+
+    public Contact(String id, int phone, String firstName, String lastName, String adress, String email, boolean status) {
+        this.id = id;
+        this.phone = phone;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.adress = adress;
+        this.email = email;
+        this.status = status;
     }
+
+    public Contact(String id, int phone, String firstName, String lastName, String message, String adress, String email) {
+        this.id = id;
+        this.phone = phone;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.message = message;
+        this.adress = adress;
+        this.email = email;
+    }
+    
+
+    public Contact(String id, int phone, String firstName, String lastName, String message, String adress, String email, boolean status) {
+        this.id = id;
+        this.phone = phone;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.message = message;
+        this.adress = adress;
+        this.email = email;
+        this.status = status;
+    }
+
+    public Contact(int phone, String firstName, String lastName, String adress, String email, boolean status) {
+        this.phone = phone;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.adress = adress;
+        this.email = email;
+        this.status = status;
+    }
+
+    public Contact(String id, int phone, String firstName, String lastName, String message, String adress) {
+        this.id = id;
+        this.phone = phone;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.message = message;
+        this.adress = adress;
+    }
+    
 
     public Contact(int phone, String firstName, String lastName, String message, String adress, String email, boolean status) {
         this.phone = phone;
@@ -36,11 +89,11 @@ public class Contact {
         this.status = status;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -92,12 +145,6 @@ public class Contact {
         this.email = email;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 43 * hash + this.id;
-        return hash;
-    }
 
     @Override
     public boolean equals(Object obj) {

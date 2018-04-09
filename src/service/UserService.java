@@ -113,8 +113,8 @@ public class UserService implements CrudService<User> {
 
         String request = "INSERT INTO `fos_user` "
                 + "(`username`, `username_canonical`, `email`, `email_canonical`, "
-                + "`enabled`, `password`,`roles`, `phone`, `picture`) "
-                + "VALUES (?, ?, ?, ?, '1', ?,?, ?, ?);";
+                + "`enabled`, `password`,`roles`, `phone`, `picture`, `points`) "
+                + "VALUES (?, ?, ?, ?, '1', ?,?, ?, ?,0);";
         try {
             ste = connection.prepareStatement(request);
             ste.setString(1, u.getUsername());
@@ -134,7 +134,7 @@ public class UserService implements CrudService<User> {
     @Override
     public void update(User u) {
         String req = "UPDATE `fos_user` SET `username`=?, `username_canonical`=?, `email`=?, `email_canonical`=?, "
-                + "`enabled`=?, `password`=?,`roles`=?, `phone`=?, `picture`=?"
+                + "`enabled`=?, `password`=?,`roles`=?, `phone`=?, `picture`=?, `points`=0"
                 + "WHERE id=?";
         try {
             PreparedStatement statment = connection.prepareStatement(req);

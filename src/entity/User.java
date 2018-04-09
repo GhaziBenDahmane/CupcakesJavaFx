@@ -31,10 +31,13 @@ public class User {
     private String photoprofil;
 
     public User(int id) {
+        this.points = 0;
         this.id = id;
     }
 
     public User() {
+        this.points = 0;
+
     }
 
     public User(int id, String username, String email, boolean enabled, String salt, String password, Date lastLogin, String confirmationToken, Date passwordRequestedAt, ArrayList<String> roles, int points, String phone, String photoprofil) {

@@ -6,7 +6,11 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -31,6 +35,8 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import populator.ClaimMaster;
 import service.ClaimService;
 import service.NotificationService;
@@ -88,6 +94,8 @@ public class ClaimListController implements Initializable {
     private JFXButton refreshbtn;
     @FXML
     private JFXButton answer_btn;
+    @FXML
+    private JFXButton export_btn;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -217,5 +225,33 @@ public class ClaimListController implements Initializable {
     @FXML
     private void comboBoxChanged(ActionEvent event) {
         this.filterClaims();
+    }
+
+    private void toXLS(String file) {
+        try (FileWriter fw = new FileWriter(file, true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw)) {
+            out.println("clientName" + "\t" + "description" + "\t" + "postedOn" + "\t" + "answer" + "\t" + "answeredBy");
+            tableView.getItems().stream().forEach(e -> out.println(e.getClientName() + "\t" + e.getDescription()
+                    + "\t" + e.postedOn().get() + "\t" + e.getAnswer()
+                    + "\t" + e.getAnsweredBy()
+            ));
+        } catch (IOException e) {
+            //exception handling left as an exercise for the reader
+        }
+
+    }
+
+    @FXML
+    private void exportClicked(ActionEvent event) {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Save to file");
+        File file = chooser.showSaveDialog(new Stage());
+        if (!file.getAbsolutePath().endsWith(".xls")) {
+            toXLS(file.getAbsolutePath() + ".xls");
+        } else {
+            toXLS(file.getAbsolutePath());
+        }
+
     }
 }

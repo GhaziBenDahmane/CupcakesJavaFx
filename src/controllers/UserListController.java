@@ -229,11 +229,11 @@ public class UserListController implements Initializable {
         if (boxValue != null) {
             if (boxValue.getText().equals("Admin")) {
                 System.out.println("here");
-                stream = stream.filter(x -> x.getRole().contains("ADMIN"));
+                stream = stream.filter(x -> x.getRole().toLowerCase().contains("admin"));
             } else {
                 System.out.println("not here");
 
-                stream = stream.filter(x -> !x.getRole().contains("ADMIN"));
+                stream = stream.filter(x -> !x.getRole().toLowerCase().contains("admin"));
             }
         }
         tableView.setItems(stream

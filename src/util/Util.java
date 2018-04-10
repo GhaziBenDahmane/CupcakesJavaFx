@@ -53,17 +53,17 @@ public final class Util {
         return BCrypt.checkpw(plainpw, hashed);
     }
 
-    public static void showInfo(String title, String text) {
+    public static void showInfo(String text) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
+        alert.setTitle("Success");
         alert.setHeaderText(null);
         alert.setContentText(text);
         alert.showAndWait();
     }
 
-    public static void showError(String title, String text) {
+    public static void showError(String text) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
+        alert.setTitle("Error");
         alert.setHeaderText(null);
         alert.setContentText(text);
         alert.showAndWait();

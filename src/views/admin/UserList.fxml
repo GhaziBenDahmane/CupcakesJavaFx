@@ -24,7 +24,7 @@
             <Group fx:id="groups">
                <children>
                   <AnchorPane fx:id="loadPane" prefHeight="366.0" prefWidth="322.0" />
-                  <JFXButton focusTraversable="false" layoutX="310.0" prefHeight="25.0" prefWidth="24.0" onAction="#tombolClose" text="X">
+                  <JFXButton focusTraversable="false" layoutX="310.0" onAction="#tombolClose" prefHeight="25.0" prefWidth="24.0" text="X">
                      <font>
                         <Font name="Segoe UI Black" size="14.0" />
                      </font>
@@ -71,14 +71,13 @@
                   </HBox>
                   <TableView fx:id="tableView" fixedCellSize="0.0" focusTraversable="false" layoutY="60.0" prefHeight="356.0" prefWidth="764.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="59.0">
                     <columns>
-                      <TableColumn fx:id="username" prefWidth="93.0" text="Username" />
+                      <TableColumn fx:id="username" prefWidth="105.0" text="Username" />
 
-                      <TableColumn fx:id="email" editable="false" resizable="false" text="Email" />
-                      <TableColumn fx:id="password" editable="false" prefWidth="99.0" resizable="false" text="Password" />
-                      <TableColumn fx:id="lastLogin" editable="false" prefWidth="97.0" resizable="false" text="Last Login" />
-                      <TableColumn fx:id="Role" editable="false" prefWidth="110.0" resizable="false" text="Role" />
-                        <TableColumn fx:id="phone" prefWidth="75.0" text="Phone" />
-                        <TableColumn fx:id="picture" prefWidth="100.0" text="Picture" />
+                      <TableColumn fx:id="email" editable="false" prefWidth="92.0" resizable="false" text="Email" />
+                      <TableColumn fx:id="password" editable="false" prefWidth="98.0" resizable="false" text="Password" />
+                      <TableColumn fx:id="lastLogin" editable="false" prefWidth="111.0" resizable="false" text="Last Login" />
+                      <TableColumn fx:id="Role" editable="false" prefWidth="127.0" resizable="false" text="Role" />
+                        <TableColumn fx:id="phone" prefWidth="127.0" text="Phone" />
                     </columns>
                      <contextMenu>
                         <ContextMenu fx:id="contextMenu">

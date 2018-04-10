@@ -15,6 +15,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import service.UserService;
+import util.Util;
 
 /**
  * FXML Controller class
@@ -50,6 +52,20 @@ public class ProfileController implements Initializable {
 
     @FXML
     private void simpanClicked(ActionEvent event) {
+        UserService us = new UserService();
+        User selectedUser = CupCakesJavaFx.loggedUser;
+        String uemail = email.getText();
+        String uphone = phone.getText();
+        selectedUser.setEmail(uemail);
+        selectedUser.setPhone(uphone);
+        if (!passwordField.getText().isEmpty()) {
+            String upassword = passwordField.getText();
+            String hashedpw = Util.hashpw(upassword);
+            selectedUser.setPassword(hashedpw);
+        }
+        us.update(selectedUser);
+        Util.showInfo("Modification done");
+
     }
 
 }

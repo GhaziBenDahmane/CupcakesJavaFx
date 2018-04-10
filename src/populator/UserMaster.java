@@ -12,7 +12,6 @@ public class UserMaster {
     private SimpleStringProperty lastLogin;
     private SimpleStringProperty role;
     private SimpleStringProperty phone;
-    private SimpleStringProperty picture;
     private User user;
 
     public UserMaster() {
@@ -24,9 +23,8 @@ public class UserMaster {
         this.email = new SimpleStringProperty(user.getEmail());
         this.password = new SimpleStringProperty(user.getPassword());
         this.lastLogin = new SimpleStringProperty(user.getLastLogin().toString());
-        this.role = new SimpleStringProperty(user.getRoles().get(user.getRoles().size() - 1));
+        this.role = new SimpleStringProperty(user.isAdmin() ? "Admin" : "User");
         this.phone = new SimpleStringProperty(user.getPhone());
-        this.picture = new SimpleStringProperty(user.getPhotoprofil());
     }
 
     public SimpleStringProperty usernameProperty() {
@@ -51,10 +49,6 @@ public class UserMaster {
 
     public SimpleStringProperty phoneProperty() {
         return phone;
-    }
-
-    public SimpleStringProperty pictureProperty() {
-        return picture;
     }
 
     public String getUsername() {
@@ -105,14 +99,6 @@ public class UserMaster {
         this.phone = phone;
     }
 
-    public String getPicture() {
-        return picture.get();
-    }
-
-    public void setPicture(SimpleStringProperty picture) {
-        this.picture = picture;
-    }
-
     public User getUser() {
         return user;
     }
@@ -130,7 +116,6 @@ public class UserMaster {
         hash = 41 * hash + Objects.hashCode(this.lastLogin);
         hash = 41 * hash + Objects.hashCode(this.role);
         hash = 41 * hash + Objects.hashCode(this.phone);
-        hash = 41 * hash + Objects.hashCode(this.picture);
         hash = 41 * hash + Objects.hashCode(this.user);
         return hash;
     }
@@ -165,9 +150,7 @@ public class UserMaster {
         if (!Objects.equals(this.phone, other.phone)) {
             return false;
         }
-        if (!Objects.equals(this.picture, other.picture)) {
-            return false;
-        }
+
         if (!Objects.equals(this.user, other.user)) {
             return false;
         }
@@ -176,7 +159,7 @@ public class UserMaster {
 
     @Override
     public String toString() {
-        return "UserMaster{" + "username=" + username + ", email=" + email + ", password=" + password + ", lastLogin=" + lastLogin + ", Role=" + role + ", phone=" + phone + ", picture=" + picture + ", user=" + user + '}';
+        return "UserMaster{" + "username=" + username + ", email=" + email + ", password=" + password + ", lastLogin=" + lastLogin + ", role=" + role + ", phone=" + phone + ", user=" + user + '}';
     }
 
 }

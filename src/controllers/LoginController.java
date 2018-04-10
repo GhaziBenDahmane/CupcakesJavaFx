@@ -28,6 +28,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import service.UserService;
+import util.Util;
 import util.Views;
 
 /**
@@ -96,6 +97,9 @@ public class LoginController implements Initializable {
                 stage.show();
             } catch (IOException ex) {
             }
+        } else {
+            Util.showError("Wrong username/password combination");
+
         }
     }
 

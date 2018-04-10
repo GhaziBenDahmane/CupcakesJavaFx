@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import service.ClaimService;
 import service.UserService;
+import util.Util;
 
 /**
  * FXML Controller class
@@ -42,12 +43,15 @@ public class AnswerClaimFormController implements Initializable {
     @FXML
     private void submitAction(ActionEvent event) {
         if (answer.getText().isEmpty()) {
+            Util.showInfo("Please enter a valid answer!");
 
         } else {
             UserService us = new UserService();
             ClaimService cs = new ClaimService();
             Claim claim = ClaimListController.sselectedItem.getClaim();
             cs.answer(claim, answer.getText());
+            Util.showInfo("Claim answered!");
+
         }
 
     }

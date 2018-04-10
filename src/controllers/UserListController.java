@@ -89,8 +89,7 @@ public class UserListController implements Initializable {
     private TableColumn<UserMaster, String> Role;
     @FXML
     private TableColumn<UserMaster, String> phone;
-    @FXML
-    private TableColumn<UserMaster, String> picture;
+
     private List<UserMaster> cm;
     private UserService cs;
     public static UserMaster selectedUser;
@@ -133,11 +132,6 @@ public class UserListController implements Initializable {
         PropertyValueFactory<UserMaster, String> phoneProp
                 = new PropertyValueFactory<>("phone");
         phone.setCellValueFactory(phoneProp);
-
-        PropertyValueFactory<UserMaster, String> pictureProp
-                = new PropertyValueFactory<>("picture");
-        picture.setCellValueFactory(pictureProp);
-
         tableView.setItems(FXCollections.observableArrayList(cm));
     }
 

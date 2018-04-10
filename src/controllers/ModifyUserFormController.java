@@ -45,8 +45,7 @@ public class ModifyUserFormController implements Initializable {
     private JFXComboBox<Label> role;
     @FXML
     private JFXTextField phone;
-    @FXML
-    private JFXTextField picture;
+
     UserService us = new UserService();
     public User selectedUser;
 
@@ -61,14 +60,12 @@ public class ModifyUserFormController implements Initializable {
 
         role.getItems().add(new Label("Admin"));
         role.getItems().add(new Label("User"));
-        role.setPromptText("");
         username.setText(selectedUser.getUsername());
 
         email.setText(selectedUser.getEmail());
         phone.setText(selectedUser.getPhone());
 
         //lastLogin.setValue(localDateLastLogin);
-        picture.setText(selectedUser.getPhotoprofil());
     }
 
     @FXML
@@ -78,32 +75,36 @@ public class ModifyUserFormController implements Initializable {
     @FXML
     private void inputClicked(ActionEvent event) {
         selectedUser = UserListController.selectedUser.getUser();
-        System.out.println(selectedUser);
         ArrayList<String> uroles = new ArrayList<>();
         String uusername = username.getText();
-        String upassword = password.getText();
         String uemail = email.getText();
         LocalDate value = lastLogin.getValue();
         Date lastLoginDate = Date.from(value.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-        if (role.getValue() != null && role.getValue().getText().equals("Admin")) {
-            uroles.add("ROLE_SIMPLE_USER");
-            uroles.add("ADMIN");
-            uroles.add("ROLE_SUPER_ADMIN");
-        } else {
-            uroles.add("ROLE_SIMPLE_USER");
+        if (role.getValue() != null) {
+            if (role.getValue().getText().equals("Admin")) {
+                uroles.add("ROLE_SIMPLE_USER");
+                uroles.add("ADMIN");
+                uroles.add("ROLE_SUPER_ADMIN");
+            } else {
+                uroles.add("ROLE_SIMPLE_USER");
 
+            }
         }
         String uphone = phone.getText();
-        String upicture = picture.getText();
-        String hashedpw = Util.hashpw(upassword);
         selectedUser.setUsername(uusername);
-        selectedUser.setPassword(hashedpw);
         selectedUser.setEmail(uemail);
         selectedUser.setLastLogin(lastLoginDate);
         selectedUser.setRoles(uroles);
         selectedUser.setPhone(uphone);
-        selectedUser.setPhotoprofil(upicture);
+        if (!password.getText().isEmpty()) {
+            String upassword = password.getText();
+            String hashedpw = Util.hashpw(upassword);
+            selectedUser.setPassword(hashedpw);
+
+        }
         us.update(selectedUser);
+        Util.showInfo("Modification done");
+
     }
 
 }

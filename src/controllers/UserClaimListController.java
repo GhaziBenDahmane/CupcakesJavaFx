@@ -132,7 +132,9 @@ public class UserClaimListController implements Initializable {
             next.setVisible(false);
         }
         filter.setValue(null);
-        loadData();
+        if (cm.size() >= 1) {
+            loadData();
+        }
     }
 
     @FXML

@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import service.ClaimService;
 import service.UserService;
+import util.Util;
 
 /**
  * FXML Controller class
@@ -60,6 +61,11 @@ public class addClaimController implements Initializable {
         if (claimType.getValue() != null && !claimText.getText().isEmpty()) {
             Claim a = new Claim(CupCakesJavaFx.loggedUser, claimText.getText(), new Date(), claimType.getValue().getText());
             cs.add(a);
+            Util.showInfo("Claim Added");
+
+        } else {
+            Util.showError("Missing data");
+
         }
 
     }

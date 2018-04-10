@@ -45,8 +45,7 @@ public class AddUserFormController implements Initializable {
     private JFXComboBox<Label> role;
     @FXML
     private JFXTextField phone;
-    @FXML
-    private JFXTextField picture;
+
     UserService us = new UserService();
 
     /**
@@ -80,7 +79,6 @@ public class AddUserFormController implements Initializable {
 
         }
         String uphone = phone.getText();
-        String upicture = picture.getText();
         String hashedpw = Util.hashpw(upassword);
         User aa = new User();
         aa.setUsername(uusername);
@@ -89,8 +87,8 @@ public class AddUserFormController implements Initializable {
         aa.setLastLogin(lastLoginDate);
         aa.setRoles(uroles);
         aa.setPhone(uphone);
-        aa.setPhotoprofil(upicture);
         us.add(aa);
+        Util.showInfo("User added successfully");
     }
 
 }

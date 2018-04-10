@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import animasi.FadeInRightTransition;
+import animation.FadeInRightTransition;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;

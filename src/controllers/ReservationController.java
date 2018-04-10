@@ -5,8 +5,8 @@
  */
 package controllers;
 
-import animasi.FadeInRightTransition;
-import animasi.FadeOutLeftTransition;
+import animation.FadeInRightTransition;
+import animation.FadeOutLeftTransition;
 import entity.Contact;
 import entity.Reservation;
 import function.navigation;

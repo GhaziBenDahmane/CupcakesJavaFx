@@ -1,4 +1,4 @@
-package animasi;
+package animation;
 
 import javafx.animation.Interpolator;
 import javafx.animation.Timeline;

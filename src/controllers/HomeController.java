@@ -5,9 +5,9 @@
  */
 package controllers;
 
-import animasi.FadeInRightTransition;
-import animasi.FadeInTransition;
-import animasi.FadeOutLeftTransition;
+import animation.FadeInRightTransition;
+import animation.FadeInTransition;
+import animation.FadeOutLeftTransition;
 import com.jfoenix.controls.JFXButton;
 import cupcakesjavafx.CupCakesJavaFx;
 import java.io.IOException;

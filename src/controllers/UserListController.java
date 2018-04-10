@@ -11,7 +11,11 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -36,6 +40,8 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import populator.UserMaster;
 import service.NotificationService;
 import service.UserService;
@@ -94,6 +100,8 @@ public class UserListController implements Initializable {
     private List<UserMaster> cm;
     private UserService cs;
     public static UserMaster selectedUser;
+    @FXML
+    private JFXButton export_btn;
 
     /**
      * Initializes the controller class.
@@ -231,11 +239,37 @@ public class UserListController implements Initializable {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), l -> FXCollections.observableArrayList(l))));
     }
 
+    private void toXLS(String file) {
+        try (FileWriter fw = new FileWriter(file, true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw)) {
+            out.println("username" + "\t" + "email" + "\t" + "password" + "\t" + "lastLogin" + "\t" + "role" + "\t" + "phone");
+            tableView.getItems().stream().forEach(e -> out.println(e.getUsername() + "\t" + e.getEmail()
+                    + "\t" + e.getPassword() + "\t" + e.getLastLogin()
+                    + "\t" + e.getRole() + "\t" + e.getPhone()));
+        } catch (IOException e) {
+            //exception handling left as an exercise for the reader
+        }
+    }
+
     @FXML
     private void tombolClose(ActionEvent event) {
         refreshClicked(null);
         blur.setEffect(null);
         new FadeOutLeftTransition(trans).play();
+    }
+
+    @FXML
+    private void exportClicked(ActionEvent event) {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Save to file");
+        File file = chooser.showSaveDialog(new Stage());
+        if (!file.getAbsolutePath().endsWith(".xls")) {
+            toXLS(file.getAbsolutePath() + ".xls");
+        } else {
+            toXLS(file.getAbsolutePath());
+        }
+
     }
 
 }

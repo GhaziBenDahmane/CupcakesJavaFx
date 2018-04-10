@@ -74,6 +74,7 @@ public class LoginController implements Initializable {
 
     @FXML
     private void register(ActionEvent event) throws IOException {
+
         blur.setEffect(new GaussianBlur(10));
         new FadeInRightTransition(trans).play();
         AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.REGISTER));

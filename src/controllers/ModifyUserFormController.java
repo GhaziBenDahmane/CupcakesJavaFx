@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import service.NotificationService;
 import service.UserService;
 import util.Util;
 
@@ -104,6 +105,7 @@ public class ModifyUserFormController implements Initializable {
         }
         us.update(selectedUser);
         Util.showInfo("Modification done");
+        NotificationService.successBlueNotification("User modified!", "User modified!");
 
     }
 

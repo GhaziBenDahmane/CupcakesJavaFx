@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import service.NotificationService;
 import service.UserService;
 import util.Util;
 
@@ -65,6 +66,7 @@ public class ProfileController implements Initializable {
         }
         us.update(selectedUser);
         Util.showInfo("Modification done");
+        NotificationService.faceBlueNotification("Profile updatet", "Your profile was updated!");
 
     }
 

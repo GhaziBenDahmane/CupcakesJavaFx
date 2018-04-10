@@ -33,6 +33,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import populator.ClaimMaster;
 import service.ClaimService;
+import service.NotificationService;
 import util.Views;
 
 /**
@@ -148,6 +149,8 @@ public class ClaimListController implements Initializable {
             cm.remove(selectedItem);
             tableView.getItems().remove(selectedItem);
             cs.delete(selectedItem.getClaim());
+            NotificationService.successBlueNotification("Claim deleted!", "Claim deleted!");
+
         }
     }
 

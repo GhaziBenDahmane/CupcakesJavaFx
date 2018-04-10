@@ -27,6 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import service.NotificationService;
 import service.UserService;
 import util.Util;
 import util.Views;
@@ -84,7 +85,7 @@ public class LoginController implements Initializable {
         UserService us = new UserService();
         User user = us.login(username.getText(), password.getText());
         if (user != null) {
-
+            NotificationService.successBlueNotification("login Successful", "Welcome " + user.getUsername());
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource(Views.HOME));
             try {

@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import service.ClaimService;
+import service.NotificationService;
 import service.UserService;
 import util.Util;
 
@@ -62,6 +63,7 @@ public class addClaimController implements Initializable {
             Claim a = new Claim(CupCakesJavaFx.loggedUser, claimText.getText(), new Date(), claimType.getValue().getText());
             cs.add(a);
             Util.showInfo("Claim Added");
+            NotificationService.successBlueNotification("Claim added!", "Your claim was added!");
 
         } else {
             Util.showError("Missing data");

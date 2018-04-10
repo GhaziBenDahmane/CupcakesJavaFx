@@ -37,6 +37,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import populator.UserMaster;
+import service.NotificationService;
 import service.UserService;
 import util.Views;
 
@@ -178,6 +179,7 @@ public class UserListController implements Initializable {
             cm.remove(selectedItem);
             tableView.getItems().remove(selectedItem);
             cs.delete(selectedItem.getUser());
+            NotificationService.successBlueNotification("User deleted!", "User deleted!");
         }
     }
 //new windows

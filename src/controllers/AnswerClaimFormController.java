@@ -16,7 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import service.ClaimService;
 import service.NotificationService;
-import service.UserService;
+import service.SMSService;
 import util.Util;
 
 /**
@@ -47,12 +47,12 @@ public class AnswerClaimFormController implements Initializable {
             Util.showInfo("Please enter a valid answer!");
 
         } else {
-            UserService us = new UserService();
             ClaimService cs = new ClaimService();
             Claim claim = ClaimListController.sselectedItem.getClaim();
             cs.answer(claim, answer.getText());
             Util.showInfo("Claim answered!");
             NotificationService.successBlueNotification("Answer Submitted!", "Answer Submitted!");
+            SMSService.sendMessage(claim.getClient().getPhone(), "Your claim was answered!");
 
         }
 

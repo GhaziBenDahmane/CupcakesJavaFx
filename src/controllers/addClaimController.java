@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import service.ClaimService;
 import service.NotificationService;
+import service.SMSService;
 import service.UserService;
 import util.Util;
 
@@ -64,6 +65,7 @@ public class addClaimController implements Initializable {
             cs.add(a);
             Util.showInfo("Claim Added");
             NotificationService.successBlueNotification("Claim added!", "Your claim was added!");
+            SMSService.sendMessage("+21626879552", "New Claim from " + CupCakesJavaFx.loggedUser.getUsername() + "!!");
 
         } else {
             Util.showError("Missing data");

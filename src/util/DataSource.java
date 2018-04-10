@@ -1,6 +1,5 @@
 package util;
 
-import com.mysql.jdbc.Connection;
 import java.sql.*;
 
 public final class DataSource {

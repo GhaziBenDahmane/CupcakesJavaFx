@@ -48,7 +48,7 @@ import util.DataSource;
  * @author USER
  */
 public class ReservationController {
-     ObservableList<String> comboFilter = FXCollections.observableArrayList("Hari","Bulan","Semua");
+     ObservableList<String> comboFilter = FXCollections.observableArrayList("Day","Month","Year");
     ObservableList<String> comboBulan = FXCollections.observableArrayList("January","February"
             ,"March","April","May","June","July","August","September","October","November","December");
     SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
@@ -151,10 +151,9 @@ public class ReservationController {
             nav.animationFade(reservationTable);
        
             columnID.setCellValueFactory(new PropertyValueFactory<>("id"));
-            columnNbTable.setCellValueFactory(new PropertyValueFactory<>("nbTable"));
-            columnNbPerson.setCellValueFactory(new PropertyValueFactory<>("nbPerson"));
+            columnNbTable.setCellValueFactory(new PropertyValueFactory<>("NbTable"));
+            columnNbPerson.setCellValueFactory(new PropertyValueFactory<>("NbPerson"));
             columnDateReservation.setCellValueFactory(new PropertyValueFactory<>("dateReservation"));
-            System.out.println("fok ala zebi aad");
            
            // columnInputTime.setCellValueFactory(new PropertyValueFactory<>("inputTime"));
             reservationTable.setItems(getReservations());
@@ -214,11 +213,11 @@ public class ReservationController {
     
         public ObservableList<Reservation> getReservations()
          {
-             ReservationService reservation = new ReservationService();
+            ReservationService reservation = new ReservationService();
             ObservableList<Reservation> r = FXCollections.observableArrayList();
             List<Reservation> allReservations;
-              allReservations=reservation.selectAll();
-              allReservations.stream().forEach(( allReservation) -> {
+            allReservations=reservation.selectAll();
+            allReservations.stream().forEach(( allReservation) -> {
                 r.add(new Reservation(allReservation.getId(), allReservation.getNbTables(),
                         allReservation.getNbPersonnes(),allReservation.getDateReservation() ));
         });
@@ -249,14 +248,14 @@ public class ReservationController {
     private void tambahClicked() throws IOException{
         blur.setEffect(new GaussianBlur(10));
         new FadeInRightTransition(trans).play();
-        AnchorPane pane = FXMLLoader.load(getClass().getResource(nav.getContactAdd()));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource(nav.getReservationAdd()));
         loadPane.getChildren().setAll(pane);
     }
     
     @FXML
     private void ubahClicked(ActionEvent event) throws IOException {
-        if(dateReservation.equals("")){
-            nav.showAlert(Alert.AlertType.WARNING, "Peringatan", null, "Please select the data ..");
+        if(columnID.equals("")){
+            nav.showAlert(Alert.AlertType.WARNING, "WARNING", null, "Please select the data ..");
         }
         else{
             openUbah();
@@ -265,8 +264,8 @@ public class ReservationController {
     
     @FXML
     private void hapusClicked(ActionEvent event) throws IOException{
-        if(dateReservation.equals("")){
-            nav.showAlert(Alert.AlertType.WARNING, "Peringatan", null, "Please select the data..");
+        if(columnID.equals("")){
+            nav.showAlert(Alert.AlertType.WARNING, "WARNING", null, "Please select the data..");
         }
         else{
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -275,18 +274,18 @@ public class ReservationController {
                 +"\nb Person\t: "+nbPerson
                
                 );
-        alert.setContentText("Anda yakin ingin menghapus data ini ?");
+        alert.setContentText("Are you sure you want to delete this data ?");
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
           //  model.delete(id);
             if(model.getStatusDelete()==true){
-                nav.showAlert(Alert.AlertType.INFORMATION, "Sukses", null, "Data berhasil dihapus..");
+                nav.showAlert(Alert.AlertType.INFORMATION, "Success", null, "Reservation Deleted..");
                 loadTable();
                 clearParameter();
             }
             else{
-                nav.showAlert(Alert.AlertType.ERROR, "Error", null, "Data gagal dihapus..");
+                nav.showAlert(Alert.AlertType.ERROR, "Error", null, "Failed..");
             }
         } 
         }
@@ -294,12 +293,12 @@ public class ReservationController {
     
     private void openUbah() throws IOException{
         FXMLLoader Loader = new FXMLLoader();
-        Loader.setLocation(getClass().getResource(nav.getContactUpdate()));
+        Loader.setLocation(getClass().getResource(nav.getReservationUpdate()));
         blur.setEffect(new GaussianBlur(10));
         new FadeInRightTransition(trans).play();
         AnchorPane pane = Loader.load();
-        ContactUpdateController ContactUpdate = Loader.getController();
-       // ContactUpdate.setData(id,nbTable,nbTable,dateReservation );
+        ReservationUpdateController ReservationUpdate = Loader.getController();
+        ReservationUpdate.setData(id, nbTable, nbPerson, dateReservation);
         loadPane.getChildren().setAll(pane);
     }
     

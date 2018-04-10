@@ -45,6 +45,7 @@ import javafx.stage.Stage;
 import populator.UserMaster;
 import service.NotificationService;
 import service.UserService;
+import util.Util;
 import util.Views;
 
 /**
@@ -247,8 +248,11 @@ public class UserListController implements Initializable {
             tableView.getItems().stream().forEach(e -> out.println(e.getUsername() + "\t" + e.getEmail()
                     + "\t" + e.getPassword() + "\t" + e.getLastLogin()
                     + "\t" + e.getRole() + "\t" + e.getPhone()));
+            NotificationService.successBlueNotification("Export finished!", "Users exported to " + file);
+
         } catch (IOException e) {
-            //exception handling left as an exercise for the reader
+            Util.showError("Export failed");
+
         }
     }
 

@@ -40,6 +40,7 @@ import javafx.stage.Stage;
 import populator.ClaimMaster;
 import service.ClaimService;
 import service.NotificationService;
+import util.Util;
 import util.Views;
 
 /**
@@ -236,8 +237,10 @@ public class ClaimListController implements Initializable {
                     + "\t" + e.postedOn().get() + "\t" + e.getAnswer()
                     + "\t" + e.getAnsweredBy()
             ));
+            NotificationService.successBlueNotification("Export finished!", "Claims exported to " + file);
+
         } catch (IOException e) {
-            //exception handling left as an exercise for the reader
+            Util.showError("Export failed");
         }
 
     }

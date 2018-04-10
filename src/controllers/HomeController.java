@@ -80,6 +80,10 @@ public class HomeController implements Initializable {
     private JFXButton btn_user_management1;
     @FXML
     private JFXButton btn_claim_management;
+    @FXML
+    private JFXButton btn_trainning_management1;
+    @FXML
+    private JFXButton btn_send_mail;
 
     /**
      * Initializes the controller class.
@@ -206,6 +210,32 @@ public class HomeController implements Initializable {
             rootPane.setOpacity(0);
             new FadeInTransition(rootPane).play();
             AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.ADMIN_CLAIMS_LIST));
+            rootPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    private void trainManagementClicked(ActionEvent event) {
+        try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.TRAINNING_LIST));
+            rootPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    private void sendMailClicked(ActionEvent event) {
+        try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.SEND_MAIL));
             rootPane.getChildren().setAll(pane);
         } catch (Exception e) {
             System.out.println(e);

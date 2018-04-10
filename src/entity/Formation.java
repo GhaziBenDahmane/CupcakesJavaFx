@@ -5,10 +5,87 @@
  */
 package entity;
 
+import java.util.Date;
+
 /**
  *
- * @author ding
+ * @author asus
  */
 public class Formation {
+
+    int id;
+    String nom;
+    String video;
+    Date start_date_formation;
+    Date end_date_formation;
+    String status;
+
+    public Formation() {
+    }
+
+    public Formation(int id, String nom, String video, Date start_date_formation, Date end_date_formation, String status) {
+        this.id = id;
+        this.nom = nom;
+        this.video = video;
+        this.start_date_formation = start_date_formation;
+        this.end_date_formation = end_date_formation;
+        this.status = status;
+    }
+
+    public Formation(String nom, String video, Date start_date_formation, Date end_date_formation, String status) {
+        this.nom = nom;
+        this.video = video;
+        this.start_date_formation = start_date_formation;
+        this.end_date_formation = end_date_formation;
+        this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
+
+    public Date getStart_date_formation() {
+        return start_date_formation;
+    }
+
+    public void setStart_date_formation(Date start_date_formation) {
+        this.start_date_formation = start_date_formation;
+    }
+
+    public Date getEnd_date_formation() {
+        return end_date_formation;
+    }
+
+    public void setEnd_date_formation(Date end_date_formation) {
+        this.end_date_formation = end_date_formation;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
 }

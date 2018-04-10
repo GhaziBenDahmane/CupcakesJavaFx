@@ -12,7 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import servicesInterfaces.CrudService;
 import util.DataSource;
@@ -81,43 +80,74 @@ public class ClaimService implements CrudService<Claim> {
         return claims;
     }
 
+    public List<Claim> getByUser(User u) {
+        List<Claim> claims = new ArrayList();
+
+        String request = "SELECT * FROM claim WHERE `client_id` = ?";
+        try {
+            ste = connection.prepareStatement(request);
+            ste.setInt(1, u.getId());
+            ResultSet rs = ste.executeQuery();
+            while (rs.next()) {
+                claims.add(fromRs(rs));
+            }
+        } catch (SQLException ex) {
+        }
+
+        return claims;
+    }
+
     @Override
     public void add(Claim a) {
         String request = "INSERT INTO `claim` "
-                + "(`id``client_id``answered_by_id``description``answer``posted_on``answered`) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?);";
+                + "(`id` ,`client_id`, `answered_by_id`, `description`, `answer`, `posted_on`, `answered`, `type`) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?,?);";
         try {
             ste = connection.prepareStatement(request);
             ste.setInt(1, a.getId());
             ste.setInt(2, a.getClient().getId());
-            ste.setInt(3, a.getAnswer().isEmpty() ? null : a.getAnsweredBy().getId());
+            if (a.getAnswer() == null || a.getAnswer().isEmpty()) {
+                ste.setNull(3, java.sql.Types.INTEGER);
+            } else {
+                ste.setInt(3, a.getAnsweredBy().getId());
+
+            }
             ste.setString(4, a.getDescription());
             ste.setString(5, a.getAnswer());
             ste.setDate(6, new java.sql.Date(a.getPostedOn().getTime()));
-            ste.setBoolean(7, !a.getAnswer().isEmpty());
+            ste.setBoolean(7, a.getAnswer() == null || !a.getAnswer().isEmpty());
+            ste.setString(8, a.getType());
+
             ste.executeUpdate();
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
     }
 
     @Override
     public void update(Claim a) {
         String request = "UPDATE `claim` SET `client_id`=?, `answered_by_id`=?, `description`=?, `answer`=?, "
-                + "`posted_on`=?, `answered`=?"
-                + "WHERE id=?";
+                + "`posted_on`=?, `answered`=?, `type`=?"
+                + " WHERE id=?";
         try {
             ste = connection.prepareStatement(request);
+            System.out.println(a);
             ste.setInt(1, a.getClient().getId());
-            ste.setInt(2, a.getAnswer().isEmpty() ? null : a.getAnsweredBy().getId());
+            if (a.getAnswer() == null || a.getAnswer().isEmpty()) {
+                ste.setNull(2, java.sql.Types.INTEGER);
+            } else {
+                ste.setInt(2, a.getAnsweredBy().getId());
+
+            }
             ste.setString(3, a.getDescription());
             ste.setString(4, a.getAnswer());
             ste.setDate(5, new java.sql.Date(a.getPostedOn().getTime()));
             ste.setBoolean(6, !a.getAnswer().isEmpty());
             ste.setInt(7, a.getId());
+            ste.setString(8, a.getType());
             ste.executeUpdate();
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -138,9 +168,6 @@ public class ClaimService implements CrudService<Claim> {
         }
     }
 
-    public void Claim(int id, User client, User answeredBy, String description, String answer, Date postedOn, boolean answered) {
-    }
-
     @Override
     public Claim fromRs(ResultSet rs) {
         UserService us = new UserService();
@@ -151,7 +178,8 @@ public class ClaimService implements CrudService<Claim> {
                     rs.getString("description"),
                     rs.getString("answer"),
                     rs.getDate("posted_on"),
-                    rs.getBoolean("answered"));
+                    rs.getBoolean("answered"),
+                    rs.getString("type"));
 
         } catch (SQLException ex) {
         }
@@ -159,7 +187,9 @@ public class ClaimService implements CrudService<Claim> {
     }
 
     public static void main(String[] args) {
-        ClaimService c = new ClaimService();
-        System.out.println(c.getBy("type", "Technical Problem"));
+        ClaimService cs = new ClaimService();
+        UserService us = new UserService();
+        //cm = cs.getByUser(cupcakesjavafx.CupCakesJavaFx.loggedUser);
+        System.out.println(cs.getByUser(us.get(1)).size());
     }
 }

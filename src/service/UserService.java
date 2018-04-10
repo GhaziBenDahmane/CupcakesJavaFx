@@ -135,11 +135,12 @@ public class UserService implements CrudService<User> {
 
     @Override
     public void update(User u) {
+        System.out.println(u);
         String req = "UPDATE `fos_user` SET `username`=?, `username_canonical`=?, `email`=?, `email_canonical`=?, "
-                + "`enabled`=?, `password`=?,`roles`=?, `phone`=?, `picture`=?, `points`=0,`last_login`=?"
+                + "`password`=?,`roles`=?, `phone`=?, `picture`=?, `points`=0,`last_login`=?"
                 + "WHERE id=?";
         try {
-            PreparedStatement statment = connection.prepareStatement(req);
+            PreparedStatement ste = connection.prepareStatement(req);
             ste.setString(1, u.getUsername());
             ste.setString(2, u.getUsername().toLowerCase());
             ste.setString(3, u.getEmail());
@@ -148,12 +149,12 @@ public class UserService implements CrudService<User> {
             ste.setString(6, Util.arrayToString(u.getRoles()));
             ste.setString(7, u.getPhone());
             ste.setString(8, u.getPhotoprofil());
-            ste.setDate(8, new java.sql.Date(u.getLastLogin().getTime()));
+            ste.setDate(9, new java.sql.Date(u.getLastLogin().getTime()));
+            ste.setInt(10, u.getId());
             ste.executeUpdate();
 
         } catch (Exception e) {
-            System.err.println(e);
-
+            e.printStackTrace();
         }
     }
 

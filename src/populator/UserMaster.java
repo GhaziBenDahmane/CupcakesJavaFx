@@ -19,7 +19,6 @@ public class UserMaster {
     }
 
     public UserMaster(User user) {
-        System.out.println(user);
         this.user = user;
         this.username = new SimpleStringProperty(user.getUsername());
         this.email = new SimpleStringProperty(user.getEmail());
@@ -28,6 +27,34 @@ public class UserMaster {
         this.role = new SimpleStringProperty(user.getRoles().get(user.getRoles().size() - 1));
         this.phone = new SimpleStringProperty(user.getPhone());
         this.picture = new SimpleStringProperty(user.getPhotoprofil());
+    }
+
+    public SimpleStringProperty usernameProperty() {
+        return username;
+    }
+
+    public SimpleStringProperty emailProperty() {
+        return email;
+    }
+
+    public SimpleStringProperty passwordProperty() {
+        return password;
+    }
+
+    public SimpleStringProperty lastLoginProperty() {
+        return lastLogin;
+    }
+
+    public SimpleStringProperty roleProperty() {
+        return role;
+    }
+
+    public SimpleStringProperty phoneProperty() {
+        return phone;
+    }
+
+    public SimpleStringProperty pictureProperty() {
+        return picture;
     }
 
     public String getUsername() {

@@ -168,6 +168,10 @@ public class User {
         this.photoprofil = photoprofil;
     }
 
+    public boolean isAdmin() {
+        return this.roles.contains("ADMIN");
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;

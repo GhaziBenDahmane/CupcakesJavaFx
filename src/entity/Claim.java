@@ -18,19 +18,21 @@ public class Claim {
     private User answeredBy;
     private String description;
     private String answer;
+    private String type;
     private Date postedOn;
     private boolean answered;
 
     public Claim() {
     }
 
-    public Claim(User client, String description, Date postedOn) {
+    public Claim(User client, String description, Date postedOn, String type) {
         this.client = client;
         this.description = description;
         this.postedOn = new Date();
+        this.type = type;
     }
 
-    public Claim(int id, User client, User answeredBy, String description, String answer, Date postedOn, boolean answered) {
+    public Claim(int id, User client, User answeredBy, String description, String answer, Date postedOn, boolean answered, String type) {
         this.id = id;
         this.client = client;
         this.answeredBy = answeredBy;
@@ -38,6 +40,16 @@ public class Claim {
         this.answer = answer;
         this.postedOn = postedOn;
         this.answered = answered;
+        this.type = type;
+
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getId() {

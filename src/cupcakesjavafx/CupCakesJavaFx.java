@@ -18,6 +18,7 @@ public class CupCakesJavaFx extends Application {
 
     @Override
     public void start(Stage stage) {
+
         Views views = new Views();
         try {
             Parent root = FXMLLoader.load(getClass()

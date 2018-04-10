@@ -93,6 +93,7 @@ public class UserListController implements Initializable {
     private TableColumn<UserMaster, String> picture;
     private List<UserMaster> cm;
     private UserService cs;
+    public static UserMaster selectedUser;
 
     /**
      * Initializes the controller class.
@@ -154,6 +155,10 @@ public class UserListController implements Initializable {
 
     @FXML
     private void refreshClicked(ActionEvent event) {
+        cm = cs.getAll()
+                .stream()
+                .map(e -> new UserMaster(e))
+                .collect(Collectors.toList());
         tableView.setItems(FXCollections.observableArrayList(cm));
         search.setText("");
         Date.setText("");
@@ -192,8 +197,12 @@ public class UserListController implements Initializable {
     }
 
     @FXML
-    private void editClicked(ActionEvent event) {
-
+    private void editClicked(ActionEvent event) throws IOException {
+        selectedUser = tableView.getSelectionModel().getSelectedItem();
+        blur.setEffect(new GaussianBlur(10));
+        new FadeInRightTransition(trans).play();
+        AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.MODIFY_USER));
+        loadPane.getChildren().setAll(pane);
     }
 
     private void filterUsers() {
@@ -231,10 +240,6 @@ public class UserListController implements Initializable {
         refreshClicked(null);
         blur.setEffect(null);
         new FadeOutLeftTransition(trans).play();
-        clearParameter();
-    }
-
-    public void clearParameter() {
     }
 
 }

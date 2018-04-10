@@ -16,6 +16,26 @@ public class ClaimMaster {
     private SimpleStringProperty answeredBy;
     private Claim claim;
 
+    public SimpleStringProperty clientName() {
+        return clientName;
+    }
+
+    public SimpleStringProperty description() {
+        return description;
+    }
+
+    public SimpleStringProperty postedOn() {
+        return postedOn;
+    }
+
+    public SimpleStringProperty answer() {
+        return answer;
+    }
+
+    public SimpleStringProperty answeredBy() {
+        return answeredBy;
+    }
+
     public ClaimMaster(SimpleStringProperty clientName, SimpleStringProperty description, SimpleStringProperty postedOn, SimpleStringProperty answer, SimpleStringProperty answeredBy) {
         this.clientName = clientName;
         this.description = description;

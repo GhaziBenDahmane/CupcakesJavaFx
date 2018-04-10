@@ -7,7 +7,6 @@ package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
-import cupcakesjavafx.CupCakesJavaFx;
 import entity.Claim;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import service.ClaimService;
+import service.UserService;
 
 /**
  * FXML Controller class
@@ -40,10 +41,14 @@ public class AnswerClaimFormController implements Initializable {
 
     @FXML
     private void submitAction(ActionEvent event) {
+        UserService us = new UserService();
+        ClaimService cs = new ClaimService();
         Claim claim = ClaimListController.sselectedItem.getClaim();
         claim.setAnswer(answer.getText());
         claim.setAnswered(true);
-        claim.setAnsweredBy(CupCakesJavaFx.loggedUser);
+        //claim.setAnsweredBy(CupCakesJavaFx.loggedUser);
+        claim.setAnsweredBy(us.get(1));
+        cs.update(claim);
     }
 
 }

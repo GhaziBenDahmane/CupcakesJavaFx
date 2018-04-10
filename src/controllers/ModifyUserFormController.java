@@ -48,15 +48,27 @@ public class ModifyUserFormController implements Initializable {
     @FXML
     private JFXTextField picture;
     UserService us = new UserService();
+    public User selectedUser;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        selectedUser = UserListController.selectedUser.getUser();
+        System.out.println(selectedUser.getLastLogin());
+        //LocalDate localDateLastLogin = selectedUser.getLastLogin().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
         role.getItems().add(new Label("Admin"));
         role.getItems().add(new Label("User"));
         role.setPromptText("");
+        username.setText(selectedUser.getUsername());
+
+        email.setText(selectedUser.getEmail());
+        phone.setText(selectedUser.getPhone());
+
+        //lastLogin.setValue(localDateLastLogin);
+        picture.setText(selectedUser.getPhotoprofil());
     }
 
     @FXML
@@ -65,6 +77,8 @@ public class ModifyUserFormController implements Initializable {
 
     @FXML
     private void inputClicked(ActionEvent event) {
+        selectedUser = UserListController.selectedUser.getUser();
+        System.out.println(selectedUser);
         ArrayList<String> uroles = new ArrayList<>();
         String uusername = username.getText();
         String upassword = password.getText();
@@ -82,15 +96,14 @@ public class ModifyUserFormController implements Initializable {
         String uphone = phone.getText();
         String upicture = picture.getText();
         String hashedpw = Util.hashpw(upassword);
-        User aa = new User();
-        aa.setUsername(uusername);
-        aa.setPassword(hashedpw);
-        aa.setEmail(uemail);
-        aa.setLastLogin(lastLoginDate);
-        aa.setRoles(uroles);
-        aa.setPhone(uphone);
-        aa.setPhotoprofil(upicture);
-        us.add(aa);
+        selectedUser.setUsername(uusername);
+        selectedUser.setPassword(hashedpw);
+        selectedUser.setEmail(uemail);
+        selectedUser.setLastLogin(lastLoginDate);
+        selectedUser.setRoles(uroles);
+        selectedUser.setPhone(uphone);
+        selectedUser.setPhotoprofil(upicture);
+        us.update(selectedUser);
     }
 
 }

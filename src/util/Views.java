@@ -20,6 +20,10 @@ public class Views {
     public static String MODIFY_USER = "/views/ModifyUserForm.fxml";
     public static String REGISTER = "/views/RegisterForm.fxml";
 
+    public static String ADD_CLAIM = "/views/user/addClaim.fxml";
+    public static String USER_CLAIM_LIST = "/views/user/ClaimList.fxml";
+    public static String USER_PROFILE = "/views/user/profile.fxml";
+
     public Views() {
     }
 

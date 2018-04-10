@@ -92,7 +92,6 @@ public class ClaimListController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         filter.getItems().add(new Label("Answered"));
         filter.getItems().add(new Label("Not Answered"));
-        filter.setPromptText("");
         tableView.setEditable(true);
         cs = new ClaimService();
         cm = cs.getAll()
@@ -193,6 +192,10 @@ public class ClaimListController implements Initializable {
 
     @FXML
     private void refreshClicked(ActionEvent event) {
+        cm = cs.getAll()
+                .stream()
+                .map(e -> new ClaimMaster(e))
+                .collect(Collectors.toList());
         tableView.setItems(FXCollections.observableArrayList(cm));
         search.setText("");
         Date.setText("");

@@ -169,7 +169,7 @@ public class User {
     }
 
     public boolean isAdmin() {
-        return this.roles.contains("ADMIN");
+        return this.roles.stream().anyMatch(e -> e.contains("ADMIN"));
     }
 
     @Override

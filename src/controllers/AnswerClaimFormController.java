@@ -41,14 +41,15 @@ public class AnswerClaimFormController implements Initializable {
 
     @FXML
     private void submitAction(ActionEvent event) {
-        UserService us = new UserService();
-        ClaimService cs = new ClaimService();
-        Claim claim = ClaimListController.sselectedItem.getClaim();
-        claim.setAnswer(answer.getText());
-        claim.setAnswered(true);
-        //claim.setAnsweredBy(CupCakesJavaFx.loggedUser);
-        claim.setAnsweredBy(us.get(1));
-        cs.update(claim);
+        if (answer.getText().isEmpty()) {
+
+        } else {
+            UserService us = new UserService();
+            ClaimService cs = new ClaimService();
+            Claim claim = ClaimListController.sselectedItem.getClaim();
+            cs.answer(claim, answer.getText());
+        }
+
     }
 
 }

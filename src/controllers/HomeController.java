@@ -89,9 +89,12 @@ public class HomeController implements Initializable {
         userName.setText(CupCakesJavaFx.loggedUser.getUsername());
         emailUser.setText(CupCakesJavaFx.loggedUser.getEmail());
         if (CupCakesJavaFx.loggedUser.isAdmin()) {
+            System.out.println("you are admin");
             admin.setVisible(true);
             user.setVisible(false);
         } else {
+            System.out.println("you not admin");
+
             admin.setVisible(false);
             user.setVisible(true);
         }

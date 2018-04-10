@@ -110,7 +110,7 @@
                      <children>
                         <StackPane prefHeight="150.0" prefWidth="181.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <VBox fx:id="admin" prefHeight="200.0" prefWidth="100.0">
+                              <VBox fx:id="admin" prefHeight="200.0" prefWidth="100.0" visible="false">
                                  <children>
                                     <JFXButton fx:id="btn_home1" alignment="BASELINE_LEFT" focusTraversable="false" onAction="#homeClicked" onMouseClicked="#setBackgroundHome1" prefHeight="41.0" prefWidth="195.0" style="-fx-background-color: #D2D7D3;" text="Home" textFill="#4183d7">
                                        <graphic>

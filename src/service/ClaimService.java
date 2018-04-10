@@ -124,6 +124,20 @@ public class ClaimService implements CrudService<Claim> {
         }
     }
 
+    public void answer(Claim a, String answer) {
+        String request = "UPDATE `claim` SET `answered_by_id`=?,`answer`=?,`answered`=1 WHERE id=?";
+        try {
+            statement = connection.prepareStatement(request);
+            System.out.println(a);
+            statement.setInt(1, cupcakesjavafx.CupCakesJavaFx.loggedUser.getId());
+            statement.setString(2, answer);
+            statement.setInt(3, a.getId());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void update(Claim a) {
         System.out.println(a);

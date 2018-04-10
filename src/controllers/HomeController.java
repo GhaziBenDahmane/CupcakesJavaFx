@@ -65,8 +65,6 @@ public class HomeController implements Initializable {
     @FXML
     private JFXButton btn_home1;
     @FXML
-    private JFXButton btn_user_management;
-    @FXML
     private VBox user;
     @FXML
     private JFXButton btn_home11;
@@ -78,6 +76,10 @@ public class HomeController implements Initializable {
     private Label userName;
     @FXML
     private JFXButton claims;
+    @FXML
+    private JFXButton btn_user_management1;
+    @FXML
+    private JFXButton btn_claim_management;
 
     /**
      * Initializes the controller class.
@@ -188,6 +190,19 @@ public class HomeController implements Initializable {
             rootPane.setOpacity(0);
             new FadeInTransition(rootPane).play();
             AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.USER_CLAIM_LIST));
+            rootPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    private void claimManagementClicked(ActionEvent event) {
+        try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.ADMIN_CLAIMS_LIST));
             rootPane.getChildren().setAll(pane);
         } catch (Exception e) {
             System.out.println(e);

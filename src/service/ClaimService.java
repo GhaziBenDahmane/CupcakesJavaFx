@@ -22,7 +22,7 @@ import util.DataSource;
  */
 public class ClaimService implements CrudService<Claim> {
 
-    private PreparedStatement ste;
+    private PreparedStatement statement;
     private final Connection connection;
 
     public ClaimService() {
@@ -35,9 +35,9 @@ public class ClaimService implements CrudService<Claim> {
         List<Claim> claims = new ArrayList();
         String request = "SELECT * FROM claim";
         try {
-            ste = connection.prepareStatement(request);
+            statement = connection.prepareStatement(request);
 
-            ResultSet rs = ste.executeQuery();
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 claims.add(fromRs(rs));
             }
@@ -50,9 +50,9 @@ public class ClaimService implements CrudService<Claim> {
     public Claim get(int id) {
         String request = "SELECT * FROM claim WHERE id = ?";
         try {
-            ste = connection.prepareStatement(request);
-            ste.setInt(1, id);
-            ResultSet rs = ste.executeQuery();
+            statement = connection.prepareStatement(request);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 return fromRs(rs);
             }
@@ -67,10 +67,10 @@ public class ClaimService implements CrudService<Claim> {
 
         String request = "SELECT * FROM claim WHERE " + param + " = ?";
         try {
-            ste = connection.prepareStatement(request);
-            ste.setString(1, val);
-            System.out.println(ste.toString());
-            ResultSet rs = ste.executeQuery();
+            statement = connection.prepareStatement(request);
+            statement.setString(1, val);
+            System.out.println(statement.toString());
+            ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 claims.add(fromRs(rs));
             }
@@ -85,9 +85,9 @@ public class ClaimService implements CrudService<Claim> {
 
         String request = "SELECT * FROM claim WHERE `client_id` = ?";
         try {
-            ste = connection.prepareStatement(request);
-            ste.setInt(1, u.getId());
-            ResultSet rs = ste.executeQuery();
+            statement = connection.prepareStatement(request);
+            statement.setInt(1, u.getId());
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 claims.add(fromRs(rs));
             }
@@ -103,22 +103,22 @@ public class ClaimService implements CrudService<Claim> {
                 + "(`id` ,`client_id`, `answered_by_id`, `description`, `answer`, `posted_on`, `answered`, `type`) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?,?);";
         try {
-            ste = connection.prepareStatement(request);
-            ste.setInt(1, a.getId());
-            ste.setInt(2, a.getClient().getId());
+            statement = connection.prepareStatement(request);
+            statement.setInt(1, a.getId());
+            statement.setInt(2, a.getClient().getId());
             if (a.getAnswer() == null || a.getAnswer().isEmpty()) {
-                ste.setNull(3, java.sql.Types.INTEGER);
+                statement.setNull(3, java.sql.Types.INTEGER);
             } else {
-                ste.setInt(3, a.getAnsweredBy().getId());
+                statement.setInt(3, a.getAnsweredBy().getId());
 
             }
-            ste.setString(4, a.getDescription());
-            ste.setString(5, a.getAnswer());
-            ste.setDate(6, new java.sql.Date(a.getPostedOn().getTime()));
-            ste.setBoolean(7, a.getAnswer() == null || !a.getAnswer().isEmpty());
-            ste.setString(8, a.getType());
+            statement.setString(4, a.getDescription());
+            statement.setString(5, a.getAnswer());
+            statement.setDate(6, new java.sql.Date(a.getPostedOn().getTime()));
+            statement.setBoolean(7, a.getAnswer() == null || !a.getAnswer().isEmpty());
+            statement.setString(8, a.getType());
 
-            ste.executeUpdate();
+            statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -126,26 +126,27 @@ public class ClaimService implements CrudService<Claim> {
 
     @Override
     public void update(Claim a) {
+        System.out.println(a);
         String request = "UPDATE `claim` SET `client_id`=?, `answered_by_id`=?, `description`=?, `answer`=?, "
                 + "`posted_on`=?, `answered`=?, `type`=?"
                 + " WHERE id=?";
         try {
-            ste = connection.prepareStatement(request);
+            statement = connection.prepareStatement(request);
             System.out.println(a);
-            ste.setInt(1, a.getClient().getId());
+            statement.setInt(1, a.getClient().getId());
             if (a.getAnswer() == null || a.getAnswer().isEmpty()) {
-                ste.setNull(2, java.sql.Types.INTEGER);
+                statement.setNull(2, java.sql.Types.INTEGER);
             } else {
-                ste.setInt(2, a.getAnsweredBy().getId());
+                statement.setInt(2, a.getAnsweredBy().getId());
 
             }
-            ste.setString(3, a.getDescription());
-            ste.setString(4, a.getAnswer());
-            ste.setDate(5, new java.sql.Date(a.getPostedOn().getTime()));
-            ste.setBoolean(6, !a.getAnswer().isEmpty());
-            ste.setInt(7, a.getId());
-            ste.setString(8, a.getType());
-            ste.executeUpdate();
+            statement.setString(3, a.getDescription());
+            statement.setString(4, a.getAnswer());
+            statement.setDate(5, new java.sql.Date(a.getPostedOn().getTime()));
+            statement.setBoolean(6, !a.getAnswer().isEmpty());
+            statement.setInt(7, a.getId());
+            statement.setString(8, a.getType());
+            statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }

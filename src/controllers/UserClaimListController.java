@@ -109,7 +109,6 @@ public class UserClaimListController implements Initializable {
             cm = cm.stream().filter(e -> e.getAnswer() == null || e.getAnswer().isEmpty())
                     .collect(Collectors.toList());
         }
-        System.out.println(cm.size());
         this.currentIndex = 0;
         if (cm.size() <= 1) {
             next.setVisible(false);
@@ -126,12 +125,9 @@ public class UserClaimListController implements Initializable {
         previous.setVisible(false);
         currentIndex = 0;
         cm = cs.getByUser(cupcakesjavafx.CupCakesJavaFx.loggedUser);
-        //cm = cs.getByUser(us.get(1));
-
         if (cm.size() <= 1) {
             next.setVisible(false);
         }
-        filter.setValue(null);
         if (cm.size() >= 1) {
             loadData();
         }
@@ -171,14 +167,22 @@ public class UserClaimListController implements Initializable {
     }
 
     private void loadData() {
-        Claim claim = cm.get(this.currentIndex);
-        type.setText(claim.getType());
-        description.setText(claim.getDescription());
-        postedOn.setText(claim.getPostedOn().toString());
-        if (claim.getAnswer() != null && !claim.getAnswer().isEmpty()) {
-            answer.setText(claim.getAnswer());
+        if (cm.size() > 0) {
+            Claim claim = cm.get(this.currentIndex);
+            type.setText(claim.getType());
+            description.setText(claim.getDescription());
+            postedOn.setText(claim.getPostedOn().toString());
+            if (claim.getAnswer() != null && !claim.getAnswer().isEmpty()) {
+                answer.setText(claim.getAnswer());
 
+            } else {
+                answer.setText("");
+
+            }
         } else {
+            type.setText("");
+            description.setText("");
+            postedOn.setText("");
             answer.setText("");
 
         }

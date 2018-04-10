@@ -8,6 +8,7 @@ package util;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -50,5 +51,21 @@ public final class Util {
     //checking Password
     public static Boolean checkpw(String plainpw, String hashed) {
         return BCrypt.checkpw(plainpw, hashed);
+    }
+
+    public static void showInfo(String title, String text) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(text);
+        alert.showAndWait();
+    }
+
+    public static void showError(String title, String text) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(text);
+        alert.showAndWait();
     }
 }

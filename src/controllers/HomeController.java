@@ -86,6 +86,13 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         userName.setText(CupCakesJavaFx.loggedUser.getUsername());
         emailUser.setText(CupCakesJavaFx.loggedUser.getEmail());
+        if (CupCakesJavaFx.loggedUser.isAdmin()) {
+            admin.setVisible(true);
+            user.setVisible(false);
+        } else {
+            admin.setVisible(false);
+            user.setVisible(true);
+        }
     }
 
     @FXML
@@ -151,6 +158,15 @@ public class HomeController implements Initializable {
 
     @FXML
     private void userManagementClicked(ActionEvent event) {
+        try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.USERS_LIST));
+            rootPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @FXML

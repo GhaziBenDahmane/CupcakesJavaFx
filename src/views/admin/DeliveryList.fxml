@@ -53,8 +53,8 @@
                   <AnchorPane layoutX="31.0" layoutY="6.0" prefHeight="40.0" prefWidth="750.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
                      <children>
                         <JFXComboBox fx:id="filter" focusTraversable="false" labelFloat="true" layoutX="8.0" layoutY="13.0" onAction="#filterClicked" prefHeight="25.0" prefWidth="153.0" promptText="Filter" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="603.0" AnchorPane.topAnchor="13.0" />
-                        <JFXTextField fx:id="hari" editable="false" focusTraversable="false" labelFloat="true" layoutX="161.0" layoutY="13.0" prefHeight="25.0" prefWidth="139.0" promptText="Date" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="13.0" />
-                        <JFXDatePicker fx:id="hari_pilih" defaultColor="#4183d7" focusTraversable="false" layoutX="304.0" layoutY="13.0" onAction="#dateClicked" prefHeight="25.0" prefWidth="21.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="304.0" AnchorPane.topAnchor="13.0" />
+                        <JFXTextField fx:id="Date" editable="false" focusTraversable="false" labelFloat="true" layoutX="161.0" layoutY="13.0" prefHeight="25.0" prefWidth="139.0" promptText="Date" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="13.0" />
+                        <JFXDatePicker fx:id="date" defaultColor="#4183d7" focusTraversable="false" layoutX="304.0" layoutY="13.0" onAction="#dateClicked" prefHeight="25.0" prefWidth="21.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="304.0" AnchorPane.topAnchor="13.0" />
                         <JFXComboBox fx:id="bulan" focusTraversable="false" labelFloat="true" layoutX="401.0" layoutY="13.0" prefHeight="25.0" prefWidth="145.0" promptText="Bulan" visible="false" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="13.0" />
                         <JFXTextField fx:id="tahun" focusTraversable="false" labelFloat="true" layoutX="314.0" layoutY="13.0" prefHeight="25.0" prefWidth="38.0" promptText="Tahun" visible="false" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="314.0" AnchorPane.topAnchor="13.0" />
                         <Separator layoutX="361.0" layoutY="4.0" orientation="VERTICAL" prefHeight="40.0" prefWidth="0.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="361.0" AnchorPane.topAnchor="4.0" />
@@ -68,7 +68,7 @@
                               <Image url="@../img/icons8_Search_50px.png" />
                            </image>
                         </ImageView>
-                        <JFXTextField fx:id="cari" focusTraversable="false" labelFloat="true" layoutX="395.0" layoutY="11.0" prefHeight="0.0" prefWidth="135.0" promptText="Search..." AnchorPane.bottomAnchor="8.0" AnchorPane.topAnchor="13.0" />
+                        <JFXTextField fx:id="search" focusTraversable="false" labelFloat="true" layoutX="395.0" layoutY="11.0" prefHeight="0.0" prefWidth="135.0" promptText="Search..." AnchorPane.bottomAnchor="8.0" AnchorPane.topAnchor="13.0" />
                         <Separator layoutY="4.0" orientation="VERTICAL" prefHeight="40.0" prefWidth="0.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="4.0" />
                      </children>
                   </AnchorPane>

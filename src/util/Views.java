@@ -43,6 +43,14 @@ public class Views {
     public static String USER_CLAIM_LIST = "/views/user/ClaimList.fxml";
     public static String USER_PROFILE = "/views/user/profile.fxml";
     public static String DELIVERY = "/views/user/Delivery.fxml";
+    
+    public static String ADD_ACTUALITY = "/views/AddActuality.fxml";
+    public static String FRONT_ACTUALITY = "/views/ActualityHome.fxml";
+    public static String BACK_ACTUALITY = "/views/Actuality.fxml";
+    
+    public static String ADD_PROMOTION = "/views/AddPromotion.fxml";
+    public static String FRONT_PROMOTION = "/views/PromotionHome.fxml";
+    public static String BACK_PROMOTION = "/views/Promotion.fxml";
 
     public Views() {
     }

@@ -192,6 +192,30 @@
                                           <Font name="Segoe UI Bold" size="14.0" />
                                        </font>
                                     </JFXButton>
+                                    <JFXButton fx:id="btn_Promo" alignment="BASELINE_LEFT" focusTraversable="false" onAction="#BshowPromo" onMouseClicked="#setBackgroundUserManagement" prefHeight="41.0" prefWidth="195.0" text="Promotion Management" textFill="#4183d7">
+                                       <graphic>
+                                          <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../img/icons8_User_Groups_96px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font name="Segoe UI Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="btn_Act" alignment="BASELINE_LEFT" focusTraversable="false" onAction="#BshowAct" onMouseClicked="#setBackgroundUserManagement" prefHeight="41.0" prefWidth="195.0" text="Actuality Management" textFill="#4183d7">
+                                       <graphic>
+                                          <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../img/icons8_User_Groups_96px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font name="Segoe UI Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
                                     
                                  </children>
                               </VBox>
@@ -237,6 +261,30 @@
                                        </font>
                                     </JFXButton>
                                     <JFXButton fx:id="btn_laporan_uang_keluar_bln1" alignment="BASELINE_LEFT" focusTraversable="false" onAction="#showMap" onMouseClicked="#setBackgroundUangKeluarBulananUser" prefHeight="41.0" prefWidth="181.0" text="Map" textFill="#4183d7">
+                                       <graphic>
+                                          <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../img/icons8_Calendar_32px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font name="Segoe UI Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="btn_FAct" alignment="BASELINE_LEFT" focusTraversable="false" onAction="#FshowAct" onMouseClicked="#setBackgroundUangKeluarBulananUser" prefHeight="41.0" prefWidth="181.0" text="Actuality" textFill="#4183d7">
+                                       <graphic>
+                                          <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../img/icons8_Calendar_32px.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <font>
+                                          <Font name="Segoe UI Bold" size="14.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="btn_FPromo" alignment="BASELINE_LEFT" focusTraversable="false" onAction="#FshowPromo" onMouseClicked="#setBackgroundUangKeluarBulananUser" prefHeight="41.0" prefWidth="181.0" text="Promotion" textFill="#4183d7">
                                        <graphic>
                                           <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>

@@ -51,10 +51,6 @@ public class HomeController implements Initializable {
     @FXML
     private ImageView imageUser;
     @FXML
-    private Label tanggal;
-    @FXML
-    private Label jam;
-    @FXML
     private Label usernameUser;
     @FXML
     private Label idUser;
@@ -90,6 +86,10 @@ public class HomeController implements Initializable {
     private JFXButton btn_pastry;
     @FXML
     private JFXButton btn_Calender;
+    @FXML
+    private JFXButton btn_Promo;
+    @FXML
+    private JFXButton btn_Act;
 
     /**
      * Initializes the controller class.
@@ -295,6 +295,57 @@ public class HomeController implements Initializable {
             System.out.println(e);
         }
 
+    }
+
+    @FXML
+    private void BshowPromo(ActionEvent event) {
+        try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.BACK_PROMOTION));
+            rootPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    private void BshowAct(ActionEvent event) {
+        try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.BACK_ACTUALITY));
+            rootPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    @FXML
+    private void FshowPromo(ActionEvent event) {
+        try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.FRONT_PROMOTION));
+            rootPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    private void FshowAct(ActionEvent event) {
+        try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.FRONT_ACTUALITY));
+            rootPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
 }

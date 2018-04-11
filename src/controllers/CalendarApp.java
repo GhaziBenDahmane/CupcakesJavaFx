@@ -97,7 +97,14 @@ return stackPane;
    
 
     private EventHandler<CalendarEvent> foo(CalendarEvent evt) {
-
+        System.out.println("NEW"+evt.getEntry().getCalendar().getName());
+        System.out.println("OLD"+evt.getOldCalendar().getName());
+        
+        
+        if (evt.getEntry().getCalendar().getName()!=evt.getOldCalendar().getName())
+        {
+        es.updateStatus(evt.getEntry().getCalendar().getName(), Integer.parseInt(evt.getEntry().getId()) );
+        }
         int id = Integer.parseInt(evt.getEntry().getId()) ;
         if(evt.getOldInterval().getStartDate()!=evt.getEntry().getStartDate() || evt.getOldInterval().getEndDate()!=evt.getEntry().getEndDate())
         {
@@ -111,6 +118,8 @@ return stackPane;
             es.update(new Event(title,id));
             
         }
+                 
+
         if (evt.isEntryAdded())
         {
             Entry e = evt.getEntry();

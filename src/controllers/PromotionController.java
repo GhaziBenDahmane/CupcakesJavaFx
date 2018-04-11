@@ -111,8 +111,7 @@ public class PromotionController implements Initializable {
 
         ObservableList<Promotion> list;
 
-        list = FXCollections.observableArrayList();
-        list = service.selectAllPromotionFrom();
+        list = FXCollections.observableArrayList(service.selectAllPromotionFrom());
         tablePromotion.setItems(list);
         //   list = FXCollections.observableArrayList();
         // list= (ObservableList<Promotion>) service.selectAllPromotionFrom();

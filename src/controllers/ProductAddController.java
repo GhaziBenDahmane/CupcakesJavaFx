@@ -1,13 +1,7 @@
 package controllers;
 
-import animation.FadeOutLeftTransition;
-import de.humatic.dsj.rc.RendererControls;
 import entity.Product;
 import entity.Promotion;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -16,7 +10,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,14 +33,14 @@ import service.QRService;
 
 public class ProductAddController implements Initializable {
 
-    ObservableList<String> listPromotions ;
+    ObservableList<String> listPromotions;
     ImageView myImageView;
     Image image;
     private Stage stage;
     private File file;
 
     ProductService product = new ProductService();
-    
+
     @FXML
     private StackPane trans;
 
@@ -59,16 +52,15 @@ public class ProductAddController implements Initializable {
 
     @FXML
     private ImageView imagex;
-    
+
     @FXML
-    private Label start,end;
-    
- 
+    private Label start, end;
 
     @FXML
     private TextField barcode, name, category, price, description;
-    
-    PromotionService promo = new  PromotionService();
+
+    PromotionService promo = new PromotionService();
+
     private void clear() {
         name.setText("");
         category.setText("");
@@ -79,15 +71,15 @@ public class ProductAddController implements Initializable {
     }
 
     private void setPromotion() {
-        
-        List<Promotion> promotions =  new ArrayList<>();
+
+        List<Promotion> promotions = new ArrayList<>();
         promotions = promo.selectAll();
         List<String> discounts = new ArrayList<>();
         for (Promotion p : promotions) {
-            Double d= p.getDiscount()*100;
-            discounts.add(p.getId_promotion()+"-"+d.toString()+"%");
-                    }
-        listPromotions=FXCollections.observableList(discounts);
+            Double d = p.getDiscount() * 100;
+            discounts.add(p.getId_promotion() + "-" + d.toString() + "%");
+        }
+        listPromotions = FXCollections.observableList(discounts);
         promotion.setItems(listPromotions);
     }
 
@@ -120,7 +112,7 @@ public class ProductAddController implements Initializable {
         setPromotion();
         promotion.requestFocus();
         promotion.setOnKeyPressed(event -> {
-            
+
             if (event.getCode() == KeyCode.ENTER) {
                 try {
                     addProduct();
@@ -154,8 +146,6 @@ public class ProductAddController implements Initializable {
     private void addClicked(ActionEvent event) throws FileNotFoundException {
         addProduct();
     }
-    
-    
 
     private void addProduct() throws FileNotFoundException {
         if (name.getText().equals("") || barcode.getText().equals("")
@@ -168,10 +158,10 @@ public class ProductAddController implements Initializable {
             String desc = description.getText();
             Double pric = Double.parseDouble(price.getText());
             String promot = promotion.getSelectionModel().getSelectedItem().toString();
-            Integer id_promo=Integer.parseInt(promot.split("-")[0]);
+            Integer id_promo = Integer.parseInt(promot.split("-")[0]);
             System.out.println(id_promo);
-            Promotion promotion=promo.selectPromotionById(id_promo);
-            Product p = new Product(nam, type, pric, 0, 0, "pas encore", desc, barcod,promotion);
+            Promotion promotion = promo.selectPromotionById(id_promo);
+            Product p = new Product(nam, type, pric, 0, 0, "pas encore", desc, barcod, promotion);
             product.insert(p, file);
             showAlert(Alert.AlertType.INFORMATION, "Succes", null, "Insert with success !");
             clear();
@@ -186,13 +176,12 @@ public class ProductAddController implements Initializable {
         alert.setContentText(text);
         alert.showAndWait();
     }
-    
+
     @FXML
     private void codeOnClick(MouseEvent event) {
-       
+
         QRService qr = new QRService(barcode);
     }
-    
 
     @FXML
     private void browse(ActionEvent event) {
@@ -213,7 +202,5 @@ public class ProductAddController implements Initializable {
         System.out.println(file.getAbsolutePath() + imagex);
 
     }
-    
-   
 
 }

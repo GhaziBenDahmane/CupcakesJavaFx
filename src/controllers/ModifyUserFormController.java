@@ -57,16 +57,15 @@ public class ModifyUserFormController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         selectedUser = UserListController.selectedUser.getUser();
         System.out.println(selectedUser.getLastLogin());
-        //LocalDate localDateLastLogin = selectedUser.getLastLogin().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
         role.getItems().add(new Label("Admin"));
         role.getItems().add(new Label("User"));
+        role.getItems().add(null);
         username.setText(selectedUser.getUsername());
 
         email.setText(selectedUser.getEmail());
         phone.setText(selectedUser.getPhone());
 
-        //lastLogin.setValue(localDateLastLogin);
     }
 
     @FXML
@@ -85,7 +84,7 @@ public class ModifyUserFormController implements Initializable {
             selectedUser.setLastLogin(lastLoginDate);
 
         }
-        if (role.getValue() != null) {
+        if (!role.getSelectionModel().isEmpty()) {
             if (role.getValue().getText().equals("Admin")) {
                 uroles.add("ROLE_SIMPLE_USER");
                 uroles.add("ADMIN");
@@ -94,11 +93,12 @@ public class ModifyUserFormController implements Initializable {
                 uroles.add("ROLE_SIMPLE_USER");
 
             }
+            selectedUser.setRoles(uroles);
+
         }
         String uphone = phone.getText();
         selectedUser.setUsername(uusername);
         selectedUser.setEmail(uemail);
-        selectedUser.setRoles(uroles);
         selectedUser.setPhone(uphone);
         if (!password.getText().isEmpty()) {
             String upassword = password.getText();

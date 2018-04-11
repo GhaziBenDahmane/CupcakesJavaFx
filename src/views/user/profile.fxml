@@ -37,7 +37,7 @@
             <Font name="Segoe UI" size="14.0" />
          </font>
       </JFXTextField>
-      <JFXButton layoutX="46.0" layoutY="391.0" onAction="#simpanClicked" prefHeight="35.0" prefWidth="291.0" style="-fx-background-color: #4183D7;" text="Simpan" textFill="WHITE">
+      <JFXButton layoutX="46.0" layoutY="391.0" onAction="#simpanClicked" prefHeight="35.0" prefWidth="291.0" style="-fx-background-color: #4183D7;" text="Submit" textFill="WHITE">
          <font>
             <Font name="Segoe UI" size="18.0" />
          </font>

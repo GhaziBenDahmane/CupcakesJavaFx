@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import service.NotificationService;
 import service.UserService;
 import util.Util;
 
@@ -88,7 +89,8 @@ public class AddUserFormController implements Initializable {
         aa.setRoles(uroles);
         aa.setPhone(uphone);
         us.add(aa);
-        Util.showInfo("User added successfully");
+        Util.showInfo("User added!");
+        NotificationService.successBlueNotification("User added!", "User added!");
     }
 
 }

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="622.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+<AnchorPane prefHeight="622.0" prefWidth="961.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
    <children>
       <StackPane fx:id="trans" opacity="0.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -100,23 +100,8 @@
                      <children>
                         <StackPane prefHeight="150.0" prefWidth="181.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <VBox fx:id="admin" prefHeight="200.0" prefWidth="100.0" visible="false">
+                              <VBox fx:id="admin" prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <JFXButton fx:id="btn_home1" alignment="BASELINE_LEFT" focusTraversable="false" onAction="#homeClicked" onMouseClicked="#setBackgroundHome1" prefHeight="41.0" prefWidth="195.0" style="-fx-background-color: #D2D7D3;" text="Home" textFill="#4183d7">
-                                       <graphic>
-                                          <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../img/icons8_Home_96px.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <font>
-                                          <Font name="Segoe UI Bold" size="14.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets top="1.0" />
-                                       </VBox.margin>
-                                    </JFXButton>
                                     <JFXButton fx:id="btn_user_management1" alignment="BASELINE_LEFT" focusTraversable="false" onAction="#userManagementClicked" onMouseClicked="#setBackgroundUserManagement" prefHeight="41.0" prefWidth="195.0" text="User Management" textFill="#4183d7">
                                        <graphic>
                                           <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -255,7 +240,7 @@
                                     
                                  </children>
                               </VBox>
-                              <VBox fx:id="user" prefHeight="200.0" prefWidth="100.0">
+                              <VBox fx:id="user" prefHeight="200.0" prefWidth="100.0" visible="false">
                                  <children>
                                     <JFXButton fx:id="btn_home11" alignment="BASELINE_LEFT" focusTraversable="false" onAction="#homeClicked" onMouseClicked="#setBackgroundHomeUser" prefHeight="41.0" prefWidth="195.0" style="-fx-background-color: #D2D7D3;" text="Home" textFill="#4183d7">
                                        <graphic>

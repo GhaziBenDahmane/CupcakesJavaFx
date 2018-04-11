@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import service.NotificationService;
 import service.UserService;
 import util.Util;
 
@@ -52,7 +53,10 @@ public class RegisterFormController implements Initializable {
 
     @FXML
     private void inputClicked(ActionEvent event) {
-        if (password1.getText().equals(password.getText())) {
+        if (password1.getText().equals(password.getText())
+                && !username.getText().isEmpty()
+                && !password.getText().isEmpty()
+                && !phone.getText().isEmpty()) {
             ArrayList<String> uroles = new ArrayList<>();
             String uusername = username.getText();
             String upassword = password.getText();
@@ -62,7 +66,6 @@ public class RegisterFormController implements Initializable {
             uroles.add("ROLE_SIMPLE_USER");
 
             String uphone = phone.getText();
-            String upicture = picture.getText();
             String hashedpw = Util.hashpw(upassword);
             User aa = new User();
             aa.setUsername(uusername);
@@ -71,8 +74,12 @@ public class RegisterFormController implements Initializable {
             aa.setLastLogin(lastLoginDate);
             aa.setRoles(uroles);
             aa.setPhone(uphone);
-            aa.setPhotoprofil(upicture);
             us.add(aa);
+            NotificationService.successBlueNotification("Registration Successful", "Welcome " + aa.getUsername());
+
+        } else {
+            Util.showError("Check your data!");
+
         }
 
     }

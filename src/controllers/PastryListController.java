@@ -6,6 +6,7 @@
 package controllers;
 
 import animation.FadeInRightTransition;
+import animation.FadeOutLeftTransition;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -50,18 +51,6 @@ public class PastryListController implements Initializable {
     private AnchorPane dataUangMasuk;
     @FXML
     private AnchorPane blur;
-    @FXML
-    private JFXComboBox<?> filter;
-    @FXML
-    private JFXTextField Date;
-    @FXML
-    private JFXDatePicker date;
-    @FXML
-    private JFXComboBox<?> bulan;
-    @FXML
-    private JFXTextField tahun;
-    @FXML
-    private JFXTextField search;
     @FXML
     private JFXButton btn_tambah;
     @FXML
@@ -116,4 +105,13 @@ public class PastryListController implements Initializable {
             list =  service.selectAllPastry();
             return list;
          }
+
+   
+    @FXML
+    private void tombolClose(ActionEvent event) {
+        System.out.println("called");
+        blur.setEffect(null);
+        new FadeOutLeftTransition(trans).play();
+    }
+
 }

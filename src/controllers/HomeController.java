@@ -86,6 +86,10 @@ public class HomeController implements Initializable {
     private JFXButton btn_send_mail;
     @FXML
     private JFXButton event;
+    @FXML
+    private JFXButton btn_pastry;
+    @FXML
+    private JFXButton btn_Calender;
 
     /**
      * Initializes the controller class.
@@ -155,9 +159,6 @@ public class HomeController implements Initializable {
     private void homeClicked(ActionEvent event) {
     }
 
-    @FXML
-    private void laporanUangKeluarBulananClicked(ActionEvent event) {
-    }
 
     @FXML
     private void setBackgroundHome1(MouseEvent event) {
@@ -268,6 +269,24 @@ public class HomeController implements Initializable {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    @FXML
+    private void showPastry(ActionEvent event) {
+        try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.PASTRY_LIST));
+            rootPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    private void showCal(ActionEvent event) {
+        
     }
 
 }

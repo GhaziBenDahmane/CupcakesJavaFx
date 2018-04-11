@@ -7,6 +7,7 @@ package controllers;
 
 import animation.FadeInRightTransition;
 import animation.FadeOutLeftTransition;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
@@ -91,6 +92,10 @@ public class EventListController implements Initializable {
     
     
     EventService service = new EventService();
+    @FXML
+    private JFXButton btn_tambah;
+    @FXML
+    private JFXButton btn_update;
 
     /**
      * Initializes the controller class.
@@ -110,8 +115,6 @@ public class EventListController implements Initializable {
 
     }    
     
-    @FXML
- 
      public ObservableList<Event> getEvent()
          {
             EventService service = new EventService();
@@ -146,7 +149,6 @@ public class EventListController implements Initializable {
         loadPane.getChildren().setAll(pane);
     }
     
-    @FXML
    public void changerIntitule(TableColumn.CellEditEvent edditedCell) {
         Event EvSelect = tableEvent.getSelectionModel().getSelectedItem();
         EvSelect.setTitle(edditedCell.getNewValue().toString());

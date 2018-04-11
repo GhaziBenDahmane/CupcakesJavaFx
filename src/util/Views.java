@@ -18,6 +18,7 @@ public class Views {
     public static String EVENT_ADD = "/views/AddEventForm.fxml";
     public static String PASTRY_LIST = "/views/PastryList.fxml";
     public static String PASTRY_ADD = "/views/AddPastry.fxml";
+    public static String GMAPS = "/views/gmaps.fxml";
 
     public static String ADMIN_CLAIMS_LIST = "/views/admin/ClaimList.fxml";
     public static String USERS_LIST = "/views/admin/UserList.fxml";

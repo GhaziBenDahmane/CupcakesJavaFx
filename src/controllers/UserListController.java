@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -103,6 +104,8 @@ public class UserListController implements Initializable {
     public static UserMaster selectedUser;
     @FXML
     private JFXButton export_btn;
+    @FXML
+    private JFXButton export_btn1;
 
     /**
      * Initializes the controller class.
@@ -266,7 +269,7 @@ public class UserListController implements Initializable {
     @FXML
     private void exportClicked(ActionEvent event) {
         FileChooser chooser = new FileChooser();
-        chooser.setTitle("Save to file");
+        chooser.setTitle("Save to XLS");
         File file = chooser.showSaveDialog(new Stage());
         if (!file.getAbsolutePath().endsWith(".xls")) {
             toXLS(file.getAbsolutePath() + ".xls");
@@ -274,6 +277,49 @@ public class UserListController implements Initializable {
             toXLS(file.getAbsolutePath());
         }
 
+    }
+
+    @FXML
+    private void pdfClicked(ActionEvent event) {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Save to PDF");
+        File file = chooser.showSaveDialog(new Stage());
+        if (!file.getAbsolutePath().endsWith(".pdf")) {
+            toPDF(file.getAbsolutePath() + ".pdf");
+        } else {
+            toPDF(file.getAbsolutePath());
+        }
+    }
+
+    private void toPDF(String file) {
+        try {
+            List<String> content = new ArrayList<>();
+            content.add("username");
+            content.add("email");
+            content.add("password");
+
+            content.add("lastLogin");
+            content.add("role");
+            content.add("phone");
+
+            tableView.getItems().stream().forEach(e -> {
+                content.add(e.getUsername());
+                content.add(e.getEmail());
+                content.add(e.getPassword());
+
+                content.add(e.getLastLogin());
+                content.add(e.getRole());
+                content.add(e.getPhone());
+
+            });
+            PDFService.toPDF(file, "List of Users", content, 6);
+
+            NotificationService.successBlueNotification("Export finished!", "Users exported to " + file);
+
+        } catch (Exception e) {
+            Util.showError("Export failed");
+
+        }
     }
 
 }

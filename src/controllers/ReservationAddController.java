@@ -76,8 +76,18 @@ public class ReservationAddController implements Initializable {
             String nbTable_text = nbTable.getText();
             String nbPerson_text = nbPerson.getText();
             String date_text = dateReservation_text.getText();
+
             // String date=dateReservation.getValue().toString();
             java.sql.Date date = java.sql.Date.valueOf(dateReservation.getValue());
+            java.sql.Date dd = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+            System.out.println("after" + dd.after(date));
+            System.out.println("before" + dd.before(date));
+
+            if (date.before(dd)) {
+                nav.showAlert(Alert.AlertType.WARNING, "Error", null, "Wrong Date");
+
+            }
             String waktu_input = dateFormat.format(cal.getTime());
 
             formatter = new SimpleDateFormat("dd-MMM-yy");

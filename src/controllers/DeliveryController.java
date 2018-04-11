@@ -22,7 +22,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import service.DeliveryService;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 /**
  * FXML Controller class
@@ -101,6 +106,14 @@ public class DeliveryController implements Initializable {
             model.create(d);
             if (model.getStatusInert() == true) {
                 nav.showAlert(Alert.AlertType.INFORMATION, "Success", null, "Delivery added..");
+                TrayNotification tray = new TrayNotification();
+                tray.setNotificationType(NotificationType.CUSTOM);
+                tray.setTitle("Save Success");
+                tray.setMessage("Delivery added...");
+                tray.setAnimationType(AnimationType.POPUP);
+                tray.showAndDismiss(Duration.millis(5000));
+                tray.setRectangleFill(Color.valueOf("#4183D7"));
+                clear();
                 clear();
             } else {
                 nav.showAlert(Alert.AlertType.ERROR, "Error", null, "Delivery failed..");

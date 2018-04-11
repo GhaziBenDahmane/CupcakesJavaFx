@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,109 +42,80 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import populator.ContactMaster;
 import service.ContactService;
 import util.DataSource;
 
-
 public class ContactController implements Initializable {
-    
-    ObservableList<String> comboFilter = FXCollections.observableArrayList("Day","Month","Year");
-    ObservableList<String> comboBulan = FXCollections.observableArrayList("January","February"
-            ,"March","April","May","June","July","August","September","October","November","December");
+
+    ObservableList<String> comboFilter = FXCollections.observableArrayList("Day", "Month", "Year");
+    ObservableList<String> comboBulan = FXCollections.observableArrayList("January", "February",
+            "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
     SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
-    
+
     @FXML
-    private TableView<Contact> tableUangKeluar;
-    
+    private TableView<ContactMaster> tableContact;
+
     @FXML
-    private TableColumn<Contact, String> columnID;
-    
+    private TableColumn<ContactMaster, String> columnID;
+
     @FXML
-    private TableColumn<Contact, String> columnFirstName;
-    
+    private TableColumn<ContactMaster, String> columnFirstName;
+
     @FXML
-    private TableColumn<Contact, String> columnLastName;
-    
+    private TableColumn<ContactMaster, String> columnLastName;
+
     @FXML
-    private TableColumn<Contact, String> columnEmail;
-    
+    private TableColumn<ContactMaster, String> columnEmail;
+
     @FXML
-    private TableColumn<Contact, String> columnAdress;
-    
+    private TableColumn<ContactMaster, String> columnAdress;
+
     @FXML
-    private TableColumn<Contact, String> columnPhone;
-        @FXML
-    private TableColumn<Contact, String> columnMessage;
-    
+    private TableColumn<ContactMaster, String> columnPhone;
     @FXML
-    private TableColumn<Contact, String> columnStatus;
-    
+    private TableColumn<ContactMaster, String> columnMessage;
+
     @FXML
-    private TableColumn<Contact, String> columnInputTime;
-    
-    private ObservableList<Contact> data;
-    
+    private TableColumn<ContactMaster, String> columnStatus;
+
     @FXML
-    private AnchorPane utama;
-    
+    private TableColumn<ContactMaster, String> columnInputTime;
+
     @FXML
     private AnchorPane blur;
-    
+
     @FXML
     private AnchorPane loadPane;
-    
-    @FXML
-    private AnchorPane dataUangKeluar;
-    
+
     @FXML
     private StackPane trans;
-    
+
     @FXML
     private Group groups;
-    
+
     @FXML
     private ContextMenu contextMenu;
-    
+
     @FXML
     private CheckBox check;
-    
+
     @FXML
     private ComboBox filter, month;
-    
+
     @FXML
-    private TextField day, year, cari;
-    
+    private TextField day, year, search;
+
     @FXML
     private DatePicker select_day;
-    
-    private String id="";
-    private String  firstName="", lastName="", email="", adress="",message="",phone="";
-    
-    
+
+    private String id = "", firstName = "", lastName = "", email = "", adress = "", phone = "", message = "";
+    public static ContactMaster sselectedItem;
     DataSource kon = new DataSource();
     ContactService model = new ContactService();
     navigation nav = new navigation();
-    time time = new time();
-    
-    private void setFilter(){
-        filter.setValue("day");
-        filter.setItems(comboFilter);
-    }
-    
-    private void  setDay(){
-        day.setText(time.tanggal());
-        select_day.setValue(LocalDate.parse(time.tanggalQuery()));
-    }
-    
-    private void setMonth(){
-        month.setValue(time.tanggalBulan());
-        month.setItems(comboBulan);
-    }
-    
-    private void setYear(){
-        year.setText(time.tanggalTahun());
-    }
-    
+
+
     /*private void setStyleTable(){
         columnID.setStyle("-fx-alignment: CENTER");
         columnFirstName.setStyle("-fx-alignment: CENTER");
@@ -152,11 +124,9 @@ public class ContactController implements Initializable {
         columnEmail.setStyle("-fx-alignment: CENTER");
         columnPhone.setStyle("-fx-alignment: CENTER");
     }*/
-    
-    private void loadTable(){
+    private void loadTable() {
         try {
-           
-      
+            nav.animationFade(tableContact);
             columnID.setCellValueFactory(new PropertyValueFactory<>("id"));
             columnFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
             columnLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
@@ -164,180 +134,132 @@ public class ContactController implements Initializable {
             columnAdress.setCellValueFactory(new PropertyValueFactory<>("adress"));
             columnPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
             columnMessage.setCellValueFactory(new PropertyValueFactory<>("message"));
-            columnInputTime.setCellValueFactory(new PropertyValueFactory<>("inputTime"));
-            tableUangKeluar.setItems(getContacts());
+            //  columnInputTime.setCellValueFactory(new PropertyValueFactory<>("inputTimes"));
+
+            ContactService contact = new ContactService();
+            List<Contact> allContacts;
+            allContacts = contact.selectAll();
+            List<ContactMaster> cm = allContacts
+                    .stream().map(e -> new ContactMaster(e))
+                    .collect(Collectors.toList());
+            tableContact.setItems(FXCollections.observableArrayList(cm));
         } catch (Exception e) {
             System.out.println("error controller");;
         }
     }
-    
-    private void clearParameter(){
-     id="";   firstName=""; lastName=""; email=""; adress="";message="";phone="";
+
+    private void clearParameter() {
+        // id="";   firstName=""; lastName=""; email=""; adress="";message="";phone="";
     }
-    
+
     @FXML
-    private void refreshClicked(ActionEvent event){
+    private void refreshClicked(ActionEvent event) {
         loadTable();
     }
-    
+
     @FXML
-    private void filterClicked(ActionEvent event){
-        if(filter.getSelectionModel().getSelectedItem().toString().equals("day")){
-            month.setVisible(false);
-            day.setVisible(true);
-            select_day.setVisible(true);
-            year.setVisible(false);
-             setDay();
-        }
-        else if (filter.getSelectionModel().getSelectedItem().toString().equals("month")){
-            month.setVisible(true);
-            day.setVisible(false);
-            select_day.setVisible(false);
-            year.setVisible(true);
-            setMonth();
-            setYear();
-        }
-        else{
-            month.setVisible(false);
-            day.setVisible(false);
-            select_day.setVisible(false);
-            year.setVisible(false);
-        }
-    }
-    
-    @FXML
-    private void dateClicked(ActionEvent event){
-        String dateText = sdf.format(Date.valueOf(select_day.getValue()));
-        day.setText(dateText);
-    }
-    
-    @FXML
-    private void checkClicked(ActionEvent event){
-        if(check.isSelected()==true){
+    private void checkClicked(ActionEvent event) {
+        if (check.isSelected() == true) {
             columnInputTime.setVisible(true);
-        }
-        else{
+        } else {
             columnInputTime.setVisible(false);
         }
     }
-     @FXML
-    private void ambilID(MouseEvent event) throws IOException{
-        if(event.getClickCount()==1){
-           // id = tableUangKeluar.getSelectionModel().getSelectedItem().getId();
-            firstName = tableUangKeluar.getSelectionModel().getSelectedItem().getFirstName();
-            lastName = tableUangKeluar.getSelectionModel().getSelectedItem().getLastName();
-            email = tableUangKeluar.getSelectionModel().getSelectedItem().getEmail();
-            adress = tableUangKeluar.getSelectionModel().getSelectedItem().getAdress();
-          //  phone = tableUangKeluar.getSelectionModel().getSelectedItem().getPhone();
-            message = tableUangKeluar.getSelectionModel().getSelectedItem().getMessage();
-        }
-        else if(event.getClickCount()==2){
-          //   id = tableUangKeluar.getSelectionModel().getSelectedItem().getId();
-            firstName = tableUangKeluar.getSelectionModel().getSelectedItem().getFirstName();
-            lastName = tableUangKeluar.getSelectionModel().getSelectedItem().getLastName();
-            email = tableUangKeluar.getSelectionModel().getSelectedItem().getEmail();
-            adress = tableUangKeluar.getSelectionModel().getSelectedItem().getAdress();
-          //  phone = tableUangKeluar.getSelectionModel().getSelectedItem().getPhone();
-            message = tableUangKeluar.getSelectionModel().getSelectedItem().getMessage();
+
+    @FXML
+    private void ambilID(MouseEvent event) throws IOException {
+        if (event.getClickCount() == 1) {
+            id = Integer.toString(tableContact.getSelectionModel().getSelectedItem().getContact().getId());
+            firstName = tableContact.getSelectionModel().getSelectedItem().getContact().getFirstName();
+            lastName = tableContact.getSelectionModel().getSelectedItem().getContact().getLastName();
+            email = tableContact.getSelectionModel().getSelectedItem().getContact().getEmail();
+            adress = tableContact.getSelectionModel().getSelectedItem().getContact().getAdress();
+            phone = Integer.toString(tableContact.getSelectionModel().getSelectedItem().getContact().getPhone());
+            message = tableContact.getSelectionModel().getSelectedItem().getContact().getMessage();
+        } else if (event.getClickCount() == 2) {
+            id = Integer.toString(tableContact.getSelectionModel().getSelectedItem().getContact().getId());
+            firstName = tableContact.getSelectionModel().getSelectedItem().getContact().getFirstName();
+            lastName = tableContact.getSelectionModel().getSelectedItem().getContact().getLastName();
+            email = tableContact.getSelectionModel().getSelectedItem().getContact().getEmail();
+            adress = tableContact.getSelectionModel().getSelectedItem().getContact().getAdress();
+            phone = Integer.toString(tableContact.getSelectionModel().getSelectedItem().getContact().getPhone());
+            message = tableContact.getSelectionModel().getSelectedItem().getContact().getMessage();
             openUbah();
-        }
-        else if (event.getButton()==MouseButton.SECONDARY){
-            contextMenu.show(tableUangKeluar, event.getScreenX(), event.getScreenY());
+        } else if (event.getButton() == MouseButton.SECONDARY) {
+            contextMenu.show(tableContact, event.getScreenX(), event.getScreenY());
         }
     }
-    
-        public ObservableList<Contact> getContacts()
-         {
-             ContactService contact = new ContactService();
-            ObservableList<Contact> p = FXCollections.observableArrayList();
-            List<Contact> allContacts;
-             allContacts=contact.selectAll();
-             allContacts.stream().forEach((allContact) -> {
-                p.add(new Contact(allContact.getId(),allContact.getPhone(),allContact.getInputTime(),allContact.getFirstName(),allContact.getLastName(),
-                        allContact.getMessage(),allContact.getAdress(),allContact.getEmail()));
-        });
-            return p;
-            
-         }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        setFilter();
-        setDay();
-        setMonth();
-        setYear();
-       // setStyleTable();
+        // setStyleTable();
         loadTable();
-    }    
-    
+    }
+
     @FXML
-    private void tombolClose(ActionEvent event){
+    private void tombolClose(ActionEvent event) {
         loadTable();
         blur.setEffect(null);
         new FadeOutLeftTransition(trans).play();
         clearParameter();
     }
 
-
     @FXML
-    private void tambahClicked() throws IOException{
-       blur.setEffect(new GaussianBlur(10));
+    private void addClicked() throws IOException {
+        blur.setEffect(new GaussianBlur(10));
         new FadeInRightTransition(trans).play();
 //       AnchorPane pane = FXMLLoader.load(getClass().getResource(nav.getContactAdd()));
         AnchorPane pane = FXMLLoader.load(getClass().getResource(nav.getContactAdd()));
         loadPane.getChildren().setAll(pane);
-        
-    }
-    
-    @FXML
-    private void ubahClicked(ActionEvent event) throws IOException {
-      if(id.equals("")){
-            nav.showAlert(Alert.AlertType.WARNING, "WARNING", null, "Please select the data..");
-        }
-      else {
-            openUbah();
-       }    
-    }
-    
-    @FXML
-    private void hapusClicked(ActionEvent event) throws IOException{
-        if(id.equals("")){
-            nav.showAlert(Alert.AlertType.WARNING, "WARNING", null, "Please select the data..");
-        }
-        else{
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Delete Contact");
-        alert.setHeaderText("First Name\t: "+firstName
-                +"lastName:"+lastName
-                +"Email:"+email
-                +"Adress: "+adress
-                +"Email: "+email);
-        alert.setContentText("Are you sure you want to delete this data?");
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
-            model.delete(Integer.parseInt(id));
-            if(model.getStatusDelete()==true){
-                nav.showAlert(Alert.AlertType.INFORMATION, "Success", null, "Data successfully deleted..");
-                loadTable();
-                clearParameter();
-            }
-            else{
-                nav.showAlert(Alert.AlertType.ERROR, "Error", null, "Data failed to delete..");
-            }
-        } 
+    }
+
+    @FXML
+    private void updateClicked(ActionEvent event) throws IOException {
+        if (adress.equals("")) {
+            nav.showAlert(Alert.AlertType.WARNING, "WARNING", null, "Please select the data..");
+        } else {
+            openUbah();
         }
     }
-    
-    private void openUbah() throws IOException{
+
+    @FXML
+    private void deleteClicked(ActionEvent event) throws IOException {
+        if (adress.equals("")) {
+            nav.showAlert(Alert.AlertType.WARNING, "WARNING", null, "Please select the data..");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Contact");
+            alert.setHeaderText("First Name\t: " + firstName
+                    + "lastName:" + lastName
+                    + "Email:" + email
+                    + "Adress: " + adress
+                    + "Email: " + email);
+            alert.setContentText("Are you sure you want to delete this data?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                model.delete(Integer.parseInt(id));
+                if (model.getStatusDelete() == true) {
+                    nav.showAlert(Alert.AlertType.INFORMATION, "Success", null, "Data successfully deleted..");
+                    loadTable();
+                    clearParameter();
+                } else {
+                    nav.showAlert(Alert.AlertType.ERROR, "Error", null, "Data failed to delete..");
+                }
+            }
+        }
+    }
+
+    private void openUbah() throws IOException {
         FXMLLoader Loader = new FXMLLoader();
         Loader.setLocation(getClass().getResource(nav.getContactUpdate()));
         blur.setEffect(new GaussianBlur(10));
         new FadeInRightTransition(trans).play();
         AnchorPane pane = Loader.load();
         ContactUpdateController ContactUpdate = Loader.getController();
-        ContactUpdate.setData(id,firstName, lastName,email, adress,phone,message );
+        ContactUpdate.setData(id, firstName, lastName, email, adress, phone, message);
         loadPane.getChildren().setAll(pane);
     }
-    
+
 }

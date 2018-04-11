@@ -13,6 +13,7 @@ import java.sql.Date;
  */
 public class Reservation {
 
+    
     private int id, nbTables, nbPersonnes;
     private Date dateReservation;
 
@@ -28,6 +29,8 @@ public class Reservation {
         this.nbPersonnes = nbPersonnes;
         this.dateReservation = dateReservation;
     }
+    
+    
 
     public int getId() {
         return id;
@@ -60,6 +63,8 @@ public class Reservation {
     public void setDateReservation(Date dateReservation) {
         this.dateReservation = dateReservation;
     }
+
+
 
     @Override
     public boolean equals(Object obj) {

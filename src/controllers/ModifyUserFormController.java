@@ -74,41 +74,49 @@ public class ModifyUserFormController implements Initializable {
 
     @FXML
     private void inputClicked(ActionEvent event) {
-        selectedUser = UserListController.selectedUser.getUser();
-        ArrayList<String> uroles = new ArrayList<>();
-        String uusername = username.getText();
-        String uemail = email.getText();
-        LocalDate value = lastLogin.getValue();
-        if (value != null) {
-            Date lastLoginDate = Date.from(value.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-            selectedUser.setLastLogin(lastLoginDate);
+        if (!username.getText().isEmpty()
+                && !phone.getText().isEmpty()
+                && Util.validateEmail(email.getText())) {
 
-        }
-        if (!role.getSelectionModel().isEmpty()) {
-            if (role.getValue().getText().equals("Admin")) {
-                uroles.add("ROLE_SIMPLE_USER");
-                uroles.add("ADMIN");
-                uroles.add("ROLE_SUPER_ADMIN");
-            } else {
-                uroles.add("ROLE_SIMPLE_USER");
+            selectedUser = UserListController.selectedUser.getUser();
+            ArrayList<String> uroles = new ArrayList<>();
+            String uusername = username.getText();
+            String uemail = email.getText();
+            LocalDate value = lastLogin.getValue();
+            if (value != null) {
+                Date lastLoginDate = Date.from(value.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+                selectedUser.setLastLogin(lastLoginDate);
 
             }
-            selectedUser.setRoles(uroles);
+            if (!role.getSelectionModel().isEmpty()) {
+                if (role.getValue().getText().equals("Admin")) {
+                    uroles.add("ROLE_SIMPLE_USER");
+                    uroles.add("ADMIN");
+                    uroles.add("ROLE_SUPER_ADMIN");
+                } else {
+                    uroles.add("ROLE_SIMPLE_USER");
+
+                }
+                selectedUser.setRoles(uroles);
+
+            }
+            String uphone = phone.getText();
+            selectedUser.setUsername(uusername);
+            selectedUser.setEmail(uemail);
+            selectedUser.setPhone(uphone);
+            if (!password.getText().isEmpty()) {
+                String upassword = password.getText();
+                String hashedpw = Util.hashpw(upassword);
+                selectedUser.setPassword(hashedpw);
+
+            }
+            us.update(selectedUser);
+            Util.showInfo("Modification done");
+            NotificationService.successBlueNotification("User modified!", "User modified!");
+        } else {
+            Util.showError("Check your data!");
 
         }
-        String uphone = phone.getText();
-        selectedUser.setUsername(uusername);
-        selectedUser.setEmail(uemail);
-        selectedUser.setPhone(uphone);
-        if (!password.getText().isEmpty()) {
-            String upassword = password.getText();
-            String hashedpw = Util.hashpw(upassword);
-            selectedUser.setPassword(hashedpw);
-
-        }
-        us.update(selectedUser);
-        Util.showInfo("Modification done");
-        NotificationService.successBlueNotification("User modified!", "User modified!");
 
     }
 

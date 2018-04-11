@@ -56,7 +56,8 @@ public class RegisterFormController implements Initializable {
         if (password1.getText().equals(password.getText())
                 && !username.getText().isEmpty()
                 && !password.getText().isEmpty()
-                && !phone.getText().isEmpty()) {
+                && !phone.getText().isEmpty()
+                && Util.validateEmail(email.getText())) {
             ArrayList<String> uroles = new ArrayList<>();
             String uusername = username.getText();
             String upassword = password.getText();

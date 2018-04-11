@@ -22,7 +22,7 @@ public class CupCakesJavaFx extends Application {
         Views views = new Views();
         try {
             Parent root = FXMLLoader.load(getClass()
-                    .getResource(Views.EVENT_LIST));
+                    .getResource(Views.LOGIN));
             stage.setTitle("login");
             Scene scene = new Scene(root);
             scene.setFill(javafx.scene.paint.Color.TRANSPARENT);

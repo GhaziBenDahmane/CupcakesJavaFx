@@ -40,17 +40,17 @@
                               <Image url="@../img/icons8_Source_Code_104px_1.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="78.0" layoutY="2.0" text="Your" textFill="WHITE">
+                        <Label layoutX="78.0" layoutY="2.0" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Black" size="36.0" />
                            </font>
                         </Label>
-                        <Label layoutX="162.0" layoutY="2.0" text="Company" textFill="WHITE">
+                        <Label layoutX="80.0" layoutY="2.0" text="Cupcakes" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Semilight" size="36.0" />
                            </font>
                         </Label>
-                        <Label layoutX="78.0" layoutY="52.0" text="Pencatatan uang masuk dan keluar" textFill="WHITE">
+                        <Label layoutX="78.0" layoutY="52.0" text="THE BEST CUPCAKES IN TUNISIA" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Semilight" size="14.0" />
                            </font>
@@ -71,16 +71,6 @@
                            </image>
                         </ImageView>
                         <Separator layoutX="78.0" layoutY="45.0" prefHeight="4.0" prefWidth="210.0" />
-                        <Label fx:id="tanggal" alignment="CENTER_RIGHT" layoutX="760.0" layoutY="46.0" prefHeight="29.0" prefWidth="195.0" text="Tanggal" textFill="WHITE">
-                           <font>
-                              <Font name="Segoe UI" size="20.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="jam" alignment="CENTER_RIGHT" layoutX="760.0" layoutY="76.0" prefHeight="29.0" prefWidth="195.0" text="Jam" textFill="WHITE">
-                           <font>
-                              <Font name="Segoe UI" size="20.0" />
-                           </font>
-                        </Label>
                         <Label fx:id="usernameUser" layoutX="85.0" layoutY="98.0" text="Username User" textFill="WHITE" visible="false">
                            <font>
                               <Font name="Segoe UI" size="12.0" />

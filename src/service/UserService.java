@@ -113,7 +113,7 @@ public class UserService implements CrudService<User> {
 
         String request = "INSERT INTO `fos_user` "
                 + "(`username`, `username_canonical`, `email`, `email_canonical`, "
-                + "`enabled`, `password`,`roles`, `phone`, `picture`, `points`,`last_login`) "
+                + "`enabled`, `password`,`roles`, `phone`, `points`,`last_login`) "
                 + "VALUES (?, ?, ?, ?, '1', ?,?, ?, ?,0,?);";
         try {
             ste = connection.prepareStatement(request);
@@ -124,8 +124,7 @@ public class UserService implements CrudService<User> {
             ste.setString(5, u.getPassword());
             ste.setString(6, Util.arrayToString(u.getRoles()));
             ste.setString(7, u.getPhone());
-            ste.setString(8, u.getPhotoprofil());
-            ste.setDate(9, new java.sql.Date(u.getLastLogin().getTime()));
+            ste.setDate(8, new java.sql.Date(u.getLastLogin().getTime()));
 
             ste.executeUpdate();
         } catch (Exception e) {
@@ -137,7 +136,7 @@ public class UserService implements CrudService<User> {
     public void update(User u) {
         System.out.println(u);
         String req = "UPDATE `fos_user` SET `username`=?, `username_canonical`=?, `email`=?, `email_canonical`=?, "
-                + "`password`=?,`roles`=?, `phone`=?, `picture`=?, `points`=0,`last_login`=?"
+                + "`password`=?,`roles`=?, `phone`=?, `points`=0,`last_login`=?"
                 + "WHERE id=?";
         try {
             PreparedStatement ste = connection.prepareStatement(req);
@@ -148,9 +147,8 @@ public class UserService implements CrudService<User> {
             ste.setString(5, u.getPassword());
             ste.setString(6, Util.arrayToString(u.getRoles()));
             ste.setString(7, u.getPhone());
-            ste.setString(8, u.getPhotoprofil());
-            ste.setDate(9, new java.sql.Date(u.getLastLogin().getTime()));
-            ste.setInt(10, u.getId());
+            ste.setDate(8, new java.sql.Date(u.getLastLogin().getTime()));
+            ste.setInt(9, u.getId());
             ste.executeUpdate();
 
         } catch (Exception e) {
@@ -195,8 +193,7 @@ public class UserService implements CrudService<User> {
                     rs.getDate("password_requested_at"),
                     Util.stringToArray(rs.getString("roles")),
                     rs.getInt("points"),
-                    rs.getString("phone"),
-                    rs.getString("picture"));
+                    rs.getString("phone"));
             return u;
 
         } catch (SQLException ex) {

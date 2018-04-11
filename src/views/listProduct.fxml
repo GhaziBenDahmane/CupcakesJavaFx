@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+
+<AnchorPane id="AnchorPane" fx:id="anchopane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ListProductController">
+   <children>
+      <StackPane fx:id="pane" prefHeight="150.0" prefWidth="200.0"  >
+         <children>
+            <ImageView fx:id="imagefx" fitHeight="226.0" fitWidth="213.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+      <Label fx:id="title" layoutX="308.0" layoutY="54.0" prefHeight="26.0" prefWidth="129.0" text="Title" />
+      <Label fx:id="category" layoutX="304.0" layoutY="107.0" prefHeight="17.0" prefWidth="115.0" text="Category" />
+      <Label fx:id="description" layoutX="304.0" layoutY="135.0" prefHeight="80.0" prefWidth="129.0" text="Description" />
+      <Label fx:id="price" layoutX="61.0" layoutY="254.0" prefHeight="17.0" prefWidth="46.0" text="Price" />
+      <Label fx:id="promotion" layoutX="78.0" layoutY="287.0" text="Promotion" />
+      <JFXButton fx:id="cart" layoutX="371.0" layoutY="317.0"   text="Add to Cart" textFill="#fcf9f9" style="-fx-background-color: #4183d7;"/>
+      <Label fx:id="p" layoutX="14.0" layoutY="254.0" style="-fx-background-color: #4183d7;" text="Price :" />
+      <Label fx:id="promo" layoutX="14.0" layoutY="287.0" style="-fx-background-color: #4183d7;" text="Promotion:" />
+      <Label fx:id="t" layoutX="242.0" layoutY="59.0" style="-fx-background-color: #4183d7;" text="Title:" />
+      <Label fx:id="c" layoutX="241.0" layoutY="107.0" style="-fx-background-color: #4183d7;" text="Category:" />
+      <Label fx:id="d" layoutX="241.0" layoutY="167.0" style="-fx-background-color: #4183d7;" text="Description:" />
+   </children>
+   <children>
+      <StackPane fx:id="trans" opacity="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Group fx:id="groups">
+               <children>
+                  <AnchorPane fx:id="loadPane" prefHeight="366.0" prefWidth="322.0" />
+                  <JFXButton focusTraversable="false" layoutX="291.0" prefHeight="25.0" prefWidth="24.0" text="X">
+                     <font>
+                        <Font name="Segoe UI Black" size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </Group>
+         </children>
+      </StackPane>
+      <AnchorPane fx:id="dataUangKeluar" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane fx:id="blur" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="764.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <JFXButton fx:id="add" focusTraversable="false" onAction="#deleteOnClick" style="-fx-background-color: #4183d7;" text="Delete" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI" size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="update" focusTraversable="false" layoutX="10.0" layoutY="17.0" onAction="#refreshOnClick" style="-fx-background-color: #4183d7;" text="Refresh" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="purchase" focusTraversable="false" layoutX="52.0" layoutY="17.0" onAction="#purchaseOnClick" style="-fx-background-color: #4183d7;" text="Purchase" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="show" focusTraversable="false" layoutX="10.0" layoutY="17.0" onAction="#showOnClick" style="-fx-background-color: #4183d7;" text="Show products" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <Label style="-fx-background-color: #4183d7;" text="Total Price" textFill="#fcf9f9">
+                           <HBox.margin>
+                              <Insets left="200.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="priceproducts" text="price products">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <TableView fx:id="carts" fixedCellSize="0.0" focusTraversable="false" layoutY="11.0" prefHeight="406.0" prefWidth="590.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="11.0">
+                     <contextMenu>
+                        <ContextMenu fx:id="contextMenu">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Delete" />
+                           </items>
+                        </ContextMenu>
+                     </contextMenu>
+                     <columns>
+                        <TableColumn fx:id="idcart" editable="false" resizable="false" text="ID" />
+                        <TableColumn fx:id="nameproduct" editable="false" prefWidth="173.0" resizable="false" text="Name Product" />
+                        <TableColumn fx:id="priceproduct" editable="false" minWidth="0.0" prefWidth="159.0" resizable="false" text="Price" />
+                        <TableColumn fx:id="promot" editable="false" prefWidth="135.0" resizable="false" text="Promotion" />
+                        <TableColumn fx:id="quantity" editable="true" minWidth="5.0" prefWidth="124.0" resizable="false" text="Quantity" />
+                        <TableColumn fx:id="total" editable="false" prefWidth="145.0" resizable="false" text="Total Price" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -10,7 +10,6 @@ import animation.FadeOutLeftTransition;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import entity.Claim;
 import java.io.IOException;
 import java.net.URL;
@@ -69,9 +68,9 @@ public class UserClaimListController implements Initializable {
     @FXML
     private TextArea answer;
     @FXML
-    private FontAwesomeIconView next;
+    private Label next;
     @FXML
-    private FontAwesomeIconView previous;
+    private Label previous;
     private ClaimService cs = new ClaimService();
     List<Claim> cm;
     int currentIndex = 0;

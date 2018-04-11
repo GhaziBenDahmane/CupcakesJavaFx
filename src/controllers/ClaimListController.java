@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -97,6 +98,8 @@ public class ClaimListController implements Initializable {
     private JFXButton answer_btn;
     @FXML
     private JFXButton export_btn;
+    @FXML
+    private JFXButton export_btn1;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -256,5 +259,46 @@ public class ClaimListController implements Initializable {
             toXLS(file.getAbsolutePath());
         }
 
+    }
+
+    @FXML
+    private void pdfClicked(ActionEvent event) {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Save to PDF");
+        File file = chooser.showSaveDialog(new Stage());
+        if (!file.getAbsolutePath().endsWith(".pdf")) {
+            toPDF(file.getAbsolutePath() + ".pdf");
+        } else {
+            toPDF(file.getAbsolutePath());
+        }
+    }
+
+    private void toPDF(String file) {
+        try {
+            List<String> content = new ArrayList<>();
+            content.add("clientName");
+            content.add("description");
+            content.add("postedOn");
+
+            content.add("answer");
+            content.add("answeredBy");
+
+            tableView.getItems().stream().forEach(e -> {
+                content.add(e.getClientName());
+                content.add(e.getDescription());
+                content.add(e.getPostedOn());
+
+                content.add(e.getAnswer());
+                content.add(e.getAnsweredBy());
+
+            });
+            PDFService.toPDF(file, "List of Claims", content, 5);
+
+            NotificationService.successBlueNotification("Export finished!", "Claims exported to " + file);
+
+        } catch (Exception e) {
+            Util.showError("Export failed");
+
+        }
     }
 }

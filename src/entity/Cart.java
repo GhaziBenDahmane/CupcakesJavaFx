@@ -18,6 +18,12 @@ public class Cart {
         this.id_cart = id_cart;
         this.products = products;
     }
+    
+    public Cart(Product products) {
+        
+        this.products = products;
+    }
+
 
     public Integer getId_cart() {
         return id_cart;

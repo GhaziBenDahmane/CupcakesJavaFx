@@ -2,9 +2,11 @@ package cupcakesjavafx;
 
 import entity.User;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import util.Views;
 
@@ -15,6 +17,7 @@ import util.Views;
 public class CupCakesJavaFx extends Application {
 
     public static User loggedUser;
+    
 
     @Override
     public void start(Stage stage) {
@@ -22,7 +25,7 @@ public class CupCakesJavaFx extends Application {
         Views views = new Views();
         try {
             Parent root = FXMLLoader.load(getClass()
-                    .getResource(Views.LOGIN));
+                    .getResource("/views/product.fxml"));
             stage.setTitle("login");
             Scene scene = new Scene(root);
             scene.setFill(javafx.scene.paint.Color.TRANSPARENT);

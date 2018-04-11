@@ -14,6 +14,8 @@ public class Views {
     public static String LOGIN = "/views/Login.fxml";
     public static String HOME = "/views/Home.fxml";
     public static String REGISTER = "/views/RegisterForm.fxml";
+    public static String EVENT_LIST = "/views/EventList.fxml";
+    public static String EVENT_ADD = "/views/AddEventForm.fxml";
 
     public static String ADMIN_CLAIMS_LIST = "/views/admin/ClaimList.fxml";
     public static String USERS_LIST = "/views/admin/UserList.fxml";

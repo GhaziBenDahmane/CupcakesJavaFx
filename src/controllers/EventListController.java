@@ -6,6 +6,7 @@
 package controllers;
 
 import animation.FadeInRightTransition;
+import animation.FadeOutLeftTransition;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
@@ -13,6 +14,10 @@ import entity.Event;
 import function.navigation;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +26,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -29,6 +36,7 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import service.EventService;
+import util.Views;
 
 /**
  * FXML Controller class
@@ -64,86 +72,93 @@ public class EventListController implements Initializable {
     @FXML
     private ContextMenu contextMenu;
     @FXML
-    private TableColumn<Event, String> title;
+    private TableColumn<Event,String> id;
     @FXML
-    private TableColumn<Event, String> nbPerson;
-    private TableColumn<Event, String> endDate;
+    private TableColumn<Event,String> title;
     @FXML
-    private TableColumn<Event, String> nbTable;
+    private TableColumn<Event,String> nbPerson;
+    private TableColumn<Event,String> endDate;
     @FXML
-    private TableColumn<Event, String> band;
+    private TableColumn<Event,String> nbTable;
     @FXML
-    private TableColumn<Event, String> status;
-    private TableColumn<Event, String> cost;
+    private TableColumn<Event,String> band;
     @FXML
-    private TableColumn<Event, String> startDate;
+    private TableColumn<Event,String> status;
+    private TableColumn<Event,String> cost;
+    @FXML
+    private TableColumn<Event,String> startDate;
 
-    navigation nav = new navigation();
+    
+    
+    EventService service = new EventService();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        title.setCellValueFactory(new PropertyValueFactory<>("title"));
-        nbPerson.setCellValueFactory(new PropertyValueFactory<>("nbPerson"));
-        nbTable.setCellValueFactory(new PropertyValueFactory<>("nbTable"));
-        band.setCellValueFactory(new PropertyValueFactory<>("band"));
-        status.setCellValueFactory(new PropertyValueFactory<>("status"));
-        startDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        tableEvent.setItems(getEvent());
+           id.setCellValueFactory(new PropertyValueFactory<>("id"));
+           title.setCellValueFactory(new PropertyValueFactory<>("title"));
+           nbPerson.setCellValueFactory(new PropertyValueFactory<>("nbPerson"));
+           nbTable.setCellValueFactory(new PropertyValueFactory<>("nbTable"));
+           band.setCellValueFactory(new PropertyValueFactory<>("band"));
+           status.setCellValueFactory(new PropertyValueFactory<>("status"));
+           startDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+           tableEvent.setItems(getEvent());    
+           
+           
 
-    }
-
+    }    
+    
     @FXML
+ 
+     public ObservableList<Event> getEvent()
+         {
+            EventService service = new EventService();
+            ObservableList<Event> list;
+            list = FXCollections.observableArrayList();
+            list =  service.selectAllEventFrom();
+            return list;
+         }
 
-    public ObservableList<Event> getEvent() {
-        EventService service = new EventService();
-        ObservableList<Event> list;
-        list = FXCollections.observableArrayList();
-        list = service.selectAllEventFrom();
-        return list;
-    }
+        
 
-    @FXML
-    private void deleteClicked(ActionEvent event) throws IOException {
-
-        openUbah();
-
-    }
-
-    private void openUbah() throws IOException {
-        FXMLLoader Loader = new FXMLLoader();
-      //  Loader.setLocation(getClass().getResource(nav.getUbahUangMasuk()));
+     @FXML
+    private void addClicked() throws IOException{
         blur.setEffect(new GaussianBlur(10));
         new FadeInRightTransition(trans).play();
-        AnchorPane pane = Loader.load();
-        EventListController eventList = Loader.getController();
-        eventList.setData(title, nbPerson, endDate, nbTable, band, cost, startDate);
+        AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.EVENT_ADD));
         loadPane.getChildren().setAll(pane);
     }
 
-    public void setData(String title, String nbPerson, String endDate, String nbTable, String band, String cost, String startDate) {
-
-        this.title.setText(title);
-        this.nbPerson.setText(nbPerson);
-        this.endDate.setText(endDate);
-        this.nbTable.setText(nbTable);
-        this.band.setText(band);
-        this.cost.setText(cost);
-        this.startDate.setText(startDate);
-
+  
+       @FXML
+    private void tombolClose(ActionEvent event){
+        tableEvent.setItems(getEvent());    
+        blur.setEffect(null);
+        new FadeOutLeftTransition(trans).play();
     }
-
-    @FXML
-    private void tambahClicked() throws IOException {
-        blur.setEffect(new GaussianBlur(10));
+   @FXML
+    private void updateClicked(ActionEvent event) throws IOException {
+           blur.setEffect(new GaussianBlur(10));
         new FadeInRightTransition(trans).play();
-        AnchorPane pane = FXMLLoader.load(getClass().getResource(nav.getAddEventForm()));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.EVENT_ADD));
         loadPane.getChildren().setAll(pane);
     }
+    
+    @FXML
+   public void changerIntitule(TableColumn.CellEditEvent edditedCell) {
+        Event EvSelect = tableEvent.getSelectionModel().getSelectedItem();
+        EvSelect.setTitle(edditedCell.getNewValue().toString());
+        service.update(EvSelect);
+    }
+   
+    @FXML
+    private void deleteClicked(ActionEvent event) {
+     Event evSelect = tableEvent.getSelectionModel().getSelectedItem();
+     service.delete(evSelect.getId());
+     tableEvent.getItems().remove(evSelect);
 
-    private void setData(TableColumn<Event, String> title, TableColumn<Event, String> nbPerson, TableColumn<Event, String> endDate, TableColumn<Event, String> nbTable, TableColumn<Event, String> band, TableColumn<Event, String> cost, TableColumn<Event, String> startDate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 }

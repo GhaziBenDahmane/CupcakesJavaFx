@@ -14,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -59,15 +61,36 @@ public class EventService implements IEventService {
     @Override
     public void update(Event event) {
         try {
-            String req = "update event set (title, description) values (?,?) where id = ?";
+            
+
+            String req = "UPDATE `event` SET `title` = ? WHERE `event`.`id` = ?;";
             PreparedStatement ps = connection.prepareStatement(req);
             ps.setString(1, event.getTitle());
-
+            ps.setInt(2, event.getId());
+            ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
+    
+    public void updateIntervalle(LocalDateTime st , LocalDateTime end , int id) {
+        try {
+            
 
+            String req = "UPDATE `event` SET `startDatetime` = '"+st+"', "
+                    + "`endDatetime` = '"+end+"' WHERE `event`.`id` = '"+id+"';";
+            //String req = "update event set (title) values (?) where id = ?";
+            PreparedStatement ps = connection.prepareStatement(req);
+            
+            ps.executeUpdate();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        
+    }
+    
     @Override
     public void delete(int id) {
         try {
@@ -88,7 +111,7 @@ public class EventService implements IEventService {
             ResultSet result = statement.executeQuery(req);
             while (result.next())
             {
-                Event event = new Event(
+                Event event = new Event(result.getInt("id"),
                         result.getString("title"), result.getInt("nb_person"),result.getDate("startDatetime"),
                         result.getDate("endDatetime"), result.getInt("nb_table"), result.getInt("band"),
                         result.getString("status"), result.getDouble("cost"));

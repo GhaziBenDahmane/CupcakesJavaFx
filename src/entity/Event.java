@@ -8,12 +8,15 @@ package entity;
 import java.sql.Date;
 import java.util.Objects;
 
+
 /**
  *
  * @author Haroun
  */
 public class Event {
 
+    
+    
     private int id;
     private String title;
     private int nbPerson;
@@ -26,7 +29,8 @@ public class Event {
 
     public Event() {
     }
-
+     
+   
     public Event(String title, int nbPerson, Date startDate, Date endDate, int nbTable, int band, String status, Double cost) {
         this.title = title;
         this.nbPerson = nbPerson;
@@ -38,13 +42,22 @@ public class Event {
         this.cost = cost;
     }
 
-    public Event(int id, String title, int nbPerson, Date startDate, Date endDate, int nbTable) {
+    public Event(int id, String title, int nbPerson, Date startDate, Date endDate, int nbTable, int band, String status, double cost) {
         this.id = id;
         this.title = title;
         this.nbPerson = nbPerson;
         this.startDate = startDate;
         this.endDate = endDate;
         this.nbTable = nbTable;
+        this.band = band;
+        this.status = status;
+        this.cost = cost;
+    }
+
+    public Event(int id, Date startDate, Date endDate) {
+        this.id = id;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public Event(int id, String title, int nbPerson) {
@@ -53,9 +66,9 @@ public class Event {
         this.nbPerson = nbPerson;
     }
 
-    public Event(String title, int nbPerson) {
+    public Event(String title, int id) {
         this.title = title;
-        this.nbPerson = nbPerson;
+        this.id = id;
     }
 
     public Event(String setTitle, int parseInt, java.util.Date parse) {
@@ -138,6 +151,9 @@ public class Event {
     public void setCost(Double cost) {
         this.cost = cost;
     }
+    
+  
+    
 
     @Override
     public int hashCode() {

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="584.0" prefWidth="728.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ActualityController">
+      <children>
+      <StackPane fx:id="trans" opacity="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Group fx:id="groups">
+               <children>
+                  <AnchorPane fx:id="loadPane" prefHeight="366.0" prefWidth="322.0" />
+                  <JFXButton focusTraversable="false" layoutX="310.0" prefHeight="25.0" prefWidth="24.0" text="X">
+                     <font>
+                        <Font name="Segoe UI Black" size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </Group>
+         </children>
+      </StackPane>
+      <AnchorPane fx:id="dataUangMasuk" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane fx:id="blur" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane prefHeight="46.0" prefWidth="764.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
+                     <children>
+                        <JFXComboBox fx:id="bulan" focusTraversable="false" labelFloat="true" layoutX="401.0" layoutY="13.0" prefHeight="25.0" prefWidth="145.0" promptText="Bulan" visible="false" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="13.0" />
+                        <JFXTextField fx:id="tahun" focusTraversable="false" labelFloat="true" layoutX="314.0" layoutY="13.0" prefHeight="25.0" prefWidth="38.0" promptText="Tahun" visible="false" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="314.0" AnchorPane.topAnchor="13.0" />
+                        <Separator layoutY="4.0" orientation="VERTICAL" prefHeight="40.0" prefWidth="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <HBox alignment="CENTER_LEFT" layoutX="5.0" layoutY="544.0" prefHeight="40.0" prefWidth="718.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                  <TableView fx:id="tableActuality" fixedCellSize="0.0" focusTraversable="false" layoutX="32.0" layoutY="59.0" prefHeight="301.0" prefWidth="591.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="59.0">
+                    <columns>
+                      <TableColumn fx:id="id" editable="false" prefWidth="45.0" resizable="true" sortable="true" text="ID" />
+                      <TableColumn fx:id="title" onEditCommit="#changerTitle" prefWidth="133.0" text="Title" />
+                      <TableColumn fx:id="content" onEditCommit="#changerContent" prefWidth="199.0" text="Content" />
+                      <TableColumn fx:id="photo" onEditCommit="#changerPhoto" prefWidth="134.0" text="Picture" />
+                      <TableColumn fx:id="dateA" editable="true" prefWidth="136.0" text="Date" />
+                    </columns>
+                     <contextMenu>
+                        <ContextMenu fx:id="contextMenu">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#deleteClicked" text="Delete" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

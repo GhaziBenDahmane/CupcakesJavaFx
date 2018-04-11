@@ -13,6 +13,11 @@ import java.sql.Date;
  */
 public class Promotion {
 
+    public Promotion(Date starting_date, Date ending_date) {
+        this.starting_date = starting_date;
+        this.ending_date = ending_date;
+    }
+
     private Integer id_promotion;
     private Double Discount;
     private Date starting_date;
@@ -24,12 +29,14 @@ public class Promotion {
         this.ending_date = ending_date;
     }
 
-    
     public Promotion(Integer id_promotion, Double Discount, Date starting_date, Date ending_date) {
         this.id_promotion = id_promotion;
         this.Discount = Discount;
         this.starting_date = starting_date;
         this.ending_date = ending_date;
+    }
+
+    public Promotion() {
     }
 
     public Integer getId_promotion() {

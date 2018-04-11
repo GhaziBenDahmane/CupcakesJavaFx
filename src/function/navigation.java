@@ -1,7 +1,5 @@
 package function;
 
-import controllers.HomeController;
-import java.awt.event.KeyEvent;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.event.EventHandler;
@@ -20,32 +18,53 @@ public class navigation {
     private final String database = "/view/Database.fxml";
     private final String AddEventForm = "/views/AddEventForm.fxml";
     private final String AddPromotionForm = "/views/AddEventForm.fxml";
+    private final String AddActualityForm = "/views/AddEventForm.fxml";
 
     private final String uangMasuk = "/view/UangMasuk.fxml";
-    private final String ReservationUpdate = "/views/ReservationUpdate.fxml";
+    private final String ubahUangMasuk = "/view/UbahUangMasuk.fxml";
     private final String user = "/view/User.fxml";
     private final String uangKeluar = "/view/UangKeluar.fxml";
-    private final String ContactAdd = "/views/ContactAdd.fxml";
-    private final String ReservationAdd = "/views/ReservationAdd.fxml";
-    private final String ContactUpdate = "/views/ContactUpdate.fxml";
+    private final String tambahUangKeluar = "/view/TambahUangKeluar.fxml";
+    private final String ubahUangKeluar = "/view/UbahUangKeluar.fxml";
     private final String userManagement = "/view/UserManagement.fxml";
     private final String tambahUserManagement = "/view/TambahUserManagement.fxml";
     private final String ubahUserManagement = "/view/UbahUserManagement.fxml";
-    private final String DeliveryUpdate = "/views/DeliveryUpdate.fxml";
-
-    public String getDeliveryUpdate() {
-        return DeliveryUpdate;
-    }
     private final String laporanUangMasukHarian = "/view/LaporanUangMasukHarian.fxml";
     private final String laporanUangMasukBulanan = "/view/LaporanUangMasukBulanan.fxml";
     private final String laporanUangKeluarHarian = "/view/LaporanUangKeluarHarian.fxml";
     private final String laporanUangKeluarBulanan = "/view/LaporanUangKeluarBulanan.fxml";
+    private final String ContactAdd = "/views/ContactAdd.fxml";
+    private final String ReservationAdd = "/views/ReservationAdd.fxml";
+    private final String ContactUpdate = "/views/ContactUpdate.fxml";
+    private final String ReservationUpdate = "/views/ReservationUpdate.fxml";
+    private final String DeliveryUpdate = "/views/DeliveryUpdate.fxml";
+
     private String username, nama, email;
 
     public Image applicationIcon = new Image(getClass().getResourceAsStream("/img/icons8_Source_Code_104px_2.png"));
 
     public String getHome() {
         return home;
+    }
+
+    public String getContactAdd() {
+        return ContactAdd;
+    }
+
+    public String getReservationAdd() {
+        return ReservationAdd;
+    }
+
+    public String getContactUpdate() {
+        return ContactUpdate;
+    }
+
+    public String getReservationUpdate() {
+        return ReservationUpdate;
+    }
+
+    public String getDeliveryUpdate() {
+        return DeliveryUpdate;
     }
 
     public String getLogin() {
@@ -68,24 +87,24 @@ public class navigation {
         return AddPromotionForm;
     }
 
+    public String getAddActualityForm() {
+        return AddPromotionForm;
+    }
+
     public String getUangMasuk() {
         return uangMasuk;
     }
 
-    public String getReservationUpdate() {
-        return ReservationUpdate;
+    public String getUbahUangMasuk() {
+        return ubahUangMasuk;
     }
 
-    public String getReservationAdd() {
-        return ReservationAdd;
+    public String getTambahUangKeluar() {
+        return tambahUangKeluar;
     }
 
-    public String getContactAdd() {
-        return ContactAdd;
-    }
-
-    public String getContactUpdate() {
-        return ContactUpdate;
+    public String getUbahUangKeluar() {
+        return ubahUangKeluar;
     }
 
     public String getUserManagement() {

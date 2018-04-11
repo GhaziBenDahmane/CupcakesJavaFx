@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="589.0" style="-fx-background-color: #ececec;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddActualityController">
+   <children>
+      <Group layoutX="106.0" layoutY="111.0" AnchorPane.bottomAnchor="183.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="138.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <GridPane layoutX="-26.0" layoutY="-61.0" prefHeight="381.0" prefWidth="462.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="Add Actuality">
+                     <font>
+                        <Font name="Segoe UI Bold" size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets top="-10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <JFXTextField fx:id="titleA" labelFloat="true" prefHeight="26.0" prefWidth="273.0" promptText="Title" style="-jfx-disable-animation: false;" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="photoA" labelFloat="true" prefHeight="43.0" prefWidth="442.0" promptText="Picture's link" style="-jfx-disable-animation: false;" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextArea fx:id="contentA" focusColor="#4b73eb" labelFloat="true" prefHeight="103.0" prefWidth="442.0" promptText="Actuality Content" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Segoe UI" size="15.0" />
+                     </font>
+                  </JFXTextArea>
+                  <JFXDatePicker fx:id="dateA" defaultColor="#006e8f" editable="false" prefHeight="32.0" prefWidth="455.0" promptText="Actuality Date" showWeekNumbers="true" GridPane.rowIndex="8" />
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </GridPane>
+            <HBox alignment="CENTER_LEFT" layoutX="-21.0" layoutY="250.0" prefHeight="41.0" prefWidth="314.0">
+               <padding>
+                  <Insets left="3.0" />
+               </padding>
+            </HBox>
+         </children>
+      </Group>
+      <JFXButton layoutX="247.0" layoutY="468.0" onAction="#submitClicked" prefHeight="33.0" prefWidth="64.0" style="-fx-background-color: #4183d7;" text="Submit" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="label" layoutX="345.0" layoutY="14.0" prefHeight="29.0" prefWidth="225.0" text="Label" visible="false" />
+   </children>
+   <effect>
+      <DropShadow />
+   </effect>
+</AnchorPane>

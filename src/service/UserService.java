@@ -114,7 +114,7 @@ public class UserService implements CrudService<User> {
         String request = "INSERT INTO `fos_user` "
                 + "(`username`, `username_canonical`, `email`, `email_canonical`, "
                 + "`enabled`, `password`,`roles`, `phone`, `points`,`last_login`) "
-                + "VALUES (?, ?, ?, ?, '1', ?,?, ?, ?,0,?);";
+                + "VALUES (?, ?, ?, ?,'1',?, ?, ?,0,?);";
         try {
             ste = connection.prepareStatement(request);
             ste.setString(1, u.getUsername());
@@ -125,7 +125,6 @@ public class UserService implements CrudService<User> {
             ste.setString(6, Util.arrayToString(u.getRoles()));
             ste.setString(7, u.getPhone());
             ste.setDate(8, new java.sql.Date(u.getLastLogin().getTime()));
-
             ste.executeUpdate();
         } catch (Exception e) {
             System.err.println(e);

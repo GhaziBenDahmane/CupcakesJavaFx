@@ -286,7 +286,15 @@ public class HomeController implements Initializable {
 
     @FXML
     private void showCal(ActionEvent event) {
-        
+ try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            rootPane.getChildren().setAll((new CalendarApp().start()));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 
 }

@@ -36,6 +36,7 @@ public class Views {
     public static String VIDEO_TRAINNING = "/views/admin/videoTrainning.fxml";
     public static String SEND_MAIL = "/views/admin/sendMail.fxml";
     public static String CONTACT = "/views/admin/Contact.fxml";
+
     public static String DELIVERY_LIST = "/views/admin/DeliveryList.fxml";
     public static String DELIVERY_UPDATE = "/views/admin/DeliveryUpdate.fxml";
 

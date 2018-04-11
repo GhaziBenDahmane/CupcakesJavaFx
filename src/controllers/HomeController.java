@@ -51,10 +51,6 @@ public class HomeController implements Initializable {
     @FXML
     private ImageView imageUser;
     @FXML
-    private Label tanggal;
-    @FXML
-    private Label jam;
-    @FXML
     private Label usernameUser;
     @FXML
     private Label idUser;

@@ -292,7 +292,7 @@ public class ClaimListController implements Initializable {
                 content.add(e.getAnsweredBy());
 
             });
-            PDFService.toPDF(file, "List of Users", content, 5);
+            PDFService.toPDF(file, "List of Claims", content, 5);
 
             NotificationService.successBlueNotification("Export finished!", "Claims exported to " + file);
 

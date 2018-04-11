@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,6 +39,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -76,15 +78,11 @@ public class DeliveryListController {
     @FXML
     private JFXComboBox filter;
     @FXML
-    private JFXTextField hari;
-    @FXML
-    private JFXDatePicker hari_pilih;
-    @FXML
     private JFXComboBox bulan;
     @FXML
-    private JFXTextField tahun;
+    private JFXDatePicker date;
     @FXML
-    private JFXTextField cari;
+    private JFXTextField search;
     @FXML
     private TableView<DeliveryMaster> deliveryTable;
     @FXML
@@ -103,16 +101,22 @@ public class DeliveryListController {
     private TableColumn<DeliveryMaster, String> columnNotes;
     @FXML
     private TableColumn<DeliveryMaster, String> columnStatus;
+
+    private List<DeliveryMaster> cm;
+    private DeliveryService cs;
     ObservableList<String> comboFilter = FXCollections.observableArrayList("Day", "Month", "Year");
     ObservableList<String> comboBulan = FXCollections.observableArrayList("January", "February",
             "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
     SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
     navigation nav = new navigation();
-    time time = new time();
     DataSource kon = new DataSource();
     DeliveryService model = new DeliveryService();
 
     String id = "", deliveryDate = "", adress = "", serviceType = "", email = "", notes = "", status = "";
+    @FXML
+    private JFXTextField Date;
+    @FXML
+    private JFXTextField tahun;
 
     @FXML
     private void tombolClose(ActionEvent event) {
@@ -146,26 +150,31 @@ public class DeliveryListController {
     }
 
     @FXML
-    private void ubahClicked(ActionEvent event) {
-    }
+    private void filterClicked() {
+        String searchText = search.getText().toLowerCase();
+        LocalDate time = date.getValue();
+        Stream<DeliveryMaster> stream = cm.stream();
+        if (!search.getText().isEmpty()) {
+            stream = stream
+                    .filter(e -> e.getDelivery().getAdress().toLowerCase().contains(searchText)
+                    || e.getDelivery().getEmail().toLowerCase().contains(searchText)
+                    || e.getDelivery().getNotes().toLowerCase().contains(searchText)
+                    || e.getDelivery().getServiceType().toLowerCase().contains(searchText));
+            deliveryTable.setItems(stream.collect(Collectors.collectingAndThen(Collectors.toList(), l -> FXCollections.observableArrayList(l))));
+        }
 
-    @FXML
-    private void filterClicked(ActionEvent event) {
     }
 
     @FXML
     private void dateClicked(ActionEvent event) {
-        String dateText = sdf.format(Date.valueOf(hari_pilih.getValue()));
-        hari.setText(dateText);
+        String time = date.getValue().toString();
+        Date.setText(time);
+
     }
 
     @FXML
     private void refreshClicked(ActionEvent event) {
         loadTable();
-    }
-
-    @FXML
-    private void hapusClicked(ActionEvent event) {
     }
 
     @FXML

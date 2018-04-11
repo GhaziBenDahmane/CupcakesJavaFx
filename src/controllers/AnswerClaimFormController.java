@@ -44,7 +44,7 @@ public class AnswerClaimFormController implements Initializable {
     @FXML
     private void submitAction(ActionEvent event) {
         if (answer.getText().isEmpty()) {
-            Util.showInfo("Please enter a valid answer!");
+            Util.showError("Please enter a valid answer!");
 
         } else {
             ClaimService cs = new ClaimService();

@@ -18,6 +18,11 @@ public class Views {
     public static String EVENT_ADD = "/views/AddEventForm.fxml";
     public static String PASTRY_LIST = "/views/PastryList.fxml";
     public static String PASTRY_ADD = "/views/AddPastry.fxml";
+    public static String CONTACT_ADD = "/views/ContactAdd.fxml";
+    public static String CONTACT_ADMIN = "/views/ContactAdmin.fxml";
+    public static String RESERVATION = "/views/Reservation.fxml";
+    public static String RESERVATION_ADD = "/views/ReservationAdd.fxml";
+    public static String RESERVATION_UPDATE = "/views/ReservationUpdate.fxml";
 
     public static String ADMIN_CLAIMS_LIST = "/views/admin/ClaimList.fxml";
     public static String USERS_LIST = "/views/admin/UserList.fxml";
@@ -29,10 +34,14 @@ public class Views {
     public static String UPDATE_TRAINNING = "/views/admin/updateTrainning.fxml";
     public static String VIDEO_TRAINNING = "/views/admin/videoTrainning.fxml";
     public static String SEND_MAIL = "/views/admin/sendMail.fxml";
+    public static String CONTACT = "/views/admin/Contact.fxml";
+    public static String DELIVERY_LIST = "/views/admin/DeliveryList.fxml";
+    public static String DELIVERY_UPDATE = "/views/admin/DeliveryUpdate.fxml";
 
     public static String ADD_CLAIM = "/views/user/addClaim.fxml";
     public static String USER_CLAIM_LIST = "/views/user/ClaimList.fxml";
     public static String USER_PROFILE = "/views/user/profile.fxml";
+    public static String DELIVERY = "/views/user/Delivery.fxml";
 
     public Views() {
     }

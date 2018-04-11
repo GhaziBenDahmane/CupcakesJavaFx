@@ -14,8 +14,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import service.DeliveryService;
 import service.ReservationService;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 public class ReservationUpdateController implements Initializable {
 
@@ -68,6 +73,14 @@ public class ReservationUpdateController implements Initializable {
             model.update(reser);
             if (model.getStatusUpdate() == true) {
                 nav.showAlert(Alert.AlertType.INFORMATION, "Success", null, "Reservation Updated..");
+                TrayNotification tray = new TrayNotification();
+                tray.setNotificationType(NotificationType.CUSTOM);
+                tray.setTitle("Save Success");
+                tray.setMessage("Reservation added...");
+                tray.setAnimationType(AnimationType.POPUP);
+                tray.showAndDismiss(Duration.millis(5000));
+                tray.setRectangleFill(Color.valueOf("#4183D7"));
+
             } else {
                 nav.showAlert(Alert.AlertType.ERROR, "Error", null, "Failed >_<..");
             }

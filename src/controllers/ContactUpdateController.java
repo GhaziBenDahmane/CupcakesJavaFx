@@ -11,7 +11,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import service.ContactService;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
 public class ContactUpdateController implements Initializable {
 
@@ -47,6 +52,13 @@ public class ContactUpdateController implements Initializable {
                 || message.getText().equals("") || email.getText().equals("") || phone.getText().equals("")) {
             nav.showAlert(Alert.AlertType.WARNING, "WARNING", null, "Complete the data first !!");
         } else {
+            TrayNotification tray = new TrayNotification();
+            tray.setNotificationType(NotificationType.CUSTOM);
+            tray.setTitle("Update Success");
+            tray.setMessage("Contact Updated...");
+            tray.setAnimationType(AnimationType.POPUP);
+            tray.showAndDismiss(Duration.millis(5000));
+            tray.setRectangleFill(Color.valueOf("#4183D7"));
             String idText = idUangKeluar.getText();
             String firstNameText = firstName.getText();
             String lastNameText = lastName.getText();

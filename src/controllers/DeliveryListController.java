@@ -213,4 +213,12 @@ public class DeliveryListController {
         loadPane.getChildren().setAll(pane);
     }
 
+    @FXML
+    private void ubahClicked(ActionEvent event) {
+    }
+
+    @FXML
+    private void hapusClicked(ActionEvent event) {
+    }
+
 }

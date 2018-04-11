@@ -90,6 +90,14 @@ public class HomeController implements Initializable {
     private JFXButton btn_Promo;
     @FXML
     private JFXButton btn_Act;
+    @FXML
+    private JFXButton btn_Contact;
+    @FXML
+    private JFXButton btn_Reservation;
+    @FXML
+    private JFXButton Delivery_btn;
+    @FXML
+    private JFXButton btn_delivery;
 
     /**
      * Initializes the controller class.
@@ -158,7 +166,6 @@ public class HomeController implements Initializable {
     @FXML
     private void homeClicked(ActionEvent event) {
     }
-
 
     @FXML
     private void setBackgroundHome1(MouseEvent event) {
@@ -286,7 +293,7 @@ public class HomeController implements Initializable {
 
     @FXML
     private void showCal(ActionEvent event) {
- try {
+        try {
             rootPane.getChildren().clear();
             rootPane.setOpacity(0);
             new FadeInTransition(rootPane).play();
@@ -342,6 +349,59 @@ public class HomeController implements Initializable {
             rootPane.setOpacity(0);
             new FadeInTransition(rootPane).play();
             AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.FRONT_ACTUALITY));
+            rootPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    private void showContact(ActionEvent event) {
+        try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.CONTACT));
+            rootPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    private void showReservation(ActionEvent event) {
+        try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.RESERVATION));
+            rootPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    @FXML
+    private void showDelivery(ActionEvent event) {
+        try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.DELIVERY_LIST));
+            rootPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    private void showdelivery(ActionEvent event) {
+        try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(Views.DELIVERY));
             rootPane.getChildren().setAll(pane);
         } catch (Exception e) {
             System.out.println(e);

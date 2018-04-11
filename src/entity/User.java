@@ -40,7 +40,9 @@ public class User {
 
     }
 
-    public User(int id, String username, String email, boolean enabled, String salt, String password, Date lastLogin, String confirmationToken, Date passwordRequestedAt, ArrayList<String> roles, int points, String phone, String photoprofil) {
+    public User(int id, String username, String email, boolean enabled,
+             String salt, String password, Date lastLogin, String confirmationToken,
+             Date passwordRequestedAt, ArrayList<String> roles, int points, String phone) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -53,7 +55,6 @@ public class User {
         this.roles = roles;
         this.points = points;
         this.phone = phone;
-        this.photoprofil = photoprofil;
     }
 
     public int getId() {

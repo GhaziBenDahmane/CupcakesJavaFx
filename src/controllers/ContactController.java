@@ -7,6 +7,8 @@ package controllers;
 
 import animation.FadeInRightTransition;
 import animation.FadeOutLeftTransition;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import entity.Contact;
 import function.navigation;
 import function.time;
@@ -77,9 +79,6 @@ public class ContactController implements Initializable {
     private TableColumn<ContactMaster, String> columnMessage;
 
     @FXML
-    private TableColumn<ContactMaster, String> columnStatus;
-
-    @FXML
     private TableColumn<ContactMaster, String> columnInputTime;
 
     @FXML
@@ -97,23 +96,28 @@ public class ContactController implements Initializable {
     @FXML
     private ContextMenu contextMenu;
 
-    @FXML
     private CheckBox check;
 
     @FXML
-    private ComboBox filter, month;
-
+    private ComboBox month;
     @FXML
-    private TextField day, year, search;
-
-    @FXML
-    private DatePicker select_day;
+    private TextField year;
 
     private String id = "", firstName = "", lastName = "", email = "", adress = "", phone = "", message = "";
     public static ContactMaster sselectedItem;
     DataSource kon = new DataSource();
     ContactService model = new ContactService();
     navigation nav = new navigation();
+    @FXML
+    private AnchorPane utama;
+    @FXML
+    private AnchorPane dataUangKeluar;
+    @FXML
+    private JFXButton btn_add;
+    @FXML
+    private JFXButton btn_update;
+    @FXML
+    private JFXTextField search;
 
 
     /*private void setStyleTable(){
@@ -157,7 +161,6 @@ public class ContactController implements Initializable {
         loadTable();
     }
 
-    @FXML
     private void checkClicked(ActionEvent event) {
         if (check.isSelected() == true) {
             columnInputTime.setVisible(true);
@@ -214,7 +217,6 @@ public class ContactController implements Initializable {
 
     }
 
-    @FXML
     private void updateClicked(ActionEvent event) throws IOException {
         if (adress.equals("")) {
             nav.showAlert(Alert.AlertType.WARNING, "WARNING", null, "Please select the data..");
@@ -260,6 +262,23 @@ public class ContactController implements Initializable {
         ContactUpdateController ContactUpdate = Loader.getController();
         ContactUpdate.setData(id, firstName, lastName, email, adress, phone, message);
         loadPane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void ubahUpdate(ActionEvent event) throws IOException {
+        if (adress.equals("")) {
+            nav.showAlert(Alert.AlertType.WARNING, "WARNING", null, "Please select the data..");
+        } else {
+            openUbah();
+        }
+    }
+
+    @FXML
+    private void ubahClicked(ActionEvent event) {
+    }
+
+    @FXML
+    private void hapusClicked(ActionEvent event) {
     }
 
 }

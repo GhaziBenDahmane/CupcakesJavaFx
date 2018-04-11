@@ -21,102 +21,104 @@ import util.DataSource;
  * @author USER
  */
 public class ReservationService {
-   
 
-    private Connection connection=null;
+    private Connection connection = null;
 
     public ReservationService() {
-         connection = DataSource.getInstance().getConnection();
-         
+        connection = DataSource.getInstance().getConnection();
+
     }
-    
-     private String query="select id,nbTable,nbPerson,dateReservation "
-            +"DATE_FORMAT(input_time,'%d %M %Y %T') from contact ";
+
+    private String query = "select id,nb_table,nb_Person,date_reservation "
+            + "DATE_FORMAT(input_time,'%d %M %Y %T') from reservation ";
     private String filter;
     private String detailCari;
-    public String queryLoad="";
-    
+    public String queryLoad = "";
 
-    
     private boolean statusInsert = false;
     private boolean statusUpdate = false;
     private boolean statusDelete = false;
-    
-    public void filterHari(String hari, String cari){
-        filter=" where tanggal='"+hari+"'";
-        detailCari=" and detail like '%"+cari+"%'";
-        queryLoad=query+filter+detailCari;
-    }
-    
-    public void filterBulan(String bulan, String tahun, String cari){
-        filter=" where DATE_FORMAT(tanggal,'%M/%Y')='"+bulan+"/"+tahun+"'";
-        detailCari=" and detail like '%"+cari+"%'";
-        queryLoad=query+filter+detailCari;
-    }
-    
-    public void filterSemua(String cari){
-        detailCari=" where detail like '%"+cari+"%'";
-        queryLoad=query+detailCari;
+
+    public void filterHari(String hari, String cari) {
+        filter = " where tanggal='" + hari + "'";
+        detailCari = " and detail like '%" + cari + "%'";
+        queryLoad = query + filter + detailCari;
     }
 
-    
+    public void filterBulan(String bulan, String tahun, String cari) {
+        filter = " where DATE_FORMAT(tanggal,'%M/%Y')='" + bulan + "/" + tahun + "'";
+        detailCari = " and detail like '%" + cari + "%'";
+        queryLoad = query + filter + detailCari;
+    }
 
-  
+    public void filterSemua(String cari) {
+        detailCari = " where detail like '%" + cari + "%'";
+        queryLoad = query + detailCari;
+    }
+
+    public int ControlReservation() {
+        String req = " SELECT COUNT(nb_table,date_reservation)";
+
+        return 0;
+    }
+
     public void create(Reservation reser) {
-                String req="INSERT INTO reservation (nbTable,nbPerson,dateReservation) VALUES (?,?,?)";
+        String req = "INSERT INTO reservation (nb_table,nb_person,date_reservation) VALUES (?,?,?)";
         try {
             PreparedStatement statment = connection.prepareStatement(req);
-            statment.setInt(1,reser.getNbPersonnes());
+            statment.setInt(1, reser.getNbPersonnes());
             statment.setInt(2, reser.getNbTables());
             statment.setDate(3, reser.getDateReservation());
-    
+
             statment.execute();
- 
-            statusInsert=true;
+
+            statusInsert = true;
         } catch (SQLException ex) {
-            statusInsert=false;
+            statusInsert = false;
         }
-        
-       
+
     }
-        public boolean getStatusInert(){
+
+    public boolean getStatusInert() {
         return statusInsert;
     }
-     public List<Reservation> selectAll() {
-         List<Reservation> reservation = new ArrayList<>();
-        String req ="select * from reservation";
+
+    public List<Reservation> selectAll() {
+        List<Reservation> reservation = new ArrayList<>();
+        String req = "select id,nb_table,nb_person,date_reservation from reservation";
         try {
             Statement statement = (Statement) connection.createStatement();
             ResultSet result = statement.executeQuery(req);
-            while (result.next())
-            {
-               
-                Reservation r = new Reservation(result.getInt(1),result.getInt(2),result.getInt(3),result.getDate(4));
-               
+            while (result.next()) {
+
+                Reservation r = new Reservation(result.getInt(1), result.getInt(2), result.getInt(3), result.getDate(4));
+
                 reservation.add(r);
             }
-            
+
         } catch (SQLException ex) {
             System.out.println("select error");
         }
-        
-        
+
         return reservation;
     }
-     public void update(String id, String email, String firstName, String lastName){
-       String req="Update reservation set nbTable=? , nbPerson=? ,dateReservation=? where id=1";
-         try {
-             PreparedStatement statment = connection.prepareStatement(req);
-            statment.executeUpdate("update contact set firstName='"+firstName+
-                    "',lastName='"+lastName+
-                    "',email='"+email+"' where id='"+id+"'");
-            statusUpdate=true;
+
+    public void update(Reservation r) {
+        String req = "Update reservation set date_reservation=?,nb_table=? , nb_person=?  where id=?";
+        try {
+            PreparedStatement statment = connection.prepareStatement(req);
+            statment.setInt(4, r.getId());
+            statment.setInt(2, r.getNbTables());
+            statment.setInt(3, r.getNbPersonnes());
+            statment.setDate(1, r.getDateReservation());
+            statment.executeUpdate();
+            statusUpdate = true;
         } catch (Exception e) {
-            statusUpdate=false;
+            statusUpdate = false;
         }
     }
-    
-    public boolean getStatusUpdate(){
+
+    public boolean getStatusUpdate() {
         return statusUpdate;
     }
 
@@ -141,22 +143,21 @@ public class ReservationService {
      public boolean getStatusUpdate(){
         return statusUpdate;
     }
-    */
-
-
+     */
     public void delete(int id) {
-        String req="Delete from reservation where id= ?";
+        String req = "Delete from reservation where id= ?";
         try {
             PreparedStatement statment = connection.prepareStatement(req);
-            statment.setInt(1,id);
+            statment.setInt(1, id);
             statment.executeUpdate();
-            statusDelete=true;
+            statusDelete = true;
         } catch (SQLException ex) {
-            statusDelete=false;
+            statusDelete = false;
         }
     }
-       public boolean getStatusDelete(){
+
+    public boolean getStatusDelete() {
         return statusDelete;
     }
-    
+
 }

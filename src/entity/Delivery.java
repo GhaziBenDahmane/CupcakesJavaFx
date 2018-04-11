@@ -13,23 +13,35 @@ import java.sql.Date;
  */
 public class Delivery {
 
-    private int id, phone;
-    private String name, notes, email, adress, serviceType;
-    private Date dateDelivery, contactTime;
+    private int id;
+    private String notes, email, adress, serviceType;
+    private Date dateDelivery;
     private boolean status;
 
     public Delivery() {
     }
 
-    public Delivery(int phone, String name, String notes, String email, String adress, String serviceType, Date dateDelivery, Date contactTime, boolean status) {
-        this.phone = phone;
-        this.name = name;
+    public Delivery(int id, boolean status) {
+        this.id = id;
+        this.status = status;
+    }
+
+    public Delivery(int id, String notes, String email, String adress, String serviceType, Date dateDelivery, boolean status) {
+        this.id = id;
         this.notes = notes;
         this.email = email;
         this.adress = adress;
         this.serviceType = serviceType;
         this.dateDelivery = dateDelivery;
-        this.contactTime = contactTime;
+        this.status = status;
+    }
+
+    public Delivery(String notes, String email, String adress, String serviceType, Date dateDelivery, boolean status) {
+        this.notes = notes;
+        this.email = email;
+        this.adress = adress;
+        this.serviceType = serviceType;
+        this.dateDelivery = dateDelivery;
         this.status = status;
     }
 
@@ -47,22 +59,6 @@ public class Delivery {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getPhone() {
-        return phone;
-    }
-
-    public void setPhone(int phone) {
-        this.phone = phone;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getNotes() {
@@ -105,14 +101,6 @@ public class Delivery {
         this.dateDelivery = dateDelivery;
     }
 
-    public Date getContactTime() {
-        return contactTime;
-    }
-
-    public void setContactTime(Date contactTime) {
-        this.contactTime = contactTime;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
@@ -140,7 +128,7 @@ public class Delivery {
 
     @Override
     public String toString() {
-        return "Delivery{" + "id=" + id + ", phone=" + phone + ", name=" + name + ", notes=" + notes + ", email=" + email + ", adress=" + adress + ", serviceType=" + serviceType + ", dateDelivery=" + dateDelivery + ", contactTime=" + contactTime + '}';
+        return "Delivery{" + "id=" + id + ", notes=" + notes + ", email=" + email + ", adress=" + adress + ", serviceType=" + serviceType + ", dateDelivery=" + dateDelivery + ", status=" + status + '}';
     }
 
 }

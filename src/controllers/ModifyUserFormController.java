@@ -80,7 +80,11 @@ public class ModifyUserFormController implements Initializable {
         String uusername = username.getText();
         String uemail = email.getText();
         LocalDate value = lastLogin.getValue();
-        Date lastLoginDate = Date.from(value.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        if (value != null) {
+            Date lastLoginDate = Date.from(value.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+            selectedUser.setLastLogin(lastLoginDate);
+
+        }
         if (role.getValue() != null) {
             if (role.getValue().getText().equals("Admin")) {
                 uroles.add("ROLE_SIMPLE_USER");
@@ -94,7 +98,6 @@ public class ModifyUserFormController implements Initializable {
         String uphone = phone.getText();
         selectedUser.setUsername(uusername);
         selectedUser.setEmail(uemail);
-        selectedUser.setLastLogin(lastLoginDate);
         selectedUser.setRoles(uroles);
         selectedUser.setPhone(uphone);
         if (!password.getText().isEmpty()) {

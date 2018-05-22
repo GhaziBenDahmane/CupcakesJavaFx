@@ -25,7 +25,7 @@ public class ContactUpdateController implements Initializable {
     ContactService model = new ContactService();
 
     @FXML
-    private TextField firstName, lastName, email, adress, phone, message;
+    private TextField firstName,adress, phone, message;
 
     @FXML
     private Label idUangKeluar;
@@ -35,11 +35,9 @@ public class ContactUpdateController implements Initializable {
         nav.harusAngka(phone);
     }
 
-    public void setData(String id, String UfirstName, String UlastName, String Uemail, String Uadress, String Uphone, String UMessage) {
+    public void setData(String id, String UfirstName, String Uadress, String Uphone, String UMessage) {
         idUangKeluar.setText(id);
         firstName.setText(UfirstName);
-        lastName.setText(UlastName);
-        email.setText(Uemail);
         adress.setText(Uadress);
         phone.setText(Uphone);
         message.setText(UMessage);
@@ -48,8 +46,8 @@ public class ContactUpdateController implements Initializable {
 
     @FXML
     private void simpanClicked(ActionEvent event) {
-        if (firstName.getText().equals("") || lastName.getText().equals("") || adress.getText().equals("")
-                || message.getText().equals("") || email.getText().equals("") || phone.getText().equals("")) {
+        if (firstName.getText().equals("") || adress.getText().equals("")
+                || message.getText().equals("") || phone.getText().equals("")) {
             nav.showAlert(Alert.AlertType.WARNING, "WARNING", null, "Complete the data first !!");
         } else {
             TrayNotification tray = new TrayNotification();
@@ -61,12 +59,10 @@ public class ContactUpdateController implements Initializable {
             tray.setRectangleFill(Color.valueOf("#4183D7"));
             String idText = idUangKeluar.getText();
             String firstNameText = firstName.getText();
-            String lastNameText = lastName.getText();
-            String emailText = email.getText();
             String phoneText = phone.getText();
             String adressText = adress.getText();
             String messageText = message.getText();
-            Contact c = new Contact(Integer.parseInt(idText), Integer.parseInt(phoneText), firstNameText, lastNameText, messageText, adressText, emailText, false);
+            Contact c = new Contact(Integer.parseInt(idText), Integer.parseInt(phoneText), firstNameText,  messageText, adressText, false);
             model.update(c);
             if (model.getStatusUpdate() == true) {
                 nav.showAlert(Alert.AlertType.INFORMATION, "Success", null, "The Contact has been updated..");

@@ -17,7 +17,6 @@ public class ContactMaster {
 
     private SimpleStringProperty id;
     private SimpleStringProperty firstName;
-    private SimpleStringProperty lastName;
     private SimpleStringProperty email;
     private SimpleStringProperty adress;
     private SimpleStringProperty phone;
@@ -28,8 +27,7 @@ public class ContactMaster {
         this.contact = contact;
         this.id = new SimpleStringProperty(String.valueOf(contact.getId()));
         this.firstName = firstName = new SimpleStringProperty(contact.getFirstName());
-        this.lastName = new SimpleStringProperty(contact.getLastName());
-        this.email = new SimpleStringProperty(contact.getEmail());
+        this.message = message = new SimpleStringProperty(contact.getMessage());
         this.adress = new SimpleStringProperty(contact.getAdress());
         this.phone = new SimpleStringProperty(String.valueOf(contact.getPhone()));
         this.message = new SimpleStringProperty(contact.getMessage());
@@ -50,14 +48,6 @@ public class ContactMaster {
 
     public void setFirstName(SimpleStringProperty firstName) {
         this.firstName = firstName;
-    }
-
-    public SimpleStringProperty lastNameProperty() {
-        return lastName;
-    }
-
-    public void setLastName(SimpleStringProperty lastName) {
-        this.lastName = lastName;
     }
 
     public SimpleStringProperty emailProperty() {

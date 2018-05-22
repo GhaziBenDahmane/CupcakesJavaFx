@@ -11,13 +11,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import entity.Contact;
 import function.navigation;
-import function.time;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -34,7 +30,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -63,12 +58,6 @@ public class ContactController implements Initializable {
 
     @FXML
     private TableColumn<ContactMaster, String> columnFirstName;
-
-    @FXML
-    private TableColumn<ContactMaster, String> columnLastName;
-
-    @FXML
-    private TableColumn<ContactMaster, String> columnEmail;
 
     @FXML
     private TableColumn<ContactMaster, String> columnAdress;
@@ -103,7 +92,7 @@ public class ContactController implements Initializable {
     @FXML
     private TextField year;
 
-    private String id = "", firstName = "", lastName = "", email = "", adress = "", phone = "", message = "";
+    private String id = "", firstName = "", adress = "", phone = "", message = "";
     public static ContactMaster sselectedItem;
     DataSource kon = new DataSource();
     ContactService model = new ContactService();
@@ -120,21 +109,11 @@ public class ContactController implements Initializable {
     private JFXTextField search;
 
 
-    /*private void setStyleTable(){
-        columnID.setStyle("-fx-alignment: CENTER");
-        columnFirstName.setStyle("-fx-alignment: CENTER");
-        columnLastName.setStyle("-fx-alignment: CENTER");
-        columnAdress.setStyle("-fx-alignment: CENTER");
-        columnEmail.setStyle("-fx-alignment: CENTER");
-        columnPhone.setStyle("-fx-alignment: CENTER");
-    }*/
     private void loadTable() {
         try {
             nav.animationFade(tableContact);
             columnID.setCellValueFactory(new PropertyValueFactory<>("id"));
             columnFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-            columnLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-            columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
             columnAdress.setCellValueFactory(new PropertyValueFactory<>("adress"));
             columnPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
             columnMessage.setCellValueFactory(new PropertyValueFactory<>("message"));
@@ -153,7 +132,7 @@ public class ContactController implements Initializable {
     }
 
     private void clearParameter() {
-        // id="";   firstName=""; lastName=""; email=""; adress="";message="";phone="";
+       //  id="";   firstName=""; adress="";message="";phone="";
     }
 
     @FXML
@@ -174,16 +153,12 @@ public class ContactController implements Initializable {
         if (event.getClickCount() == 1) {
             id = Integer.toString(tableContact.getSelectionModel().getSelectedItem().getContact().getId());
             firstName = tableContact.getSelectionModel().getSelectedItem().getContact().getFirstName();
-            lastName = tableContact.getSelectionModel().getSelectedItem().getContact().getLastName();
-            email = tableContact.getSelectionModel().getSelectedItem().getContact().getEmail();
             adress = tableContact.getSelectionModel().getSelectedItem().getContact().getAdress();
             phone = Integer.toString(tableContact.getSelectionModel().getSelectedItem().getContact().getPhone());
             message = tableContact.getSelectionModel().getSelectedItem().getContact().getMessage();
         } else if (event.getClickCount() == 2) {
             id = Integer.toString(tableContact.getSelectionModel().getSelectedItem().getContact().getId());
             firstName = tableContact.getSelectionModel().getSelectedItem().getContact().getFirstName();
-            lastName = tableContact.getSelectionModel().getSelectedItem().getContact().getLastName();
-            email = tableContact.getSelectionModel().getSelectedItem().getContact().getEmail();
             adress = tableContact.getSelectionModel().getSelectedItem().getContact().getAdress();
             phone = Integer.toString(tableContact.getSelectionModel().getSelectedItem().getContact().getPhone());
             message = tableContact.getSelectionModel().getSelectedItem().getContact().getMessage();
@@ -211,7 +186,6 @@ public class ContactController implements Initializable {
     private void addClicked() throws IOException {
         blur.setEffect(new GaussianBlur(10));
         new FadeInRightTransition(trans).play();
-//       AnchorPane pane = FXMLLoader.load(getClass().getResource(nav.getContactAdd()));
         AnchorPane pane = FXMLLoader.load(getClass().getResource(nav.getContactAdd()));
         loadPane.getChildren().setAll(pane);
 
@@ -233,10 +207,8 @@ public class ContactController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete Contact");
             alert.setHeaderText("First Name\t: " + firstName
-                    + "lastName:" + lastName
-                    + "Email:" + email
-                    + "Adress: " + adress
-                    + "Email: " + email);
+                  
+                    + "Adress: " + adress);
             alert.setContentText("Are you sure you want to delete this data?");
 
             Optional<ButtonType> result = alert.showAndWait();
@@ -260,7 +232,7 @@ public class ContactController implements Initializable {
         new FadeInRightTransition(trans).play();
         AnchorPane pane = Loader.load();
         ContactUpdateController ContactUpdate = Loader.getController();
-        ContactUpdate.setData(id, firstName, lastName, email, adress, phone, message);
+        ContactUpdate.setData(id, firstName, adress, phone, message);
         loadPane.getChildren().setAll(pane);
     }
 

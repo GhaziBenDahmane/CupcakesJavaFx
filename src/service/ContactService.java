@@ -64,13 +64,13 @@ public class ContactService {
 
     public List<Contact> selectAll() {
         List<Contact> contacs = new ArrayList<>();
-        String req = "select id,firstName,adress,tel,message,status from contact";
+        String req = "select id,tel,firstName,message,adress,email from contact";
         try {
             Statement statement = (Statement) connection.createStatement();
             ResultSet result = statement.executeQuery(req);
             while (result.next()) {
 
-                Contact p = new Contact(result.getInt(1), result.getInt(4), result.getString(2), result.getString(3), result.getString(5), false);
+                Contact p = new Contact(result.getInt(1), result.getInt(2), result.getString(3), result.getString(4), result.getString(5),result.getString(6));
 
                 contacs.add(p);
             }

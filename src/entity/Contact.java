@@ -16,10 +16,19 @@ public class Contact {
    
     private int id, phone;
    
-    private String firstName,message, adress;
+    private String firstName,message, adress,email;
     private boolean status;
 
     public Contact() {
+    }
+
+    public Contact(int id, int phone, String firstName, String message, String adress, String email) {
+        this.id = id;
+        this.phone = phone;
+        this.firstName = firstName;
+        this.message = message;
+        this.adress = adress;
+        this.email = email;
     }
 
     public Contact(int id, int phone, String firstName, String message, String adress, boolean status) {
@@ -30,6 +39,14 @@ public class Contact {
         this.adress = adress;
 
         this.status = status;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getId() {

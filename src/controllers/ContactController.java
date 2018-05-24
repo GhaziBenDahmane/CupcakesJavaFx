@@ -61,14 +61,14 @@ public class ContactController implements Initializable {
 
     @FXML
     private TableColumn<ContactMaster, String> columnAdress;
+    @FXML
+    private TableColumn<ContactMaster, String> columnEmail;
 
     @FXML
     private TableColumn<ContactMaster, String> columnPhone;
     @FXML
     private TableColumn<ContactMaster, String> columnMessage;
 
-    @FXML
-    private TableColumn<ContactMaster, String> columnInputTime;
 
     @FXML
     private AnchorPane blur;
@@ -114,9 +114,11 @@ public class ContactController implements Initializable {
             nav.animationFade(tableContact);
             columnID.setCellValueFactory(new PropertyValueFactory<>("id"));
             columnFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
             columnAdress.setCellValueFactory(new PropertyValueFactory<>("adress"));
             columnPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
             columnMessage.setCellValueFactory(new PropertyValueFactory<>("message"));
+            
             //  columnInputTime.setCellValueFactory(new PropertyValueFactory<>("inputTimes"));
 
             ContactService contact = new ContactService();
@@ -140,13 +142,7 @@ public class ContactController implements Initializable {
         loadTable();
     }
 
-    private void checkClicked(ActionEvent event) {
-        if (check.isSelected() == true) {
-            columnInputTime.setVisible(true);
-        } else {
-            columnInputTime.setVisible(false);
-        }
-    }
+
 
     @FXML
     private void ambilID(MouseEvent event) throws IOException {

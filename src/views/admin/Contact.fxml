@@ -74,9 +74,10 @@
                      <columns>
                         <TableColumn fx:id="columnID" editable="false" minWidth="3.0" prefWidth="37.0" resizable="false" sortable="false" text="ID" />
                         <TableColumn fx:id="columnFirstName" editable="false" prefWidth="139.0" resizable="false" sortable="false" text="Name" />
-                        <TableColumn fx:id="columnMessage" editable="false" prefWidth="309.0" resizable="false" sortable="false" text="Message" />
-                        <TableColumn fx:id="columnAdress" editable="false" minWidth="8.0" prefWidth="128.0" resizable="false" sortable="false" text="Adress" />
-                        <TableColumn fx:id="columnPhone" minWidth="0.0" prefWidth="148.79998779296875" text="Phone" />
+                        <TableColumn fx:id="columnMessage" editable="false" prefWidth="143.0" resizable="false" sortable="false" text="Message" />
+                        <TableColumn fx:id="columnEmail" editable="false" prefWidth="149.0" resizable="false" sortable="false" text="Email" />
+                        <TableColumn fx:id="columnAdress" editable="false" minWidth="0.0" prefWidth="103.0" resizable="false" sortable="false" text="Adress" />
+                        <TableColumn fx:id="columnPhone" minWidth="0.0" prefWidth="330.0" text="Phone" />
                      </columns>
                   </TableView>
                   <AnchorPane layoutX="10.0" layoutY="6.0" prefHeight="46.0" prefWidth="764.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">

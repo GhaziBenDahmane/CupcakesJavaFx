@@ -61,6 +61,8 @@ public class DeliveryUpdateController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        status.getItems().add(new Label("Delivered"));
+        status.getItems().add(new Label("Not Delivered"));
 
     }
 

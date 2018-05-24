@@ -30,26 +30,24 @@ public class DeliveryService {
 
     }
 
-    private String query = "select id,nbTable,nbPerson,dateReservation "
-            + "DATE_FORMAT(input_time,'%d %M %Y %T') from contact ";
-    private String filter;
-    private String detailCari;
-    public String queryLoad = "";
 
     private boolean statusInsert = false;
     private boolean statusUpdate = false;
     private boolean statusDelete = false;
 
     public void create(Delivery d) {
-        String req = "INSERT INTO delivery (dateDelivery,email,adress,status,service_type,notes) VALUES (?,?,?,?,?,?)";
+        String req = "INSERT INTO delivery (name,phone,dateDelivery,contactTime,email,adress,status,service_type,notes) VALUES (?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement statment = connection.prepareStatement(req);
-            statment.setDate(1, d.getDateDelivery());
-            statment.setString(2, d.getEmail());
-            statment.setString(3, d.getAdress());
-            statment.setBoolean(4, false);
-            statment.setString(5, d.getServiceType());
-            statment.setString(6, d.getNotes());
+            statment.setString(1, d.getName());
+            statment.setInt(2, d.getPhone());
+            statment.setDate(3, d.getDateDelivery());
+            statment.setDate(4, d.getContactTime());
+            statment.setString(5, d.getEmail());
+            statment.setString(6, d.getAdress());
+            statment.setBoolean(7, false);
+            statment.setString(8, d.getServiceType());
+            statment.setString(9, d.getNotes());
 
             statment.execute();
 
@@ -72,7 +70,9 @@ public class DeliveryService {
             ResultSet result = statement.executeQuery(req);
             while (result.next()) {
 
-                Delivery r = new Delivery(result.getInt(1), result.getString(3), result.getString(4), result.getString(5), result.getString(7), result.getDate(2), result.getBoolean(6));
+                Delivery r = new Delivery(result.getInt(1), result.getInt(3),
+                        result.getString(2), result.getString(6), result.getString(7),result.getString(8),result.getString(10),
+                        result.getDate(4),result.getDate(5), result.getBoolean(9));
 
                 reservation.add(r);
             }

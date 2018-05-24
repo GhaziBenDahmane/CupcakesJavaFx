@@ -39,15 +39,22 @@ public class DeliveryController implements Initializable {
     @FXML
     private JFXTextField deliveryDate;
     @FXML
+    private JFXTextField contactTime;
+    @FXML
     private JFXTextField email;
     @FXML
     private JFXTextField notes;
+    @FXML
+    private JFXTextField phone;
+    @FXML
+    private JFXTextField name;
 
-    private JFXDatePicker dateReservation;
     @FXML
     private JFXComboBox serviceType;
     @FXML
     private JFXDatePicker dateDelivery;
+    @FXML
+    private JFXDatePicker dateContact;
     SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
     ObservableList<String> comboType = FXCollections.observableArrayList("Free", "Premium");
     navigation nav = new navigation();
@@ -75,7 +82,7 @@ public class DeliveryController implements Initializable {
         email.setText("");
         notes.setText("");
         //date_uang_keluar_text.setText("");
-        dateReservation.requestFocus();
+        
     }
 
     @FXML
@@ -92,16 +99,19 @@ public class DeliveryController implements Initializable {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Calendar cal = Calendar.getInstance();
             String email_text = email.getText();
+            String name_text = name.getText();
             String notes_text = notes.getText();
+            String phone_text = phone.getText();
             String adress_text = adress.getText();
             String service_text = serviceType.getValue().toString();
             String deliveryDate_text = deliveryDate.getText();
+            String contactTime_text = contactTime.getText();
             // String date=dateReservation.getValue().toString();
             java.sql.Date date = java.sql.Date.valueOf(dateDelivery.getValue());
-            String waktu_input = dateFormat.format(cal.getTime());
+            java.sql.Date datec = java.sql.Date.valueOf(dateContact.getValue());
 
             formatter = new SimpleDateFormat("dd-MMM-yy");
-            Delivery d = new Delivery(i, notes_text, email_text, adress_text, service_text, date, false);
+            Delivery d = new Delivery(i,Integer.parseInt(phone_text),name_text,notes_text, email_text, adress_text, service_text, date,datec, false);
             i++;
             model.create(d);
             if (model.getStatusInert() == true) {

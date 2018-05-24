@@ -37,7 +37,7 @@ public class navigation {
     private final String ReservationAdd = "/views/ReservationAdd.fxml";
     private final String ContactUpdate = "/views/ContactUpdate.fxml";
     private final String ReservationUpdate = "/views/ReservationUpdate.fxml";
-    private final String DeliveryUpdate = "/views/DeliveryUpdate.fxml";
+    private final String DeliveryUpdate = "/views/admin/DeliveryUpdate.fxml";
 
     private String username, nama, email;
 

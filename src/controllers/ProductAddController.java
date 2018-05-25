@@ -4,6 +4,7 @@ import entity.Product;
 import entity.Promotion;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -114,29 +115,17 @@ public class ProductAddController implements Initializable {
         promotion.setOnKeyPressed(event -> {
 
             if (event.getCode() == KeyCode.ENTER) {
-                try {
-                    addProduct();
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(ProductAddController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                addProduct();
             }
         });
         barcode.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                try {
-                    addProduct();
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(ProductAddController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                addProduct();
             }
         });
         price.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                try {
-                    addProduct();
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(ProductAddController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                addProduct();
             }
         });
 
@@ -147,7 +136,7 @@ public class ProductAddController implements Initializable {
         addProduct();
     }
 
-    private void addProduct() throws FileNotFoundException {
+    private void addProduct()  {
         if (name.getText().equals("") || barcode.getText().equals("")
                 || category.getText().equals("") || price.getText().equals("")) {
             showAlert(Alert.AlertType.WARNING, "ALERT", null, "There is some empty fields !");
@@ -163,7 +152,11 @@ public class ProductAddController implements Initializable {
             Promotion pr = promo.selectPromotionById(id_promo);
             System.out.println(pr);
             Product p = new Product(nam, type, pric, 0, 0, "pas encore", desc, barcod, pr);
-            product.insert(p, file);
+            try {
+                product.insert(p, file);
+            } catch (IOException ex) {
+                Logger.getLogger(ProductAddController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             showAlert(Alert.AlertType.INFORMATION, "Succes", null, "Insert with success !");
             clear();
 

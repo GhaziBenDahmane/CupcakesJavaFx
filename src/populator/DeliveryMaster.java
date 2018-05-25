@@ -16,6 +16,9 @@ public class DeliveryMaster {
 
     private SimpleStringProperty id;
     private SimpleStringProperty deliveryDate;
+    private SimpleStringProperty contactTime;
+    private SimpleStringProperty phone;
+    private SimpleStringProperty name;
     private SimpleStringProperty serviceType;
     private SimpleStringProperty email;
     private SimpleStringProperty adress;
@@ -27,6 +30,9 @@ public class DeliveryMaster {
         this.delivery = delivery;
         this.id = new SimpleStringProperty(String.valueOf(delivery.getId()));
         this.deliveryDate = new SimpleStringProperty(String.valueOf(delivery.getDateDelivery()));
+        this.contactTime = new SimpleStringProperty(String.valueOf(delivery.getContactTime()));
+        this.phone = new SimpleStringProperty(String.valueOf(delivery.getPhone()));
+        this.name = new SimpleStringProperty(String.valueOf(delivery.getName()));
         this.serviceType = new SimpleStringProperty(String.valueOf(delivery.getServiceType()));
         this.email = new SimpleStringProperty(String.valueOf(delivery.getEmail()));
         this.adress = new SimpleStringProperty(String.valueOf(delivery.getAdress()));
@@ -40,6 +46,27 @@ public class DeliveryMaster {
 
     public void setId(SimpleStringProperty id) {
         this.id = id;
+    }
+     public SimpleStringProperty contactTimeProperty() {
+        return contactTime;
+    }
+
+    public void setContactTime(SimpleStringProperty contactTime) {
+        this.contactTime = contactTime;
+    }
+     public SimpleStringProperty phoneProperty() {
+        return phone;
+    }
+
+    public void setPhone(SimpleStringProperty phone) {
+        this.phone = phone;
+    }
+     public SimpleStringProperty nameProperty() {
+        return name;
+    }
+
+    public void setName(SimpleStringProperty name) {
+        this.name = name;
     }
 
     public SimpleStringProperty deliveryDateProperty() {

@@ -11,19 +11,13 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
-import entity.Contact;
 import entity.Delivery;
-import entity.Reservation;
 import function.navigation;
-import function.time;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,16 +27,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseButton;
@@ -50,8 +37,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import populator.DeliveryMaster;
-import populator.ReservationMaster;
-import service.ContactService;
 import service.DeliveryService;
 import util.DataSource;
 
@@ -101,6 +86,12 @@ public class DeliveryListController {
     private TableColumn<DeliveryMaster, String> columnNotes;
     @FXML
     private TableColumn<DeliveryMaster, String> columnStatus;
+    @FXML
+    private TableColumn<DeliveryMaster, String> columnName;
+    @FXML
+    private TableColumn<DeliveryMaster, String> columnPhone;
+    @FXML
+    private TableColumn<DeliveryMaster, String> columnContactTime;
 
     private List<DeliveryMaster> cm;
     private DeliveryService cs;
@@ -112,7 +103,7 @@ public class DeliveryListController {
     DataSource kon = new DataSource();
     DeliveryService model = new DeliveryService();
 
-    String id = "", deliveryDate = "", adress = "", serviceType = "", email = "", notes = "", status = "";
+    String id = "",name="",phone="",contactTime="", deliveryDate = "", adress = "", serviceType = "", email = "", notes = "", status = "";
     @FXML
     private JFXTextField Date;
     @FXML
@@ -136,6 +127,9 @@ public class DeliveryListController {
             columnEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
             columnNotes.setCellValueFactory(new PropertyValueFactory<>("notes"));
             columnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+            columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            columnPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+            columnContactTime.setCellValueFactory(new PropertyValueFactory<>("contactTime"));
             DeliveryService delivery = new DeliveryService();
             List<Delivery> allReservations;
             allReservations = delivery.selectAll();
@@ -171,6 +165,11 @@ public class DeliveryListController {
         Date.setText(time);
 
     }
+    
+    public void initialize(URL url, ResourceBundle rb) {
+        // setStyleTable();
+        loadTable();
+    }
 
     @FXML
     private void refreshClicked(ActionEvent event) {
@@ -181,19 +180,9 @@ public class DeliveryListController {
     private void ambilID(MouseEvent event) throws IOException {
         if (event.getClickCount() == 1) {
             id = Integer.toString(deliveryTable.getSelectionModel().getSelectedItem().getDelivery().getId());
-            deliveryDate = deliveryTable.getSelectionModel().getSelectedItem().getDelivery().getDateDelivery().toString();
-            adress = deliveryTable.getSelectionModel().getSelectedItem().getDelivery().getAdress();
-            serviceType = deliveryTable.getSelectionModel().getSelectedItem().getDelivery().getServiceType();
-            email = deliveryTable.getSelectionModel().getSelectedItem().getDelivery().getEmail();
-            notes = deliveryTable.getSelectionModel().getSelectedItem().getDelivery().getNotes();
             status = Boolean.toString(deliveryTable.getSelectionModel().getSelectedItem().getDelivery().isStatus());
         } else if (event.getClickCount() == 2) {
             id = Integer.toString(deliveryTable.getSelectionModel().getSelectedItem().getDelivery().getId());
-            deliveryDate = deliveryTable.getSelectionModel().getSelectedItem().getDelivery().getDateDelivery().toString();
-            adress = deliveryTable.getSelectionModel().getSelectedItem().getDelivery().getAdress();
-            serviceType = deliveryTable.getSelectionModel().getSelectedItem().getDelivery().getServiceType();
-            email = deliveryTable.getSelectionModel().getSelectedItem().getDelivery().getEmail();
-            notes = deliveryTable.getSelectionModel().getSelectedItem().getDelivery().getNotes();
             status = Boolean.toString(deliveryTable.getSelectionModel().getSelectedItem().getDelivery().isStatus());
             openUbah();
         } else if (event.getButton() == MouseButton.SECONDARY) {
@@ -211,6 +200,14 @@ public class DeliveryListController {
         DeliveryUpdateController DeliveryUpdate = Loader.getController();
         DeliveryUpdate.setData(id, status);
         loadPane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void ubahClicked(ActionEvent event) {
+    }
+
+    @FXML
+    private void hapusClicked(ActionEvent event) {
     }
 
 }

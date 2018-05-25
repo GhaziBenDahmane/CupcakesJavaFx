@@ -13,45 +13,32 @@ import java.sql.Date;
  */
 public class Delivery {
 
-    private int id;
-    private String notes, email, adress, serviceType;
-    private Date dateDelivery;
+    private int id,phone;
+    private String name,notes, email, adress, serviceType;
+    private Date dateDelivery,contactTime;
     private boolean status;
 
     public Delivery() {
+    }
+
+    public Delivery(int id, int phone, String name, String notes, String email, String adress, String serviceType, Date dateDelivery, Date contactTime, boolean status) {
+        this.id = id;
+        this.phone = phone;
+        this.name = name;
+        this.notes = notes;
+        this.email = email;
+        this.adress = adress;
+        this.serviceType = serviceType;
+        this.dateDelivery = dateDelivery;
+        this.contactTime = contactTime;
+        this.status = status;
     }
 
     public Delivery(int id, boolean status) {
         this.id = id;
         this.status = status;
     }
-
-    public Delivery(int id, String notes, String email, String adress, String serviceType, Date dateDelivery, boolean status) {
-        this.id = id;
-        this.notes = notes;
-        this.email = email;
-        this.adress = adress;
-        this.serviceType = serviceType;
-        this.dateDelivery = dateDelivery;
-        this.status = status;
-    }
-
-    public Delivery(String notes, String email, String adress, String serviceType, Date dateDelivery, boolean status) {
-        this.notes = notes;
-        this.email = email;
-        this.adress = adress;
-        this.serviceType = serviceType;
-        this.dateDelivery = dateDelivery;
-        this.status = status;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
+    
 
     public int getId() {
         return id;
@@ -59,6 +46,22 @@ public class Delivery {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getPhone() {
+        return phone;
+    }
+
+    public void setPhone(int phone) {
+        this.phone = phone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getNotes() {
@@ -101,34 +104,26 @@ public class Delivery {
         this.dateDelivery = dateDelivery;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + this.id;
-        return hash;
+    public Date getContactTime() {
+        return contactTime;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Delivery other = (Delivery) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+    public void setContactTime(Date contactTime) {
+        this.contactTime = contactTime;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
-        return "Delivery{" + "id=" + id + ", notes=" + notes + ", email=" + email + ", adress=" + adress + ", serviceType=" + serviceType + ", dateDelivery=" + dateDelivery + ", status=" + status + '}';
+        return "Delivery{" + "id=" + id + ", phone=" + phone + ", name=" + name + ", notes=" + notes + ", email=" + email + ", adress=" + adress + ", serviceType=" + serviceType + ", dateDelivery=" + dateDelivery + ", contactTime=" + contactTime + ", status=" + status + '}';
     }
+    
 
 }

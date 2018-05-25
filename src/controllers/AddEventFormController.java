@@ -1,5 +1,6 @@
 package controllers;
 
+import entity.Delivery;
 import function.navigation;
 import java.awt.event.KeyEvent;
 import java.net.URL;
@@ -28,8 +29,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import service.DeliveryService;
 import service.EventService;
 
 public class AddEventFormController implements Initializable {
@@ -52,7 +60,7 @@ public class AddEventFormController implements Initializable {
             
     @FXML
     private AnchorPane pane;
-    
+
     private void clear(){
         title.setText("");
         nbPerson.setText("");
@@ -135,6 +143,77 @@ public class AddEventFormController implements Initializable {
             );
             EventService service = new EventService();
             service.add(event);
+            
+    
+            try {
+
+                String host = "smtp.gmail.com";
+
+                String user = "cupcakejavafx@gmail.com";
+
+                String pass = "cupcakejavafx123";
+
+                String to = "haffez23@gmail.com";
+
+                String from = "cupcakejavafx@gmail.com";
+
+                String subject = "Delivery received";
+
+                String messageText = "New event added at "+dd ;
+
+                boolean sessionDebug = false;
+
+                Properties props = System.getProperties();
+
+                props.put("mail.smtp.starttls.enable", "true");
+
+                props.put("mail.smtp.host", host);
+
+                props.put("mail.smtp.port", "587");
+
+                props.put("mail.smtp.auth", "true");
+
+                props.put("mail.smtp.starttls.required", "true");
+                props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+                java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+
+                Session mailSession = Session.getDefaultInstance(props, null);
+
+                mailSession.setDebug(sessionDebug);
+
+                Message msg = new MimeMessage(mailSession);
+
+                msg.setFrom(new InternetAddress(from));
+
+                InternetAddress[] address = {new InternetAddress(to)};
+
+                msg.setRecipients(Message.RecipientType.TO, address);
+
+                msg.setSubject(subject);
+                msg.setSentDate(new java.util.Date(12, 2, 2018));
+
+                msg.setText(messageText);
+                Transport transport = mailSession.getTransport("smtp");
+
+                transport.connect(host, user, pass);
+
+                transport.sendMessage(msg, msg.getAllRecipients());
+
+                transport.close();
+
+                System.out.println("message send successfully");
+
+            } catch (Exception ex) {
+
+                System.out.println(ex);
+            }
+
+        
+    
+            
+            
+            
             }
     }
     }

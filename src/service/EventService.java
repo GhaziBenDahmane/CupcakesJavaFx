@@ -88,6 +88,25 @@ public class EventService implements IEventService {
             ex.printStackTrace();
         }
         
+         
+        
+        
+    }
+    
+    
+     public void updateStatus(String status, int id) {
+        try {
+            
+
+            String req = "UPDATE `event` SET `status` = '"+status+"' WHERE `event`.`id` = '"+id+"';";
+            PreparedStatement ps = connection.prepareStatement(req);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+         
+        
         
     }
     

@@ -39,7 +39,7 @@ public class ContactAddController implements Initializable {
     navigation nav = new navigation();
 
     @FXML
-    private TextField firstName, lastName, email, adress, phone, message;
+    private TextField firstName, adress, phone, message;
 
     @FXML
     private AnchorPane pane;
@@ -48,8 +48,6 @@ public class ContactAddController implements Initializable {
 
     private void clear() {
         firstName.setText("");
-        lastName.setText("");
-        email.setText("");
         adress.setText("");
         phone.setText("");
         //date_uang_masuk_text.setText("");
@@ -81,17 +79,7 @@ public class ContactAddController implements Initializable {
                 inputMethod();
             }
         });
-        lastName.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                inputMethod();
-            }
-        });
         phone.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                inputMethod();
-            }
-        });
-        email.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 inputMethod();
             }
@@ -115,22 +103,20 @@ public class ContactAddController implements Initializable {
     }
 
     private void inputMethod() {
-        if (firstName.getText().equals("") || lastName.getText().equals("") || adress.getText().equals("")
-                || message.getText().equals("") || email.getText().equals("") || phone.getText().equals("")) {
+        if (firstName.getText().equals("") | adress.getText().equals("")
+                || message.getText().equals("") || phone.getText().equals("")) {
             nav.showAlert(Alert.AlertType.WARNING, "WARNING", null, "Complete the data first !!");
 
         } else {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Calendar cal = Calendar.getInstance();
             String firstNameText = firstName.getText();
-            String lastNameText = lastName.getText();
-            String emailText = email.getText();
             String phoneText = phone.getText();
             String adressText = adress.getText();
             String messageText = message.getText();
             String inputTime = dateFormat.format(cal.getTime());
 
-            Contact c = new Contact(i, Integer.parseInt(phoneText), inputTime, firstNameText, lastNameText, messageText, adressText, emailText, false);
+            Contact c = new Contact(i, Integer.parseInt(phoneText), firstNameText, messageText, adressText, false);
             i++;
             model.create(c);
             if (model.getStatusInert() == true) {

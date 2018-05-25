@@ -17,7 +17,6 @@ public class ContactMaster {
 
     private SimpleStringProperty id;
     private SimpleStringProperty firstName;
-    private SimpleStringProperty lastName;
     private SimpleStringProperty email;
     private SimpleStringProperty adress;
     private SimpleStringProperty phone;
@@ -28,11 +27,11 @@ public class ContactMaster {
         this.contact = contact;
         this.id = new SimpleStringProperty(String.valueOf(contact.getId()));
         this.firstName = firstName = new SimpleStringProperty(contact.getFirstName());
-        this.lastName = new SimpleStringProperty(contact.getLastName());
-        this.email = new SimpleStringProperty(contact.getEmail());
-        this.adress = new SimpleStringProperty(contact.getAdress());
-        this.phone = new SimpleStringProperty(String.valueOf(contact.getPhone()));
-        this.message = new SimpleStringProperty(contact.getMessage());
+        this.message = message = new SimpleStringProperty(contact.getMessage());
+        this.adress = adress = new SimpleStringProperty(contact.getAdress());
+        this.phone = phone = new SimpleStringProperty(String.valueOf(contact.getPhone()));
+        this.message = message = new SimpleStringProperty(contact.getMessage());
+        this.email = email = new SimpleStringProperty(contact.getEmail());
 
     }
 
@@ -43,6 +42,13 @@ public class ContactMaster {
     public void setId(SimpleStringProperty id) {
         this.id = id;
     }
+    public SimpleStringProperty emailProperty() {
+        return email;
+    }
+
+    public void setEmail(SimpleStringProperty id) {
+        this.email = email;
+    }
 
     public SimpleStringProperty firstNameProperty() {
         return firstName;
@@ -52,21 +58,6 @@ public class ContactMaster {
         this.firstName = firstName;
     }
 
-    public SimpleStringProperty lastNameProperty() {
-        return lastName;
-    }
-
-    public void setLastName(SimpleStringProperty lastName) {
-        this.lastName = lastName;
-    }
-
-    public SimpleStringProperty emailProperty() {
-        return email;
-    }
-
-    public void setEmail(SimpleStringProperty email) {
-        this.email = email;
-    }
 
     public SimpleStringProperty adressProperty() {
         return adress;

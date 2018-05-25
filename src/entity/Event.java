@@ -29,6 +29,10 @@ public class Event {
 
     public Event() {
     }
+
+    public Event(String status) {
+        this.status = status;
+    }
      
    
     public Event(String title, int nbPerson, Date startDate, Date endDate, int nbTable, int band, String status, Double cost) {

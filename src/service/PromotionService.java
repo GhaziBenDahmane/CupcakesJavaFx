@@ -36,7 +36,7 @@ public class PromotionService {
             statment.execute();
 
         } catch (SQLException ex) {
-            Logger.getLogger(ProductService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PromotionService.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -96,7 +96,7 @@ public class PromotionService {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ProductService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PromotionService.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return promotion;

@@ -64,8 +64,8 @@ public class ProductService {
 
     }
 
-    public void insert(Product p, File file) throws FileNotFoundException {
-        String req = "INSERT INTO product (name,price,type,description,promotion_id,nb_viewed,nb_seller,barcode,image) VALUES (?,?,?,?,?,?,?,?,?)";
+    public void insert(Product p, File file) throws FileNotFoundException, IOException {
+        String req = "INSERT INTO product (name,price,type,description,promotion_id,nb_viewed,photo,barcode,image) VALUES (?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement statment = connection.prepareStatement(req);
             statment.setString(1, p.getName());
@@ -76,7 +76,9 @@ public class ProductService {
             statment.setBinaryStream(9, fis, file.length());
             statment.setInt(5, p.getPromotion().getId_promotion());
             statment.setInt(6, p.getNb_view());
-            statment.setInt(7, p.getNb_seller());
+            String[] s;
+            s = file.getAbsolutePath().split("\\\\");
+            statment.setString(7,s[s.length-1]);
             statment.setInt(8, p.getBarcode());
             statment.execute();
 
@@ -97,8 +99,8 @@ public class ProductService {
             while (result.next()) {
 
                 Promotion promotion = new Promotion(result.getInt("promotion_id"), result.getDouble("discount"), result.getDate("starting_date"), result.getDate("ending_date"));
-                Product p = new Product(result.getInt(1), result.getString(3), result.getString(4), result.getDouble(5),
-                        result.getInt(6), result.getInt(8), result.getString(10), result.getString(9), result.getInt("barcode"), promotion, result.getBlob("image"));
+                Product p = new Product(result.getInt("id"), result.getString("name"), result.getString(4), result.getDouble(5),
+                        result.getInt(6), result.getInt(7), result.getString(8), result.getString(9), result.getInt("barcode"), promotion, result.getBlob("image"));
                 products.add(p);
             }
 
@@ -111,7 +113,7 @@ public class ProductService {
 
     public void update(Product p) {
 
-        String req = "Update product set name=? , type=? , price=? ,description=? ,barcode=? where id= ?";
+        String req = "Update product set name=? , type=? , price=? ,description=? ,barcode=?  where id= ?";
         try {
             PreparedStatement statment = connection.prepareStatement(req);
             statment.setString(1, p.getName());

@@ -14,9 +14,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.image.ImageView?>
 
-<AnchorPane id="AnchorPane" fx:id="anchopane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ListProductController">
+<AnchorPane id="AnchorPane" fx:id="anchopane" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ListProductController">
    <children>
-      <StackPane fx:id="pane" prefHeight="150.0" prefWidth="200.0"  >
+      <StackPane fx:id="pane" prefHeight="150.0" prefWidth="200.0">
          <children>
             <ImageView fx:id="imagefx" fitHeight="226.0" fitWidth="213.0" pickOnBounds="true" preserveRatio="true" />
          </children>
@@ -26,7 +26,7 @@
       <Label fx:id="description" layoutX="304.0" layoutY="135.0" prefHeight="80.0" prefWidth="129.0" text="Description" />
       <Label fx:id="price" layoutX="61.0" layoutY="254.0" prefHeight="17.0" prefWidth="46.0" text="Price" />
       <Label fx:id="promotion" layoutX="78.0" layoutY="287.0" text="Promotion" />
-      <JFXButton fx:id="cart" layoutX="371.0" layoutY="317.0"   text="Add to Cart" textFill="#fcf9f9" style="-fx-background-color: #4183d7;"/>
+      <JFXButton fx:id="cart" layoutX="371.0" layoutY="317.0" style="-fx-background-color: #4183d7;" text="Add to Cart" textFill="#fcf9f9" />
       <Label fx:id="p" layoutX="14.0" layoutY="254.0" style="-fx-background-color: #4183d7;" text="Price :" />
       <Label fx:id="promo" layoutX="14.0" layoutY="287.0" style="-fx-background-color: #4183d7;" text="Promotion:" />
       <Label fx:id="t" layoutX="242.0" layoutY="59.0" style="-fx-background-color: #4183d7;" text="Title:" />
@@ -111,8 +111,8 @@
                         <TableColumn fx:id="nameproduct" editable="false" prefWidth="173.0" resizable="false" text="Name Product" />
                         <TableColumn fx:id="priceproduct" editable="false" minWidth="0.0" prefWidth="159.0" resizable="false" text="Price" />
                         <TableColumn fx:id="promot" editable="false" prefWidth="135.0" resizable="false" text="Promotion" />
-                        <TableColumn fx:id="quantity" editable="true" minWidth="5.0" prefWidth="124.0" resizable="false" text="Quantity" />
                         <TableColumn fx:id="total" editable="false" prefWidth="145.0" resizable="false" text="Total Price" />
+                        <TableColumn fx:id="quantity" editable="true" minWidth="5.0" prefWidth="124.0" resizable="false" text="Quantity" />
                      </columns>
                   </TableView>
                </children>

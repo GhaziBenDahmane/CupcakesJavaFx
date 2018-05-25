@@ -292,5 +292,31 @@ public class HomeController implements Initializable {
         }
 
     }
+    
+    @FXML
+    private void showProduct(ActionEvent event) {
+        try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/product.fxml"));
+            rootPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    @FXML
+    private void showCart(ActionEvent event) {
+        try {
+            rootPane.getChildren().clear();
+            rootPane.setOpacity(0);
+            new FadeInTransition(rootPane).play();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("/views/listProduct.fxml"));
+            rootPane.getChildren().setAll(pane);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
 }

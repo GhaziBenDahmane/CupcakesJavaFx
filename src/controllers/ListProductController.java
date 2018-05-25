@@ -245,7 +245,7 @@ public class ListProductController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(ListProductController.class.getName()).log(Level.SEVERE, null, ex);
             }
-              Double dos = po.getPromotion().getDiscount() * 100;
+              Double dos = 0.1 * 100;
             return new SimpleStringProperty(dos.toString() + "%");
         });
 
@@ -265,7 +265,7 @@ public class ListProductController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(ListProductController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Double d = po.getPromotion().getDiscount() * po.getPrice();
+            Double d = 0.1 * po.getPrice();
             float f = po.getPrice().floatValue() - d.floatValue();
             return new SimpleStringProperty(Float.toString(f));
         });

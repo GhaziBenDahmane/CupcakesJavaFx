@@ -81,7 +81,7 @@ public class CartService {
                 Promotion promotion=ps.selectPromotionById(result.getInt(1));
 
                 p = new Product(result.getInt(1), result.getString(3), result.getString(4), result.getDouble(5),
-                        result.getInt(6), result.getInt(8), result.getString(10), result.getString(9), result.getInt(7), promotion,result.getBlob("image"));
+                        result.getInt(6), result.getInt(7), result.getString(8), result.getString(9), result.getInt(7), promotion,result.getBlob("image"));
                
             
 
@@ -95,6 +95,17 @@ public class CartService {
 
     public void delete(int id) {
         String req = "Delete from cart where id= ?";
+        try {
+            PreparedStatement statment = connection.prepareStatement(req);
+            statment.setInt(1, id);
+            statment.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void deleteProductFromCart(int id) {
+        String req = "Delete from cart where id_product= ?";
         try {
             PreparedStatement statment = connection.prepareStatement(req);
             statment.setInt(1, id);

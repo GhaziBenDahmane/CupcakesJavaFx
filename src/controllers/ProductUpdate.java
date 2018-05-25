@@ -103,6 +103,9 @@ public class ProductUpdate implements Initializable {
             String newCategory = category.getText();
             String newPrice = price.getText();
             String newDescription = description.getText();
+          //  String newpromotion= promotion.getSelectionModel().getSelectedItem().toString();
+           // System.out.println(newpromotion+"promo");
+           // System.out.println();
             Product p = new Product(Integer.parseInt(newId), Integer.parseInt(newBarcode), newName, newCategory, Double.parseDouble(newPrice), newDescription);
             product.update(p);
             if (product.isStatusUpdate()) {

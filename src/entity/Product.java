@@ -206,15 +206,17 @@ public class Product implements Comparable<Product> {
     public void setImage(Blob image) {
         this.image = image;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" + "id=" + id + ", name=" + name + ", type=" + type + ", barcode=" + barcode + ", price=" + price + ", nb_view=" + nb_view + ", nb_seller=" + nb_seller + ", Photo=" + Photo + ", Description=" + Description + ", promotion=" + promotion + ", image=" + image + '}';
+    }
     
     
     
     
 
-    @Override
-    public String toString() {
-        return "Product{" + "id=" + id + ", name=" + name + ", Type=" + type + ", price=" + price + ", nb_view=" + nb_view + ", nb_seller=" + nb_seller + ", Photo=" + Photo + ", Description=" + Description + '}';
-    }
+   
 
     @Override
     public int hashCode() {

@@ -26,9 +26,11 @@ import javafx.scene.layout.StackPane;
 import service.ProductService;
 import entity.Product;
 import entity.Promotion;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -46,7 +48,12 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import service.CartService;
+import service.NotificationService;
 import service.PromotionService;
+import util.Util;
 
 public class ProductController implements Initializable {
 
@@ -60,7 +67,7 @@ public class ProductController implements Initializable {
 
     @FXML
     private TableColumn<Std, Integer> barcode;
-    
+
     @FXML
     private TableColumn<Std, String> description;
 
@@ -112,7 +119,6 @@ public class ProductController implements Initializable {
 
     private final ProductService product = new ProductService();
     private String promotion_id = "", id_product = "", name_product = "", category_product = "", price_product = "", barcode_product = "", description_product = "", promotion_product = "";
-    
 
     private void setFilter() {
         sort.setValue("ID");
@@ -138,7 +144,7 @@ public class ProductController implements Initializable {
             price_product = products.getSelectionModel().getSelectedItem().getPrice();
             description_product = products.getSelectionModel().getSelectedItem().getDescription();
            // d=Double.parseDouble(products.getSelectionModel().getSelectedItem().getDiscount())*100;
-           // promotion_product = d.toString();
+            // promotion_product = d.toString();
             promotion_id = products.getSelectionModel().getSelectedItem().getPromotion_Id();
 
         } else if (event.getClickCount() == 2) {
@@ -150,10 +156,10 @@ public class ProductController implements Initializable {
             price_product = products.getSelectionModel().getSelectedItem().getPrice();
             description_product = products.getSelectionModel().getSelectedItem().getDescription();
           //  d= Double.parseDouble(products.getSelectionModel().getSelectedItem().getDiscount())*100;
-           // promotion_product = d.toString();
+            // promotion_product = d.toString();
             promotion_id = products.getSelectionModel().getSelectedItem().getPromotion_Id();
             updateProduct();
-            
+
         } else if (event.getButton() == MouseButton.SECONDARY) {
             contextMenu.show(products, event.getScreenX(), event.getScreenY());
         }
@@ -175,6 +181,46 @@ public class ProductController implements Initializable {
     }
 
     @FXML
+    private void pdfClicked(ActionEvent event) {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Save to PDF");
+        File file = chooser.showSaveDialog(new Stage());
+        if (!file.getAbsolutePath().endsWith(".pdf")) {
+            toPDF(file.getAbsolutePath() + ".pdf");
+        } else {
+            toPDF(file.getAbsolutePath());
+        }
+    }
+
+    private void toPDF(String file) {
+        try {
+            List<String> content = new ArrayList<>();
+            content.add("id");
+            content.add("barcode");
+            content.add("name");
+            content.add("type");
+
+            content.add("price");
+
+            products.getItems().stream().forEach(e -> {
+                content.add(e.getId());
+                content.add(e.getBarcode());
+                content.add(e.getName());
+                content.add(e.getType());
+                content.add(e.getPrice());
+
+            });
+            PDFService.toPDF(file, "List of Products", content, 5);
+
+            NotificationService.successBlueNotification("Export finished!", "Claims exported to " + file);
+
+        } catch (Exception e) {
+            Util.showError("Export failed");
+
+        }
+    }
+
+    @FXML
     private void deleteOnClick(ActionEvent event) throws IOException {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -186,6 +232,8 @@ public class ProductController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
+            CartService cs = new CartService();
+            cs.deleteProductFromCart(Integer.parseInt(products.getSelectionModel().getSelectedItem().getId()));
             product.delete(Integer.parseInt(products.getSelectionModel().getSelectedItem().getId()));
             product.setStatusDelete(true);
             if (product.isStatusDelete()) {
@@ -218,12 +266,12 @@ public class ProductController implements Initializable {
         type.setCellValueFactory(new PropertyValueFactory<>("type"));
         price.setCellValueFactory(new PropertyValueFactory<>("price"));
         description.setCellValueFactory(new PropertyValueFactory<>("description"));
-         promotion.setCellValueFactory((CellDataFeatures<Std, String> param) -> {
-             PromotionService ps= new PromotionService();
-             Promotion promo = ps.selectPromotionById(Integer.parseInt(param.getValue().getPromotion_Id()));
-             Double d =promo.getDiscount()*100;
-         return new SimpleStringProperty(d.toString()+"%" );
-         });
+        promotion.setCellValueFactory((CellDataFeatures<Std, String> param) -> {
+            PromotionService ps = new PromotionService();
+            Promotion promo = ps.selectPromotionById(Integer.parseInt(param.getValue().getPromotion_Id()));
+            Double d = promo.getDiscount() * 100;
+            return new SimpleStringProperty(d.toString() + "%");
+        });
 
         products.setItems(FXCollections.observableArrayList(allProducts));
 
@@ -302,8 +350,8 @@ public class ProductController implements Initializable {
             this.name = new SimpleStringProperty(product.getName());
             this.type = new SimpleStringProperty(product.getType());
             this.price = new SimpleStringProperty(product.getPrice().toString());
-            this.promotion_id=new SimpleStringProperty(product.getPromotion().getId_promotion().toString());
-            this.description=new SimpleStringProperty(product.getDescription());
+            this.promotion_id = new SimpleStringProperty(product.getPromotion().getId_promotion().toString());
+            this.description = new SimpleStringProperty(product.getDescription());
         }
 
         public SimpleStringProperty id() {
@@ -381,11 +429,6 @@ public class ProductController implements Initializable {
         public void setDescription(SimpleStringProperty description) {
             this.description = description;
         }
-
-       
-
-       
-        
 
     }
 

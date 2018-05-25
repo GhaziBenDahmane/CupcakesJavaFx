@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="utama" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProductController">
+<AnchorPane fx:id="utama" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProductController">
    <children>
       <StackPane fx:id="trans" opacity="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -53,6 +53,14 @@
                            </HBox.margin>
                         </JFXButton>
                         <JFXButton fx:id="delete" focusTraversable="false" layoutX="52.0" layoutY="17.0" onAction="#deleteOnClick" style="-fx-background-color: #4183d7;" text="Delete" textFill="WHITE">
+                           <font>
+                              <Font name="Segoe UI" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="pdf" focusTraversable="false" layoutX="133.0" layoutY="17.0" onAction="#pdfClicked" style="-fx-background-color: #4183d7;" text="PDF" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI" size="13.0" />
                            </font>

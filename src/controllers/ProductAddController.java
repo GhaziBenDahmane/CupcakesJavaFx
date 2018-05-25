@@ -160,8 +160,9 @@ public class ProductAddController implements Initializable {
             String promot = promotion.getSelectionModel().getSelectedItem().toString();
             Integer id_promo = Integer.parseInt(promot.split("-")[0]);
             System.out.println(id_promo);
-            Promotion promotion = promo.selectPromotionById(id_promo);
-            Product p = new Product(nam, type, pric, 0, 0, "pas encore", desc, barcod, promotion);
+            Promotion pr = promo.selectPromotionById(id_promo);
+            System.out.println(pr);
+            Product p = new Product(nam, type, pric, 0, 0, "pas encore", desc, barcod, pr);
             product.insert(p, file);
             showAlert(Alert.AlertType.INFORMATION, "Succes", null, "Insert with success !");
             clear();
@@ -178,7 +179,7 @@ public class ProductAddController implements Initializable {
     }
 
     @FXML
-    private void codeOnClick(MouseEvent event) {
+    private void codeOnClick(ActionEvent event) {
 
         QRService qr = new QRService(barcode);
     }
